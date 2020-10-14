@@ -40,7 +40,9 @@ class BlockOrientation(Enum):
     Right = 4
 
 '''
-A block has six faces. When collapsed to 2D, they look like...
+A block has six faces. Each face is assigned a number.
+
+When collapsed to 2D, they look like...
                   
                  BlackTopRightCornerSquare (1)
                              ^
@@ -48,16 +50,16 @@ A block has six faces. When collapsed to 2D, they look like...
                              v
                  BlackBottomRightCornerSquare (6)
 
-By convention, we will say this is the default orientation of 'up'.
-If the WhiteSquare (3) has BlackSquare (4) oriented upwards, we'll call that
-an orientation of 'right'.
+By convention, we will say this is the default orientation of 'up', when
+1 is above 3.
 
-Each face is assigned a number.
+If the WhiteSquare (3) has BlackSquare (4) oriented upwards, we'll call that
+an orientation of 'right', and so on.
 '''
 class Block:
 
-    def __init__(self, faceNumber, orientation):
-        this.face = (faceNumber, orientation)
+    def __init__(self, number, orientation):
+        this.face = (number, orientation)
         this.patterns = {
             1: {
                 BlockOrienation.Up: BlockPattern.BlackTopRightCornerSquare,
@@ -97,6 +99,7 @@ class Block:
             },
         }
 
+
     def getPattern():
         return this.patterns[this.face[0]][this.face[1]]
    
@@ -112,9 +115,11 @@ class Block:
     def flipUp():
         pass
 
+    ''' Change orientation, but stay on the same face. '''
     def rotateRight():
         pass
-
+        
+    ''' Change orientation, but stay on the same face. '''
     def rotateLeft():
         pass
 
