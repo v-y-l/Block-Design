@@ -12,17 +12,18 @@ class BlockPattern(Enum):
     BlackBottomLeftCornerSquare = 5
     BlackBottomRightCornerSquare = 6
 
-    # Leave out rotated problems for now
-    # to simplify the model
+    # Leave out 45 degree rotation
+    # problems for now to simplify the model
+
     # WhiteDiamond = 7
     # BlackDiamond = 8
     # BlackTopCornerDiamond = 9
     # BlackBottomCornerDiamond = 10
 
-''' When a face is rotated 45 degrees. '''
-# class RotateDirection(Enum):
-#     Right = 1
-#     Left = 2
+''' When a face is rotated 90 degrees. '''
+class RotateDirection(Enum):
+    Right = 1
+    Left = 2
 
 ''' When a face is flipped over to another face. '''
 class FlipDirection(Enum):
@@ -100,11 +101,20 @@ class Block:
         return this.patterns[this.face[0]][this.face[1]]
    
     def flipUp():
+        pass
         
     def flipDown():
+        pass
             
     def flipRight():
+        pass
             
     def flipUp():
-            
+        pass
+
+    def rotateRight():
+        pass
+
+    def rotateLeft():
+        pass
 
