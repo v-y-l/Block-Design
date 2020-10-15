@@ -169,10 +169,10 @@ class Block:
         blockFour.neighbors[BlockOrientation.Down] = blockSix
         blockFour.neighbors[BlockOrientation.Left] = blockThree
 
-        blockFive.neighbors[BlockOrientation.Up] = blockSix
-        blockFive.neighbors[BlockOrientation.Right] = blockFour
-        blockFive.neighbors[BlockOrientation.Down] = blockOne
-        blockFive.neighbors[BlockOrientation.Left] = blockTwo
+        blockFive.neighbors[BlockOrientation.Up] = blockOne
+        blockFive.neighbors[BlockOrientation.Right] = blockTwo
+        blockFive.neighbors[BlockOrientation.Down] = blockSix
+        blockFive.neighbors[BlockOrientation.Left] = blockFour
 
         blockSix.neighbors[BlockOrientation.Up] = blockThree
         blockSix.neighbors[BlockOrientation.Right] = blockFour
@@ -206,7 +206,7 @@ class Block:
     '''
     def flipDown(self):
         number, orientation = self.face
-        if number == 5 and orientation == BlockOrientation.Down:
+        if number == 5 and orientation == BlockOrientation.Up:
             block = self.blocks[number].neighbors[self.opposites[orientation]]
         else:
             block = self.blocks[number].neighbors[orientation]
