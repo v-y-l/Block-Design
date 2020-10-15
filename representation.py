@@ -218,6 +218,8 @@ class Block:
         block = self.blocks[number].neighbors[leftOrientation]
         nextNumber = block.val
         self.face = (nextNumber, orientation)
+        # When you make this flip, there is an orientation change
+        self.rotateRight()
         return self.face
 
 
@@ -228,6 +230,8 @@ class Block:
         block = self.blocks[number].neighbors[rightOrientation]
         nextNumber = block.val
         self.face = (nextNumber, orientation)
+        # When you make this flip, there is an orientation change
+        self.rotateLeft()
         return self.face
 
     ''' Change orientation, but stay on the same face. '''
