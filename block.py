@@ -192,16 +192,22 @@ class Block:
         number, orientation = self.face
         return self.patterns[number][orientation]
 
-    ''' Bring your current face towards the UP orientation. '''
+    ''' Move away the current orientation. '''
     def flipUp(self):
         number, orientation = self.face
-        block = self.blocks[number].neighbors[self.opposites[orientation]]
+        # A kink in our convention. When flipping up from 6, we want to move
+        # towards 6, but 'UP' will actually take us to 1.
+        if number == 5 and orientation == BlockOrientation.Up:
+            block = self.blocks[number].neighbors[orientation]
+        else:
+            block = self.blocks[number].neighbors[self.opposites[orientation]]
         nextNumber = block.val
         self.face = (nextNumber, orientation)
         return self.face
 
-    ''' 
-        Move to towards the current orientation.
+    '''
+    Move towards the current orientation. (The next face comes from the current
+    orientation.)
     '''
     def flipDown(self):
         number, orientation = self.face
@@ -215,7 +221,7 @@ class Block:
         self.face = (nextNumber, orientation)
         return self.face
 
-    ''' Go left of your orientation. '''
+    '''  of your orientation. '''
     def flipRight(self):
         number, orientation = self.face
         leftOrientation = self.orientations[orientation].prev.val

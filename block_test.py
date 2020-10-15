@@ -4,6 +4,23 @@ from block import Block, BlockOrientation
 
 class TestBlockMethods(unittest.TestCase):
 
+    def test_flipup(self):
+        block = Block()
+        self.assertEqual(block.face[1], BlockOrientation.Up)
+        self.assertEqual(block.face[0], 1)
+        block.flipUp()
+        self.assertEqual(block.face[1], BlockOrientation.Up)
+        self.assertEqual(block.face[0], 3)
+        block.flipUp()
+        self.assertEqual(block.face[1], BlockOrientation.Up)
+        self.assertEqual(block.face[0], 6)
+        block.flipUp()
+        self.assertEqual(block.face[1], BlockOrientation.Up)
+        self.assertEqual(block.face[0], 5)
+        block.flipUp()
+        self.assertEqual(block.face[1], BlockOrientation.Up)
+        self.assertEqual(block.face[0], 1)        
+
     def test_flipdown(self):
         block = Block()
         self.assertEqual(block.face[1], BlockOrientation.Up)
@@ -17,20 +34,6 @@ class TestBlockMethods(unittest.TestCase):
         block.flipDown()
         self.assertEqual(block.face[1], BlockOrientation.Up)
         self.assertEqual(block.face[0], 3)
-
-    def test_flipup(self):
-        block = Block()
-        self.assertEqual(block.face[1], BlockOrientation.Up)
-        self.assertEqual(block.face[0], 1)
-        block.flipDown()
-        self.assertEqual(block.face[1], BlockOrientation.Up)
-        self.assertEqual(block.face[0], 5)
-        block.flipDown()
-        self.assertEqual(block.face[1], BlockOrientation.Up)
-        self.assertEqual(block.face[0], 6)
-        block.flipDown()
-        self.assertEqual(block.face[1], BlockOrientation.Up)
-        self.assertEqual(block.face[0], 3)        
 
     def test_flipright(self):
         block = Block()
