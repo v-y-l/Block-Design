@@ -129,6 +129,8 @@ class Block:
         left.prev = down
         left.next= up
 
+        # Returns a node to the doubly linked list that determines
+        # the clockwise order starting from up.
         self.orientations = {
             BlockOrientation.Up: up,
             BlockOrientation.Right: right,
@@ -180,7 +182,6 @@ class Block:
         blockSix.neighbors[BlockOrientation.Down] = blockFive
         blockSix.neighbors[BlockOrientation.Left] = blockTwo
 
-
         self.blocks = {
             1: blockOne,
             2: blockTwo,
@@ -193,19 +194,41 @@ class Block:
     def getPattern(self):
         number, orientation = self.face
         return self.patterns[number][orientation]
-   
+
+    ''' Go away from your orientation. '''
     def flipUp(self):
         number, orientation = self.face
         block = self.blocks[number].neighbors[self.opposites[orientation]]
         nextNumber = block.val
         self.face = (nextNumber, orientation)
         return self.face
-        
+
+    ''' Go towards your orientation. '''
     def flipDown(self):
-        pass
-            
+        number, orientation = self.face
+        block = self.blocks[number].neighbors[orientation]
+        nextNumber = block.val
+        self.face = (nextNumber, orientation)
+        return self.face
+
+    ''' Go left of your orientation. '''
     def flipRight(self):
-        pass
+        number, orientation = self.face
+        leftOrientation = self.orientations[orientation].prev.val
+        block = self.blocks[number].neighbors[leftOrientation]
+        nextNumber = block.val
+        self.face = (nextNumber, orientation)
+        return self.face
+
+
+    ''' Go right of your orientation. '''
+    def flipLeft(self):
+        number, orientation = self.face
+        rightOrientation = self.orientations[orientation].next.val
+        block = self.blocks[number].neighbors[rightOrientation]
+        nextNumber = block.val
+        self.face = (nextNumber, orientation)
+        return self.face
 
     ''' Change orientation, but stay on the same face. '''
     def rotateRight(self):
@@ -220,4 +243,3 @@ class Block:
         nextOrientation = self.orientations[orientation].next.val
         self.face = (number, nextOrientation)
         return self.face
-
