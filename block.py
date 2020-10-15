@@ -60,17 +60,14 @@ A block has six faces. Each face is assigned a number.
 
 When collapsed to 2D, they look like...
                   
-                 BlackTopRightCornerSquare (1)
-                             ^
-    WhiteSquare (2) | WhiteSquare (3) | BlackSquare (4) | Black Square (5)
-                             v
-                 BlackBottomRightCornerSquare (6)
+ 
+                 BlackTopRightCornerSquare (1, ^)
+                             |
+    WhiteSquare (2, ^) | WhiteSquare (3, ^) | BlackSquare (4, ^) | Black Square (5, ^)
+                             |
+                 BlackBottomRightCornerSquare (6, ^)
 
-By convention, we will say this is the default orientation of 'up', when
-1 is above 3.
-
-If the WhiteSquare (3) has BlackSquare (4) oriented upwards, we'll call that
-an orientation of 'right', and so on.
+By convention, each face has the default orientation of 'up' or ^.
 '''
 class Block:
 
@@ -195,7 +192,7 @@ class Block:
         number, orientation = self.face
         return self.patterns[number][orientation]
 
-    ''' Go away from your orientation. '''
+    ''' Bring your current face towards the UP orientation. '''
     def flipUp(self):
         number, orientation = self.face
         block = self.blocks[number].neighbors[self.opposites[orientation]]
@@ -203,10 +200,16 @@ class Block:
         self.face = (nextNumber, orientation)
         return self.face
 
-    ''' Go towards your orientation. '''
+    ''' 
+        Bring your current face towards the DOWN orientation.
+        (Opposite of whatever orientation we are in.)
+    '''
     def flipDown(self):
         number, orientation = self.face
-        block = self.blocks[number].neighbors[orientation]
+        if number == 5 and orientation == BlockOrientation.Down:
+            block = self.blocks[number].neighbors[self.opposites[orientation]]
+        else:
+            block = self.blocks[number].neighbors[orientation]
         nextNumber = block.val
         self.face = (nextNumber, orientation)
         return self.face
@@ -218,10 +221,7 @@ class Block:
         block = self.blocks[number].neighbors[leftOrientation]
         nextNumber = block.val
         self.face = (nextNumber, orientation)
-        # When you make this flip, there is an orientation change
-        self.rotateRight()
         return self.face
-
 
     ''' Go right of your orientation. '''
     def flipLeft(self):
@@ -230,8 +230,6 @@ class Block:
         block = self.blocks[number].neighbors[rightOrientation]
         nextNumber = block.val
         self.face = (nextNumber, orientation)
-        # When you make this flip, there is an orientation change
-        self.rotateLeft()
         return self.face
 
     ''' Change orientation, but stay on the same face. '''
