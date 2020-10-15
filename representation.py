@@ -28,16 +28,24 @@ class RotateDirection(Enum):
 ''' When a face is flipped over to another face. '''
 class FlipDirection(Enum):
     Up = 1
-    Left = 2
+    Right = 2
     Down = 3
-    Right = 4
+    Left = 4
 
 ''' Orientation based on descriptors below. '''
 class BlockOrientation(Enum):
     Up = 1
-    Left = 2
+    Right = 2
     Down = 3
-    Right = 4
+    Left = 4
+
+''' For a doubly linked list '''
+class Node:
+    
+    def __init__(self, val):
+        self.val = val
+        self.next = None
+        self.prev = None
 
 '''
 A block has six faces. Each face is assigned a number.
@@ -58,68 +66,95 @@ an orientation of 'right', and so on.
 '''
 class Block:
 
-    def __init__(self, number, orientation):
-        this.face = (number, orientation)
-        this.patterns = {
+    def __init__(self, number=1, orientation=BlockOrientation.Up):
+        self.face = (number, orientation)
+        self.patterns = {
             1: {
-                BlockOrienation.Up: BlockPattern.BlackTopRightCornerSquare,
-                BlockOrienation.Right: BlockPattern.BlackTopLeftCornerSquare,
-                BlockOrienation.Bottom: BlockPattern.BlackBottomLeftCornerSquare,
-                BlockOrienation.Left: BlockPattern.BlackBottomRightCornerSquare,
+                BlockOrientation.Up: BlockPattern.BlackTopRightCornerSquare,
+                BlockOrientation.Right: BlockPattern.BlackTopLeftCornerSquare,
+                BlockOrientation.Down: BlockPattern.BlackBottomLeftCornerSquare,
+                BlockOrientation.Left: BlockPattern.BlackBottomRightCornerSquare,
             },
             2: {
-                BlockOrienation.Up: BlockPattern.WhiteSquare,
-                BlockOrienation.Right: BlockPattern.WhiteSquare,
-                BlockOrienation.Bottom: BlockPattern.WhiteSquare,
-                BlockOrienation.Left: BlockPattern.WhiteSquare,
+                BlockOrientation.Up: BlockPattern.WhiteSquare,
+                BlockOrientation.Right: BlockPattern.WhiteSquare,
+                BlockOrientation.Down: BlockPattern.WhiteSquare,
+                BlockOrientation.Left: BlockPattern.WhiteSquare,
             },
             3: {
-                BlockOrienation.Up: BlockPattern.WhiteSquare,
-                BlockOrienation.Right: BlockPattern.WhiteSquare,
-                BlockOrienation.Bottom: BlockPattern.WhiteSquare,
-                BlockOrienation.Left: BlockPattern.WhiteSquare,
+                BlockOrientation.Up: BlockPattern.WhiteSquare,
+                BlockOrientation.Right: BlockPattern.WhiteSquare,
+                BlockOrientation.Down: BlockPattern.WhiteSquare,
+                BlockOrientation.Left: BlockPattern.WhiteSquare,
             },
             4: {
-                BlockOrienation.Up: BlockPattern.BlackSquare,
-                BlockOrienation.Right: BlockPattern.BlackSquare,
-                BlockOrienation.Bottom: BlockPattern.BlackSquare,
-                BlockOrienation.Left: BlockPattern.BlackSquare,
+                BlockOrientation.Up: BlockPattern.BlackSquare,
+                BlockOrientation.Right: BlockPattern.BlackSquare,
+                BlockOrientation.Down: BlockPattern.BlackSquare,
+                BlockOrientation.Left: BlockPattern.BlackSquare,
             },
             5: {
-                BlockOrienation.Up: BlockPattern.BlackSquare,
-                BlockOrienation.Right: BlockPattern.BlackSquare,
-                BlockOrienation.Bottom: BlockPattern.BlackSquare,
-                BlockOrienation.Left: BlockPattern.BlackSquare,
+                BlockOrientation.Up: BlockPattern.BlackSquare,
+                BlockOrientation.Right: BlockPattern.BlackSquare,
+                BlockOrientation.Down: BlockPattern.BlackSquare,
+                BlockOrientation.Left: BlockPattern.BlackSquare,
             },
             6: {
-                BlockOrienation.Up: BlockPattern.BlackBottomRightCornerSquare,
-                BlockOrienation.Right: BlockPattern.BlackTopRightCornerSquare,
-                BlockOrienation.Bottom: BlockPattern.BlackTopLeftCornerSquare,
-                BlockOrienation.Left: BlockPattern.BlackBottomLeftCornerSquare,
+                BlockOrientation.Up: BlockPattern.BlackBottomRightCornerSquare,
+                BlockOrientation.Right: BlockPattern.BlackTopRightCornerSquare,
+                BlockOrientation.Down: BlockPattern.BlackTopLeftCornerSquare,
+                BlockOrientation.Left: BlockPattern.BlackBottomLeftCornerSquare,
             },
         }
 
+        up = Node(BlockOrientation.Up)
+        right = Node(BlockOrientation.Right)
+        down = Node(BlockOrientation.Down)
+        left = Node(BlockOrientation.Left)
 
-    def getPattern():
-        return this.patterns[this.face[0]][this.face[1]]
+        up.prev = left
+        up.next = right
+        right.prev = up
+        right.next = down
+        down.prev = right
+        down.next = left
+        left.prev = down
+        left.next= up
+
+        self.orientations = {
+            BlockOrientation.Up: up,
+            BlockOrientation.Right: right,
+            BlockOrientation.Down: down,
+            BlockOrientation.Left: left,
+        }
+
+
+    def getPattern(self):
+        number, orientation = self.face
+        return self.patterns[number][orientation]
    
-    def flipUp():
+    def flipUp(self):
         pass
         
-    def flipDown():
+    def flipDown(self):
         pass
             
-    def flipRight():
+    def flipRight(self):
         pass
             
-    def flipUp():
+    def flipUp(self):
         pass
 
     ''' Change orientation, but stay on the same face. '''
-    def rotateRight():
-        pass
+    def rotateRight(self):
+        number, orientation = self.face
+        nextOrientation = self.orientations[orientation].prev.val
+        self.face = (number, nextOrientation)
         
     ''' Change orientation, but stay on the same face. '''
-    def rotateLeft():
-        pass
+    def rotateLeft(self):
+        number, orientation = self.face
+        nextOrientation = self.orientations[orientation].next.val
+        self.face = (number, nextOrientation)
+
 
