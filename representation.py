@@ -1,6 +1,5 @@
 from enum import Enum
 
-
 '''
 Represents the possible patterns of the block.
 '''
@@ -46,6 +45,15 @@ class Node:
         self.val = val
         self.next = None
         self.prev = None
+
+
+''' A node to represent a face. '''
+class BlockNode:
+    
+    def __init__(self, number):
+        self.val = number
+        self.neighbors = {}
+
 
 '''
 A block has six faces. Each face is assigned a number.
@@ -128,21 +136,75 @@ class Block:
             BlockOrientation.Left: left,
         }
 
+        self.opposites = {
+            BlockOrientation.Up: BlockOrientation.Down,
+            BlockOrientation.Right: BlockOrientation.Left,
+            BlockOrientation.Down: BlockOrientation.Up,
+            BlockOrientation.Left: BlockOrientation.Right,
+        }
 
+        blockOne = BlockNode(1)
+        blockTwo = BlockNode(2)
+        blockThree = BlockNode(3)
+        blockFour = BlockNode(4)
+        blockFive = BlockNode(5)
+        blockSix = BlockNode(6)
+
+        blockOne.neighbors[BlockOrientation.Up] = blockFive
+        blockOne.neighbors[BlockOrientation.Right] = blockFour
+        blockOne.neighbors[BlockOrientation.Down] = blockThree
+        blockOne.neighbors[BlockOrientation.Left] = blockTwo
+
+        blockTwo.neighbors[BlockOrientation.Up] = blockOne
+        blockTwo.neighbors[BlockOrientation.Right] = blockThree
+        blockTwo.neighbors[BlockOrientation.Down] = blockSix
+        blockTwo.neighbors[BlockOrientation.Left] = blockFive
+
+        blockThree.neighbors[BlockOrientation.Up] = blockOne
+        blockThree.neighbors[BlockOrientation.Right] = blockFour
+        blockThree.neighbors[BlockOrientation.Down] = blockSix
+        blockThree.neighbors[BlockOrientation.Left] = blockTwo
+
+        blockFour.neighbors[BlockOrientation.Up] = blockOne
+        blockFour.neighbors[BlockOrientation.Right] = blockFive
+        blockFour.neighbors[BlockOrientation.Down] = blockSix
+        blockFour.neighbors[BlockOrientation.Left] = blockThree
+
+        blockFive.neighbors[BlockOrientation.Up] = blockSix
+        blockFive.neighbors[BlockOrientation.Right] = blockFour
+        blockFive.neighbors[BlockOrientation.Down] = blockOne
+        blockFive.neighbors[BlockOrientation.Left] = blockTwo
+
+        blockSix.neighbors[BlockOrientation.Up] = blockThree
+        blockSix.neighbors[BlockOrientation.Right] = blockFour
+        blockSix.neighbors[BlockOrientation.Down] = blockFive
+        blockSix.neighbors[BlockOrientation.Left] = blockTwo
+
+
+        self.blocks = {
+            1: blockOne,
+            2: blockTwo,
+            3: blockThree,
+            4: blockFour,
+            5: blockFive,
+            6: blockSix,
+        }
+        
     def getPattern(self):
         number, orientation = self.face
         return self.patterns[number][orientation]
    
     def flipUp(self):
-        pass
+        number, orientation = self.face
+        block = self.blocks[number].neighbors[self.opposites[orientation]]
+        nextNumber = block.val
+        self.face = (nextNumber, orientation)
+        return self.face
         
     def flipDown(self):
         pass
             
     def flipRight(self):
-        pass
-            
-    def flipUp(self):
         pass
 
     ''' Change orientation, but stay on the same face. '''
@@ -150,11 +212,12 @@ class Block:
         number, orientation = self.face
         nextOrientation = self.orientations[orientation].prev.val
         self.face = (number, nextOrientation)
+        return self.face
         
     ''' Change orientation, but stay on the same face. '''
     def rotateLeft(self):
         number, orientation = self.face
         nextOrientation = self.orientations[orientation].next.val
         self.face = (number, nextOrientation)
-
+        return self.face
 
