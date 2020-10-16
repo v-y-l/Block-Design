@@ -1,3 +1,10 @@
+from enum import Enum
+
+class Pattern(Enum):
+    White = 1
+    Black = 2
+    Triangle = 3
+
 class Block:
 
     def __init__(self):
@@ -12,5 +19,24 @@ class Block:
             6: {3, 4, 5, 2},
         }
 
-    def getNeighbors():
+        self.pattern_map = {
+            1: Pattern.Triangle,
+            2: Pattern.White,
+            3: Pattern.White,
+            4: Pattern.Black,
+            5: Pattern.Black,
+            6: Pattern.Triangle
+        }
+
+    def getNeighbors(self):
         return self.adjacency_list[self.current_face]
+
+    def getPattern(self):
+        return self.pattern_map[self.current_face]
+
+    def getFace(self):
+        return self.current_face
+
+    def goToFace(self, next_face):
+        if next_face in self.current_face.getNeighbors():
+            self.current_face = next_face    
