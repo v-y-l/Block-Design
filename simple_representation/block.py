@@ -39,4 +39,6 @@ class Block:
 
     def goToFace(self, next_face):
         if next_face in self.getNeighbors():
-            self.current_face = next_face    
+            self.current_face = next_face
+        else:
+            raise Exception("Can't go from {} to {}".format(self.current_face, next_face))
