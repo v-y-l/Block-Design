@@ -8,6 +8,9 @@ class TestBlockMethods(unittest.TestCase):
         block = Block()
         self.assertEqual(block.getFace(), 1)
         self.assertEqual(block.getPattern(), Pattern.Triangle)
+        block.goToFace(5)
+        self.assertEqual(block.getFace(), 5)
+        self.assertEqual(block.getPattern(), Pattern.Black)
 
 if __name__ == '__main__':
     unittest.main()

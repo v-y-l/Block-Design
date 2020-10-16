@@ -38,5 +38,5 @@ class Block:
         return self.current_face
 
     def goToFace(self, next_face):
-        if next_face in self.current_face.getNeighbors():
+        if next_face in self.getNeighbors():
             self.current_face = next_face    
