@@ -8,14 +8,14 @@ class Puzzle:
         self.dest = dest
         self.blocks = len(dest)*[0]
         for i, _ in enumerate(dest):
-            dest[i] = Block()
+            self.blocks[i] = Block()
 
     def solve(self):
-        moves = []
-        for i in range(len(dest)):
-            moves.extend(
+        movesPerBlock = []
+        for i in range(len(self.dest)):
+            movesPerBlock.append(
                 self.searcher(self.blocks[i], self.dest[i]))
-        return moves
+        return movesPerBlock
 
 def random_search(block, dest_pattern):
     moves = []

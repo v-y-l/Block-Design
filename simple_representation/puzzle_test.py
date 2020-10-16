@@ -20,6 +20,17 @@ class TestBlockMethods(unittest.TestCase):
             block.goToFace(m)
         self.assertEqual(block.getPattern(), Pattern.White)
 
+    def test_random_search_puzzle(self):
+        expected_patterns = [Pattern.Triangle,
+                            Pattern.Triangle, Pattern.Triangle, Pattern.Triangle]
+        puzzle = Puzzle(
+            [Pattern.Triangle, Pattern.Triangle, Pattern.Triangle, Pattern.Triangle],
+            random_search)
+        puzzle.solve()
+        actual_patterns = []
+        for b in puzzle.blocks:
+            actual_patterns.append(b.getPattern())
+        self.assertEqual(actual_patterns, expected_patterns)            
         
 if __name__ == '__main__':
     unittest.main()
