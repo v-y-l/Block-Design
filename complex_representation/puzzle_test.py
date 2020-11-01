@@ -20,7 +20,7 @@ class TestBlockMethods(unittest.TestCase):
         self.assertEqual(block.getPattern(),
                          BlockPattern.BlackTopRightCornerSquare)
         random_search(block, BlockPattern.WhiteSquare)
-        self.assertEqual(block.getPattern(), BlockPattern.White)
+        self.assertEqual(block.getPattern(), BlockPattern.WhiteSquare)
 
     def test_random_search_puzzle(self):
         expected_patterns = [

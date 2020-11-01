@@ -26,5 +26,5 @@ def random_search(block, dest_pattern):
     possible_actions = block.getValidActions()
     next_action = sample(possible_actions, 1)[0]
     actions.append(next_action)
-    next_action()
+    block.executeAction(next_action)
     return random_search(block, dest_pattern)
