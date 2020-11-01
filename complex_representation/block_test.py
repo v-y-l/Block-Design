@@ -5,6 +5,7 @@ from block import Block, BlockPattern, BlockAction
 class TestBlockMethods(unittest.TestCase):
 
     def test_simple_sequence_one(self):
+        print('\nSimple sequence one')
         block = Block()
         self.assertEqual(block.getFace(), 1)
         self.assertEqual(block.getPattern(), BlockPattern.BlackTopRightCornerSquare)
@@ -22,6 +23,7 @@ class TestBlockMethods(unittest.TestCase):
         self.assertEqual(block.getPattern(), BlockPattern.BlackTopRightCornerSquare)
 
     def test_simple_sequence_two(self):
+        print('\nSimple sequence two')
         block = Block()
         self.assertEqual(block.getFace(), 1)
         self.assertEqual(block.getPattern(), BlockPattern.BlackTopRightCornerSquare)
@@ -39,6 +41,7 @@ class TestBlockMethods(unittest.TestCase):
         self.assertEqual(block.getPattern(), BlockPattern.BlackBottomLeftCornerSquare)
 
     def test_complex_sequence(self):
+        print('\Complex sequence')
         block = Block()
         self.assertEqual(block.getFace(), 1)
         self.assertEqual(block.getPattern(), BlockPattern.BlackTopRightCornerSquare)

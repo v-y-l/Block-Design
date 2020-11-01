@@ -130,6 +130,8 @@ class Block:
             6: BlockAction.GoToFaceSix
         }
 
+        print('Start at: ' + str(self))
+
     def getNeighbors(self):
         return self.blocks[self.current_face].neighbors
 
@@ -149,13 +151,17 @@ class Block:
         rotateActions =  [BlockAction.RotateLeft, BlockAction.RotateRight]
         goToActions = [self.goToFaceAction[face] for face in self.getNeighbors()]
         return rotateActions + goToActions
+
+    def __str__(self):
+        return 'block {}, face {}, pattern {}'.format(
+            self.getNumber(), self.getFace(), self.getPattern())
+
     
 ''' Go to the new face, if possible. '''
 def goToFace(block, next_face):
     if next_face in block.getNeighbors():
         block.current_face = next_face
-        print('goTo: block {}, face {}, pattern {}'
-          .format(block.getNumber(), block.getFace(), block.getPattern()))
+        print('Go to: ' + str(block))
     else:
         raise Exception("Can't go from {} to {}".format(
             block.current_face, next_face))
@@ -164,12 +170,10 @@ def goToFace(block, next_face):
 def rotateRight(block):
     block.patterns[1] = block.orientations[block.patterns[1]].next.val
     block.patterns[6] = block.orientations[block.patterns[6]].next.val
-    print('rotateRight: block {}, face {}, pattern {}'
-          .format(block.getNumber(), block.getFace(), block.getPattern()))
+    print('Right rotate: ' + str(block))
         
 ''' Change orientation, but stay on the same face. '''
 def rotateLeft(block):
     block.patterns[1] = block.orientations[block.patterns[1]].prev.val
     block.patterns[6] = block.orientations[block.patterns[6]].prev.val
-    print('rotateLeft: block {}, face {}, pattern {}'
-          .format(block.getNumber(), block.getFace(), block.getPattern()))
+    print('Left rotate: ' + str(block))
