@@ -6,6 +6,7 @@ from puzzle import Puzzle, random_search
 class TestBlockMethods(unittest.TestCase):
 
     def test_init(self):
+        print('\nInstantiates a block bank with corrent length')
         puzzle = Puzzle([
             BlockPattern.BlackSquare,
             BlockPattern.BlackBottomLeftCornerSquare,
@@ -15,7 +16,8 @@ class TestBlockMethods(unittest.TestCase):
         self.assertEqual(len(puzzle.blockBank), 4)
 
     def test_random_search(self):
-        block = Block()
+        print('\nApply random search for a single block')
+        block = Block(1, 1)
         self.assertEqual(block.getFace(), 1)
         self.assertEqual(block.getPattern(),
                          BlockPattern.BlackTopRightCornerSquare)
@@ -23,6 +25,7 @@ class TestBlockMethods(unittest.TestCase):
         self.assertEqual(block.getPattern(), BlockPattern.WhiteSquare)
 
     def test_random_search_puzzle(self):
+        print('\nApply random search for the puzzle')
         expected_patterns = [
             BlockPattern.BlackSquare,
             BlockPattern.BlackBottomLeftCornerSquare,

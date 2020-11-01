@@ -6,7 +6,7 @@ class Puzzle:
     def __init__(self, problem, solver_function):
         self.solver_function = solver_function
         self.problem = problem
-        self.blockBank = [Block() for i in range(len(problem))]
+        self.blockBank = [Block(1, i+1) for i in range(len(problem))]
 
     '''
     Returns a list of actions by block,

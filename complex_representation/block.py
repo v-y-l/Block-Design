@@ -154,7 +154,8 @@ class Block:
 def goToFace(block, next_face):
     if next_face in block.getNeighbors():
         block.current_face = next_face
-        print('goTo: face {}'.format(block.getFace()))
+        print('rotateLeft: block {}, face {}, pattern {}'
+          .format(block.getNumber(), block.getFace(), block.getPattern()))
     else:
         raise Exception("Can't go from {} to {}".format(
             block.current_face, next_face))
@@ -163,10 +164,12 @@ def goToFace(block, next_face):
 def rotateRight(block):
     block.patterns[1] = block.orientations[block.patterns[1]].next.val
     block.patterns[6] = block.orientations[block.patterns[6]].next.val
-    print('rotateRight: block {}, face {}'.format(block.getNumber(), block.getFace()))
+    print('rotateRight: block {}, face {}, pattern {}'
+          .format(block.getNumber(), block.getFace(), block.getPattern()))
         
 ''' Change orientation, but stay on the same face. '''
 def rotateLeft(block):
     block.patterns[1] = block.orientations[block.patterns[1]].prev.val
     block.patterns[6] = block.orientations[block.patterns[6]].prev.val
-    print('rotateLeft: block {}, face {}'.format(block.getNumber(), block.getFace()))
+    print('rotateLeft: block {}, face {}, pattern {}'
+          .format(block.getNumber(), block.getFace(), block.getPattern()))
