@@ -6,7 +6,7 @@ from puzzle import Puzzle, random_search
 class TestBlockMethods(unittest.TestCase):
 
     def test_init(self):
-        print('\nInstantiates a block bank with corrent length')
+        print('\nInstantiates a block bank with correct length')
         puzzle = Puzzle([
             BlockPattern.BlackSquare,
             BlockPattern.BlackBottomLeftCornerSquare,
