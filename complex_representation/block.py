@@ -154,7 +154,7 @@ class Block:
 def goToFace(block, next_face):
     if next_face in block.getNeighbors():
         block.current_face = next_face
-        print('rotateLeft: block {}, face {}, pattern {}'
+        print('goTo: block {}, face {}, pattern {}'
           .format(block.getNumber(), block.getFace(), block.getPattern()))
     else:
         raise Exception("Can't go from {} to {}".format(
