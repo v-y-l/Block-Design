@@ -1,15 +1,10 @@
 from block import BlockPattern, Block
-from search import random_search
+from search import random_search, SearchType
 
 class Puzzle:
 
-    '''
-    problem is the puzzle image that we want to do block design on,
-    solver function locates the correct face of each block for each
-    item in the puzzle
-    '''
-    def __init__(self, problem, solver_function):
-        self.solver_function = solver_function
+    def __init__(self, problem, solvers):
+        self.solvers = solvers
         self.problem = problem
         self.blockBank = [Block(1, i+1) for i in range(len(problem))]
 
@@ -17,8 +12,9 @@ class Puzzle:
     Returns a list of actions executed by each block to solve the problem.
     '''
     def solve(self):
-        movesPerBlock = []
+        searchFace = self.solvers[SearchType.Face]
+        actionsPerBlock = []
         for i in range(len(self.problem)):
-            movesPerBlock.append(
-                self.solver_function(self.blockBank[i], self.problem[i]))
-        return movesPerBlock
+            searchFaceActions = searchFace(self.blockBank[i], self.problem[i])
+            actionsPerBlock.append(actionsPerBlock)
+        return actionsPerBlock

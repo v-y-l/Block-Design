@@ -23,3 +23,8 @@ class BlockAction(Enum):
     GoToFaceSix = 6
     RotateLeft = 7
     RotateRight = 8
+
+''' Represents the type of search functions for the puzzle. '''
+class SearchType(Enum):
+    Face = 1 # Given some block, find a face
+    PuzzlePiece = 2 # Given some puzzle, find the next puzzle piece to solve

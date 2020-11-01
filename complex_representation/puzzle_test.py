@@ -1,7 +1,7 @@
 import unittest
 
 from block import BlockPattern, Block
-from puzzle import Puzzle, random_search
+from puzzle import Puzzle, random_search, SearchType
 
 class TestBlockMethods(unittest.TestCase):
 
@@ -12,7 +12,7 @@ class TestBlockMethods(unittest.TestCase):
             BlockPattern.BlackBottomLeftCornerSquare,
             BlockPattern.BlackTopRightCornerSquare,
             BlockPattern.BlackSquare
-        ], random_search)
+        ], {SearchType.Face: random_search})
         self.assertEqual(len(puzzle.blockBank), 4)
 
     def test_random_search(self):
@@ -37,7 +37,7 @@ class TestBlockMethods(unittest.TestCase):
             BlockPattern.BlackBottomLeftCornerSquare,
             BlockPattern.BlackTopRightCornerSquare,
             BlockPattern.BlackSquare
-        ], random_search)
+        ], {SearchType.Face: random_search})
         puzzle.solve()
         actual_patterns = []
         for block in puzzle.blockBank:

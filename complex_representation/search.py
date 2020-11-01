@@ -1,8 +1,12 @@
 from random import sample
+from utils.enums import SearchType
+
+#  Face search functions, given some block, search for a face. '''
 
 '''
-Randomly search for the block pattern, applying the actions to the block,
-then returning those actions as a list.
+  Randomly search for the block pattern.
+  Applies the actions to the block,
+  then returns those actions as a list.
 '''
 def random_search(block, dest_pattern):
     actions = []

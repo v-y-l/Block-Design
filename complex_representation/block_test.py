@@ -87,6 +87,7 @@ class TestBlockMethods(unittest.TestCase):
         self.assertEqual(block.getPattern(), BlockPattern.BlackBottomRightCornerSquare)
 
     def test_invalid_sequence(self):
+        print('\Invalid sequence should not be possible')
         block = Block()
         self.assertEqual(block.getFace(), 1)
         self.assertEqual(block.getPattern(), BlockPattern.BlackTopRightCornerSquare)
