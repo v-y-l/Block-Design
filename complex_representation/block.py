@@ -42,6 +42,9 @@ class BlockNode:
 
 '''
 A block has six faces. Each face is assigned a number.
+We represent things two dimensionally by sprawling out the faces.
+This simplifies tracking rotation state, as we can apply rotations
+across the entire 2D image.
 
                         [   BlackTopRightCornerSquare (1)  ]
     [ WhiteSquare (2) ] [          WhiteSquare (3)         ] [ BlackSquare (4) ] [ BlackSquare (5) ]
