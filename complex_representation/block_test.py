@@ -1,66 +1,22 @@
 import unittest
 
-from block import Block, BlockOrientation
+from block import Block, BlockPattern
 
 class TestBlockMethods(unittest.TestCase):
 
-    def test_flipup(self):
+    def test_sequenceone(self):
         block = Block()
-        self.assertEqual(block.face[1], BlockOrientation.Up)
-        self.assertEqual(block.face[0], 1)
-        block.flipUp()
-        self.assertEqual(block.face[1], BlockOrientation.Up)
-        self.assertEqual(block.face[0], 3)
-        block.flipUp()
-        self.assertEqual(block.face[1], BlockOrientation.Up)
-        self.assertEqual(block.face[0], 6)
-        block.flipUp()
-        self.assertEqual(block.face[1], BlockOrientation.Up)
-        self.assertEqual(block.face[0], 5)
-        block.flipUp()
-        self.assertEqual(block.face[1], BlockOrientation.Up)
-        self.assertEqual(block.face[0], 1)        
-
-    def test_flipdown(self):
-        block = Block()
-        self.assertEqual(block.face[1], BlockOrientation.Up)
-        self.assertEqual(block.face[0], 1)
-        block.flipDown()
-        self.assertEqual(block.face[1], BlockOrientation.Up)
-        self.assertEqual(block.face[0], 5)
-        block.flipDown()
-        self.assertEqual(block.face[1], BlockOrientation.Up)
-        self.assertEqual(block.face[0], 6)
-        block.flipDown()
-        self.assertEqual(block.face[1], BlockOrientation.Up)
-        self.assertEqual(block.face[0], 3)
-
-    def test_flipright(self):
-        block = Block()
-        self.assertEqual(block.face[1], BlockOrientation.Up)
-        self.assertEqual(block.face[0], 1)
-        block.flipRight()
-        self.assertEqual(block.face[1], BlockOrientation.Right)
-        self.assertEqual(block.face[0], 2)
-        block.flipRight()
-        self.assertEqual(block.face[1], BlockOrientation.Down)
-        self.assertEqual(block.face[0], 6)
-        block.flipRight()
-        self.assertEqual(block.face[1], BlockOrientation.Left)
+        self.assertEqual(block.current_face, 1)
+        self.assertEqual(block.getPattern(), BlockPattern.BlackTopRightCornerSquare)
+        block.goToFace(4)
         self.assertEqual(block.face[0], 4)
-
-    def test_flipsequenceone(self):
-        block = Block()
-        self.assertEqual(block.face[1], BlockOrientation.Up)
-        self.assertEqual(block.face[0], 1)
-        block.flipLeft()
-        self.assertEqual(block.face[1], BlockOrientation.Right)
-        self.assertEqual(block.face[0], 4)
-        block.flipDown()
-        self.assertEqual(block.face[1], BlockOrientation.Left)
+        self.assertEqual(block.getPattern(), BlockPattern.BlackSquare)
+        block.goToFace(5)
         self.assertEqual(block.face[0], 5)
-        block.flipRight()
+        self.assertEqual(block.getPattern(), BlockPattern.BlackSquare)
+        block.goToFace(1)
         self.assertEqual(block.face[0], 1)
+        self.assertEqual(block.getPattern(), BlockPattern.BlackTopRightCornerSquare)
 
 if __name__ == '__main__':
     unittest.main()

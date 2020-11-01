@@ -11,33 +11,6 @@ class BlockPattern(Enum):
     BlackBottomLeftCornerSquare = 5
     BlackBottomRightCornerSquare = 6
 
-    # Leave out 45 degree rotation
-    # problems for now to simplify the model
-
-    # WhiteDiamond = 7
-    # BlackDiamond = 8
-    # BlackTopCornerDiamond = 9
-    # BlackBottomCornerDiamond = 10
-
-''' When a face is rotated 90 degrees. '''
-class RotateDirection(Enum):
-    Right = 1
-    Left = 2
-
-''' When a face is flipped over to another face. '''
-class FlipDirection(Enum):
-    Up = 1
-    Right = 2
-    Down = 3
-    Left = 4
-
-''' Orientation based on descriptors below. '''
-class BlockOrientation(Enum):
-    Up = 1
-    Right = 2
-    Down = 3
-    Left = 4
-
 ''' For a doubly linked list '''
 class Node:
     
@@ -58,89 +31,49 @@ class BlockNode:
 '''
 A block has six faces. Each face is assigned a number.
 
-When collapsed to 2D, they look like...
-                  
- 
-                 BlackTopRightCornerSquare (1, ^)
-                             |
-    WhiteSquare (2, ^) | WhiteSquare (3, ^) | BlackSquare (4, ^) | Black Square (5, ^)
-                             |
-                 BlackBottomRightCornerSquare (6, ^)
+                        [   BlackTopRightCornerSquare (1)  ]
+    [ WhiteSquare (2) ] [          WhiteSquare (3)         ] [ BlackSquare (4) ] [ BlackSquare (5) ]
+                        [ BlackBottomRightCornerSquare (6) ]
 
-By convention, each face has the default orientation of 'up' or ^.
 '''
 class Block:
 
-    def __init__(self, number=1, orientation=BlockOrientation.Up):
-        self.face = (number, orientation)
+    def __init__(self, number=1):
+        
+        self.current_face = number
         self.patterns = {
-            1: {
-                BlockOrientation.Up: BlockPattern.BlackTopRightCornerSquare,
-                BlockOrientation.Right: BlockPattern.BlackTopLeftCornerSquare,
-                BlockOrientation.Down: BlockPattern.BlackBottomLeftCornerSquare,
-                BlockOrientation.Left: BlockPattern.BlackBottomRightCornerSquare,
-            },
-            2: {
-                BlockOrientation.Up: BlockPattern.WhiteSquare,
-                BlockOrientation.Right: BlockPattern.WhiteSquare,
-                BlockOrientation.Down: BlockPattern.WhiteSquare,
-                BlockOrientation.Left: BlockPattern.WhiteSquare,
-            },
-            3: {
-                BlockOrientation.Up: BlockPattern.WhiteSquare,
-                BlockOrientation.Right: BlockPattern.WhiteSquare,
-                BlockOrientation.Down: BlockPattern.WhiteSquare,
-                BlockOrientation.Left: BlockPattern.WhiteSquare,
-            },
-            4: {
-                BlockOrientation.Up: BlockPattern.BlackSquare,
-                BlockOrientation.Right: BlockPattern.BlackSquare,
-                BlockOrientation.Down: BlockPattern.BlackSquare,
-                BlockOrientation.Left: BlockPattern.BlackSquare,
-            },
-            5: {
-                BlockOrientation.Up: BlockPattern.BlackSquare,
-                BlockOrientation.Right: BlockPattern.BlackSquare,
-                BlockOrientation.Down: BlockPattern.BlackSquare,
-                BlockOrientation.Left: BlockPattern.BlackSquare,
-            },
-            6: {
-                BlockOrientation.Up: BlockPattern.BlackBottomRightCornerSquare,
-                BlockOrientation.Right: BlockPattern.BlackTopRightCornerSquare,
-                BlockOrientation.Down: BlockPattern.BlackTopLeftCornerSquare,
-                BlockOrientation.Left: BlockPattern.BlackBottomLeftCornerSquare,
-            },
+            1: BlockPattern.BlackTopRightCornerSquare,
+            2: BlockPattern.WhiteSquare,
+            3: BlockPattern.WhiteSquare,
+            4: BlockPattern.BlackSquare,
+            5: BlockPattern.BlackSquare,
+            6: BlockPattern.BlackBottomRightCornerSquare,
         }
 
-        up = Node(BlockOrientation.Up)
-        right = Node(BlockOrientation.Right)
-        down = Node(BlockOrientation.Down)
-        left = Node(BlockOrientation.Left)
+        # For rotations
 
-        up.prev = left
-        up.next = right
-        right.prev = up
-        right.next = down
-        down.prev = right
-        down.next = left
-        left.prev = down
-        left.next= up
+        blackTopRightCornerSquare = Node(BlockPattern.BlackTopRightCornerSquare)
+        blackBottomRightCornerSquare = Node(BlockPattern.BlackBottomRightCornerSquare)
+        blackBottomLeftCornerSquare = Node(BlockPattern.BlackBottomLeftCornerSquare)
+        blackTopLeftCornerSquare = Node(BlockPattern.BlackTopLeftCornerSquare)
 
-        # Returns a node to the doubly linked list that determines
-        # the clockwise order starting from up.
+        blackTopRightCornerSquare.next = blackBottomRightCornerSquare
+        blackTopRightCornerSquare.prev = blackTopLeftCornerSquare
+        blackBottomRightCornerSquare.next = blackBottomLeftCornerSquare
+        blackBottomRightCornerSquare.prev = blackTopRightCornerSquare
+        blackBottomLeftCornerSquare.next = blackTopLeftCornerSquare
+        blackBottomLeftCornerSquare.prev = blackBottomRightCornerSquare
+        blackTopLeftCornerSquare.next = blackTopRightCornerSquare
+        blackTopLeftCornerSquare.prev = blackBottomLeftCornerSquare
+
         self.orientations = {
-            BlockOrientation.Up: up,
-            BlockOrientation.Right: right,
-            BlockOrientation.Down: down,
-            BlockOrientation.Left: left,
+            blackTopRightCornerSquare: blackTopRightCornerSquare,
+            blackBottomRightCornerSquare: blackBottomRightCornerSquare,
+            blackBottomLeftCornerSquare: blackBottomLeftCornerSquare,
+            blackTopLeftCornerSquare: blackTopLeftCornerSquare
         }
 
-        self.opposites = {
-            BlockOrientation.Up: BlockOrientation.Down,
-            BlockOrientation.Right: BlockOrientation.Left,
-            BlockOrientation.Down: BlockOrientation.Up,
-            BlockOrientation.Left: BlockOrientation.Right,
-        }
+        # For movement to neighboring faces
 
         blockOne = BlockNode(1)
         blockTwo = BlockNode(2)
@@ -149,35 +82,12 @@ class Block:
         blockFive = BlockNode(5)
         blockSix = BlockNode(6)
 
-        blockOne.neighbors[BlockOrientation.Up] = blockFive
-        blockOne.neighbors[BlockOrientation.Right] = blockFour
-        blockOne.neighbors[BlockOrientation.Down] = blockThree
-        blockOne.neighbors[BlockOrientation.Left] = blockTwo
-
-        blockTwo.neighbors[BlockOrientation.Up] = blockOne
-        blockTwo.neighbors[BlockOrientation.Right] = blockThree
-        blockTwo.neighbors[BlockOrientation.Down] = blockSix
-        blockTwo.neighbors[BlockOrientation.Left] = blockFive
-
-        blockThree.neighbors[BlockOrientation.Up] = blockOne
-        blockThree.neighbors[BlockOrientation.Right] = blockFour
-        blockThree.neighbors[BlockOrientation.Down] = blockSix
-        blockThree.neighbors[BlockOrientation.Left] = blockTwo
-
-        blockFour.neighbors[BlockOrientation.Up] = blockOne
-        blockFour.neighbors[BlockOrientation.Right] = blockFive
-        blockFour.neighbors[BlockOrientation.Down] = blockSix
-        blockFour.neighbors[BlockOrientation.Left] = blockThree
-
-        blockFive.neighbors[BlockOrientation.Up] = blockOne
-        blockFive.neighbors[BlockOrientation.Right] = blockTwo
-        blockFive.neighbors[BlockOrientation.Down] = blockSix
-        blockFive.neighbors[BlockOrientation.Left] = blockFour
-
-        blockSix.neighbors[BlockOrientation.Up] = blockThree
-        blockSix.neighbors[BlockOrientation.Right] = blockFour
-        blockSix.neighbors[BlockOrientation.Down] = blockFive
-        blockSix.neighbors[BlockOrientation.Left] = blockTwo
+        blockOne.neighbors = {blockFive, blockFour, blockThree, blockTwo}
+        blockTwo.neighbors = {blockOne, blockThree, blockSix, blockFive}
+        blockThree.neighbors = {blockOne, blockFour, blockSix, blockTwo}
+        blockFour.neighbors = {blockOne, blockFive, blockSix, blockThree}
+        blockFive.neighbors = {blockOne, blockTwo, blockSix, blockFour}
+        blockSix.neighbors = {blockThree, blockFour, blockFive, blockTwo}
 
         self.blocks = {
             1: blockOne,
@@ -187,68 +97,27 @@ class Block:
             5: blockFive,
             6: blockSix,
         }
+
+    def getNeighbors(self):
+        return self.blocks[self.current_face].neighbors
         
     def getPattern(self):
-        number, orientation = self.face
-        return self.patterns[number][orientation]
+        return self.patterns[self.current_face]
 
-    ''' Move away the current orientation. '''
-    def flipUp(self):
-        number, orientation = self.face
-        # A kink in our convention. When flipping up from 6, we want to move
-        # towards 6, but 'UP' will actually take us to 1.
-        if number == 5 and orientation == BlockOrientation.Up:
-            block = self.blocks[number].neighbors[orientation]
+    ''' Go to the new face, if possible. '''
+    def goToFace(self, next_face):
+        if next_face in self.getNeighbors():
+            self.current_face = next_face
         else:
-            block = self.blocks[number].neighbors[self.opposites[orientation]]
-        nextNumber = block.val
-        self.face = (nextNumber, orientation)
-        return self.face
-
-    '''
-    Move towards the current orientation. (The next face comes from the current
-    orientation.)
-    '''
-    def flipDown(self):
-        number, orientation = self.face
-        # A kink in our convention. When flipping down from 5, we want to move
-        # towards 6, but 'UP' will actually take us to 1.
-        if number == 5 and orientation == BlockOrientation.Up:
-            block = self.blocks[number].neighbors[self.opposites[orientation]]
-        else:
-            block = self.blocks[number].neighbors[orientation]
-        nextNumber = block.val
-        self.face = (nextNumber, orientation)
-        return self.face
-
-    '''  of your orientation. '''
-    def flipRight(self):
-        number, orientation = self.face
-        leftOrientation = self.orientations[orientation].prev.val
-        block = self.blocks[number].neighbors[leftOrientation]
-        nextNumber = block.val
-        self.face = (nextNumber, orientation)
-        return self.face
-
-    ''' Go right of your orientation. '''
-    def flipLeft(self):
-        number, orientation = self.face
-        rightOrientation = self.orientations[orientation].next.val
-        block = self.blocks[number].neighbors[rightOrientation]
-        nextNumber = block.val
-        self.face = (nextNumber, orientation)
-        return self.face
+            raise Exception("Can't go from {} to {}".format(self.current_face, next_face))
 
     ''' Change orientation, but stay on the same face. '''
     def rotateRight(self):
-        number, orientation = self.face
-        nextOrientation = self.orientations[orientation].prev.val
-        self.face = (number, nextOrientation)
-        return self.face
-        
+        self.patterns[1] = self.orientations[self.patterns[1]].next
+        self.patterns[6] = self.orientations[self.patterns[6]].next
+                
     ''' Change orientation, but stay on the same face. '''
     def rotateLeft(self):
-        number, orientation = self.face
-        nextOrientation = self.orientations[orientation].next.val
-        self.face = (number, nextOrientation)
-        return self.face
+        self.patterns[1] = self.orientations[self.patterns[1]].prev
+        self.patterns[6] = self.orientations[self.patterns[6]].prev
+
