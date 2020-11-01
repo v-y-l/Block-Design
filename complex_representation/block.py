@@ -1,6 +1,6 @@
-from enums import BlockPattern, BlockAction
-from data_structures import Node, BlockNode
-from block_actions import goToFace, rotateRight, rotateLeft
+from utils.enums import BlockPattern, BlockAction
+from utils.data_structures import Node, BlockNode
+from utils.block_actions import goToFace, rotateRight, rotateLeft
 
 '''
 A block has six faces. Each face is assigned a number.
