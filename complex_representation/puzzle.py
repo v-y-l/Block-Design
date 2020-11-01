@@ -1,5 +1,5 @@
 from block import BlockPattern, Block
-from search import random_search, SearchType
+from search import SearchType, random_search, sequential_search
 
 class Puzzle:
 
@@ -12,9 +12,13 @@ class Puzzle:
     Returns a list of actions executed by each block to solve the problem.
     '''
     def solve(self):
-        searchFace = self.solvers[SearchType.Face]
+        faceSearcher = self.solvers[SearchType.Face]
+        puzzlePieceSearcher = self.solvers[SearchType.PuzzlePiece]
+
+        # The actions taken for each block to get to the destination state
         actionsPerBlock = []
-        for i in range(len(self.problem)):
-            searchFaceActions = searchFace(self.blockBank[i], self.problem[i])
+
+        for i in puzzlePieceSearcher(self.problem):
+            searchFaceActions = faceSearcher(self.blockBank[i], self.problem[i])
             actionsPerBlock.append(actionsPerBlock)
         return actionsPerBlock

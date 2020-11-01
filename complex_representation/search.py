@@ -1,7 +1,7 @@
 from random import sample
 from utils.enums import SearchType
 
-#  Face search functions, given some block, search for a face. '''
+# Face search functions, given some block, search for a face. '''
 
 '''
   Randomly search for the block pattern.
@@ -17,3 +17,9 @@ def random_search(block, dest_pattern):
     actions.append(next_action)
     block.executeAction(next_action)
     return random_search(block, dest_pattern)
+
+# Puzzle piece search functions, given some puzzle,
+# return the next puzzle piece to solve for.
+
+def sequential_search(problem):
+    return range(len(problem))
