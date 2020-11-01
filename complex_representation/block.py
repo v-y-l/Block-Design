@@ -99,6 +99,9 @@ class Block:
 
     def getNeighbors(self):
         return self.blocks[self.current_face].neighbors
+
+    def getFace(self):
+        return self.current_face
         
     def getPattern(self):
         return self.patterns[self.current_face]
