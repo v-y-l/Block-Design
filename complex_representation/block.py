@@ -27,7 +27,6 @@ class BlockNode:
         self.val = number
         self.neighbors = {}
 
-
 '''
 A block has six faces. Each face is assigned a number.
 
@@ -67,10 +66,10 @@ class Block:
         blackTopLeftCornerSquare.prev = blackBottomLeftCornerSquare
 
         self.orientations = {
-            blackTopRightCornerSquare: blackTopRightCornerSquare,
-            blackBottomRightCornerSquare: blackBottomRightCornerSquare,
-            blackBottomLeftCornerSquare: blackBottomLeftCornerSquare,
-            blackTopLeftCornerSquare: blackTopLeftCornerSquare
+            BlockPattern.BlackTopRightCornerSquare: blackTopRightCornerSquare,
+            BlockPattern.BlackBottomRightCornerSquare: blackBottomRightCornerSquare,
+            BlockPattern.BlackBottomLeftCornerSquare: blackBottomLeftCornerSquare,
+            BlockPattern.BlackTopLeftCornerSquare: blackTopLeftCornerSquare
         }
 
         # For movement to neighboring faces
@@ -113,11 +112,11 @@ class Block:
 
     ''' Change orientation, but stay on the same face. '''
     def rotateRight(self):
-        self.patterns[1] = self.orientations[self.patterns[1]].next
-        self.patterns[6] = self.orientations[self.patterns[6]].next
+        self.patterns[1] = self.orientations[self.patterns[1]].next.val
+        self.patterns[6] = self.orientations[self.patterns[6]].next.val
                 
     ''' Change orientation, but stay on the same face. '''
     def rotateLeft(self):
-        self.patterns[1] = self.orientations[self.patterns[1]].prev
-        self.patterns[6] = self.orientations[self.patterns[6]].prev
+        self.patterns[1] = self.orientations[self.patterns[1]].prev.val
+        self.patterns[6] = self.orientations[self.patterns[6]].prev.val
 
