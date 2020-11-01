@@ -20,11 +20,11 @@ class Puzzle:
         return movesPerBlock
 
 def random_search(block, dest_pattern):
-    moves = []
+    actions = []
     if block.getPattern() == dest_pattern:
-        return moves
-
-    next_face = sample(block.getNeighbors(), 1)[0]
-    moves.append(next_face)
-    block.goToFace(next_face)
+        return actions
+    possible_actions = block.getValidActions()
+    next_action = sample(possible_actions, 1)[0]
+    actions.append(next_action)
+    next_action()
     return random_search(block, dest_pattern)

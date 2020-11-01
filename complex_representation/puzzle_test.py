@@ -17,11 +17,10 @@ class TestBlockMethods(unittest.TestCase):
     def test_random_search(self):
         block = Block()
         self.assertEqual(block.getFace(), 1)
-        self.assertEqual(block.getBlockPattern(), BlockPattern.Triangle)
-        moves = random_search(block, BlockPattern.White)
-        for m in moves:
-            block.goToFace(m)
-        self.assertEqual(block.getBlockPattern(), BlockPattern.White)
+        self.assertEqual(block.getPattern(),
+                         BlockPattern.BlackTopRightCornerSquare)
+        random_search(block, BlockPattern.WhiteSquare)
+        self.assertEqual(block.getPattern(), BlockPattern.White)
 
     def test_random_search_puzzle(self):
         expected_patterns = [
@@ -38,8 +37,8 @@ class TestBlockMethods(unittest.TestCase):
         ], random_search)
         puzzle.solve()
         actual_patterns = []
-        for b in puzzle.blocks:
-            actual_patterns.append(b.getPattern())
+        for block in puzzle.blockBank:
+            actual_patterns.append(block.getPattern())
         self.assertEqual(actual_patterns, expected_patterns)            
         
 if __name__ == '__main__':

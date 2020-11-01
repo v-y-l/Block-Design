@@ -11,6 +11,19 @@ class BlockPattern(Enum):
     BlackBottomLeftCornerSquare = 5
     BlackBottomRightCornerSquare = 6
 
+'''
+Represents the possible actions for the block.
+'''
+class BlockAction(Enum):
+    GoToFaceOne = 1
+    GoToFaceTwo = 2
+    GoToFaceThree = 3
+    GoToFaceFour = 4
+    GoToFaceFive = 5
+    GoToFaceSix = 6
+    RotateLeft = 7
+    RotateRight = 8
+
 ''' For a doubly linked list '''
 class Node:
     
@@ -110,6 +123,7 @@ class Block:
     def goToFace(self, next_face):
         if next_face in self.getNeighbors():
             self.current_face = next_face
+            print('goTo: face {}'.format(self.getFace()))
         else:
             raise Exception("Can't go from {} to {}".format(self.current_face, next_face))
 
@@ -117,9 +131,16 @@ class Block:
     def rotateRight(self):
         self.patterns[1] = self.orientations[self.patterns[1]].next.val
         self.patterns[6] = self.orientations[self.patterns[6]].next.val
+        print('rotateRight: face {}'.format(self.getFace()))
                 
     ''' Change orientation, but stay on the same face. '''
     def rotateLeft(self):
         self.patterns[1] = self.orientations[self.patterns[1]].prev.val
         self.patterns[6] = self.orientations[self.patterns[6]].prev.val
+        print('rotateLeft: face {}'.format(self.getFace()))
+
+    def getValidActions(self):
+        rotateActions =  [self.rotateLeft, self.rotateRight]
+        goToActions = [lambda : self.goToFace(face) for face in self.getNeighbors()]
+        return rotateActions + goToActions
 
