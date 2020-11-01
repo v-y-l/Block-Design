@@ -82,12 +82,12 @@ class Block:
         blockFive = BlockNode(5)
         blockSix = BlockNode(6)
 
-        blockOne.neighbors = {blockFive, blockFour, blockThree, blockTwo}
-        blockTwo.neighbors = {blockOne, blockThree, blockSix, blockFive}
-        blockThree.neighbors = {blockOne, blockFour, blockSix, blockTwo}
-        blockFour.neighbors = {blockOne, blockFive, blockSix, blockThree}
-        blockFive.neighbors = {blockOne, blockTwo, blockSix, blockFour}
-        blockSix.neighbors = {blockThree, blockFour, blockFive, blockTwo}
+        blockOne.neighbors = {5, 4, 3, 2}
+        blockTwo.neighbors = {1, 3, 6, 5}
+        blockThree.neighbors = {1, 4, 6, 2}
+        blockFour.neighbors = {1, 5, 6, 3}
+        blockFive.neighbors = {1, 2, 6, 4}
+        blockSix.neighbors = {3, 4, 5, 2}
 
         self.blocks = {
             1: blockOne,
