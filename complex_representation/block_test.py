@@ -1,6 +1,6 @@
 import unittest
 
-from block import Block, BlockPattern
+from block import Block, BlockPattern, BlockAction
 
 class TestBlockMethods(unittest.TestCase):
 
@@ -8,13 +8,16 @@ class TestBlockMethods(unittest.TestCase):
         block = Block()
         self.assertEqual(block.getFace(), 1)
         self.assertEqual(block.getPattern(), BlockPattern.BlackTopRightCornerSquare)
-        block.goToFace(4)
+        
+        block.executeAction(BlockAction.GoToFaceFour)
         self.assertEqual(block.getFace(), 4)
         self.assertEqual(block.getPattern(), BlockPattern.BlackSquare)
-        block.goToFace(5)
+        
+        block.executeAction(BlockAction.GoToFaceFive)
         self.assertEqual(block.getFace(), 5)
         self.assertEqual(block.getPattern(), BlockPattern.BlackSquare)
-        block.goToFace(1)
+        
+        block.executeAction(BlockAction.GoToFaceOne)
         self.assertEqual(block.getFace(), 1)
         self.assertEqual(block.getPattern(), BlockPattern.BlackTopRightCornerSquare)
 
@@ -22,13 +25,16 @@ class TestBlockMethods(unittest.TestCase):
         block = Block()
         self.assertEqual(block.getFace(), 1)
         self.assertEqual(block.getPattern(), BlockPattern.BlackTopRightCornerSquare)
-        block.rotateRight()
+        
+        block.executeAction(BlockAction.RotateRight)
         self.assertEqual(block.getFace(), 1)
         self.assertEqual(block.getPattern(), BlockPattern.BlackBottomRightCornerSquare)
-        block.goToFace(4)
+        
+        block.executeAction(BlockAction.GoToFaceFour)
         self.assertEqual(block.getFace(), 4)
         self.assertEqual(block.getPattern(), BlockPattern.BlackSquare)
-        block.goToFace(6)
+        
+        block.executeAction(BlockAction.GoToFaceSix)
         self.assertEqual(block.getFace(), 6)
         self.assertEqual(block.getPattern(), BlockPattern.BlackBottomLeftCornerSquare)
 
@@ -36,34 +42,44 @@ class TestBlockMethods(unittest.TestCase):
         block = Block()
         self.assertEqual(block.getFace(), 1)
         self.assertEqual(block.getPattern(), BlockPattern.BlackTopRightCornerSquare)
-        block.goToFace(4)
+        
+        block.executeAction(BlockAction.GoToFaceFour)
         self.assertEqual(block.getFace(), 4)
         self.assertEqual(block.getPattern(), BlockPattern.BlackSquare)
-        block.goToFace(3)
+        
+        block.executeAction(BlockAction.GoToFaceThree)
         self.assertEqual(block.getFace(), 3)
         self.assertEqual(block.getPattern(), BlockPattern.WhiteSquare)
-        block.rotateRight()
+        
+        block.executeAction(BlockAction.RotateRight)
         self.assertEqual(block.getFace(), 3)
         self.assertEqual(block.getPattern(), BlockPattern.WhiteSquare)
-        block.goToFace(1)
+        
+        block.executeAction(BlockAction.GoToFaceOne)
         self.assertEqual(block.getFace(), 1)
         self.assertEqual(block.getPattern(), BlockPattern.BlackBottomRightCornerSquare)
-        block.goToFace(5)
+        
+        block.executeAction(BlockAction.GoToFaceFive)
         self.assertEqual(block.getFace(), 5)
         self.assertEqual(block.getPattern(), BlockPattern.BlackSquare)
-        block.goToFace(6)
+        
+        block.executeAction(BlockAction.GoToFaceSix)
         self.assertEqual(block.getFace(), 6)
         self.assertEqual(block.getPattern(), BlockPattern.BlackBottomLeftCornerSquare)
-        block.rotateRight()
+        
+        block.executeAction(BlockAction.RotateRight)
         self.assertEqual(block.getFace(), 6)
         self.assertEqual(block.getPattern(), BlockPattern.BlackTopLeftCornerSquare)
-        block.goToFace(3)
+        
+        block.executeAction(BlockAction.GoToFaceThree)
         self.assertEqual(block.getFace(), 3)
         self.assertEqual(block.getPattern(), BlockPattern.WhiteSquare)
-        block.goToFace(1)
+        
+        block.executeAction(BlockAction.GoToFaceOne)
         self.assertEqual(block.getFace(), 1)
         self.assertEqual(block.getPattern(), BlockPattern.BlackBottomLeftCornerSquare)
-        block.rotateLeft()
+        
+        block.executeAction(BlockAction.RotateLeft)
         self.assertEqual(block.getFace(), 1)
         self.assertEqual(block.getPattern(), BlockPattern.BlackBottomRightCornerSquare)
 
@@ -73,7 +89,7 @@ class TestBlockMethods(unittest.TestCase):
         self.assertEqual(block.getPattern(), BlockPattern.BlackTopRightCornerSquare)
 
         with self.assertRaises(Exception) as context:
-            block.goToFace(6)
+            block.executeAction(BlockAction.GoToFaceSix)
         self.assertEqual(str(context.exception), "Can't go from 1 to 6")
 
 if __name__ == '__main__':
