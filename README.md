@@ -1,5 +1,29 @@
 # Block-Design
 
-Models the block design test in python.
+Models the block design test.
 
-Progress log: https://docs.google.com/document/d/1gwEpj-OWHED0i5rjxqZPLjMwJhysZOsv8D_8StMi4UE/edit?usp=sharing
+## Block symbolic model
+
+[block.py](https://docs.google.com/document/d/1gwEpj-OWHED0i5rjxqZPLjMwJhysZOsv8D_8StMi4UE/edit?usp=sharing)
+
+Represents block in sprawled-out 2D form
+
+                        [   BlackTopRightCornerSquare (1)  ]
+    [ WhiteSquare (2) ] [          WhiteSquare (3)         ] [ BlackSquare (4) ] [ BlackSquare (5) ]
+                        [ BlackBottomRightCornerSquare (6) ]
+
+* Traverse to neighboring faces by specifying the number
+* Rotations rotate the entire 2D block
+
+## Puzzle model
+
+[puzzle.py](https://github.com/v-y-l/Block-Design/blob/main/src/puzzle.py)
+
+Takes in a puzzle and search strategies
+
+### Search strategies
+
+[search.py](https://github.com/v-y-l/Block-Design/blob/main/src/search.py)
+
+* Face search functions look for some face in a block
+* Puzzle piece search functions look for the next puzzle piece to solve for
