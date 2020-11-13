@@ -2,6 +2,8 @@
 
 Models the block design test.
 
+Run python [main.py](https://github.com/v-y-l/Block-Design/blob/main/src/main.py) to get started.
+
 ## Block symbolic model
 
 [block.py](https://docs.google.com/document/d/1gwEpj-OWHED0i5rjxqZPLjMwJhysZOsv8D_8StMi4UE/edit?usp=sharing)
