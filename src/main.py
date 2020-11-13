@@ -28,3 +28,5 @@ if __name__=="__main__":
 
     print("\nPuzzle solving...")
     puzzle.solve()
+
+    print("\nPuzzle solved!")
