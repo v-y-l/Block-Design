@@ -21,7 +21,7 @@ class Block:
         self._setupBlockDataStructures()
         self._setupRotationDataStructures()
         self._setupGoToDataStructures()
-        print('Start at: ' + str(self))
+        print(str(self))
 
     '''
     Setup the data structures that coordinate between the different
@@ -127,5 +127,5 @@ class Block:
         return rotateActions + goToActions
 
     def __str__(self):
-        return 'block {}, face {}, pattern {}'.format(
+        return 'Block {}: face {}, pattern {}'.format(
             self.getNumber(), self.getFace(), self.getPattern())
