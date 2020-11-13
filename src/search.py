@@ -35,3 +35,12 @@ def memory_search(block, dest_pattern):
 
 def sequential_search(problem):
     return range(len(problem))
+
+face_search_options = {
+    'r': random_search,
+    'b': beeline_search
+}
+
+puzzle_piece_search_options = {
+    's': sequential_search
+}
