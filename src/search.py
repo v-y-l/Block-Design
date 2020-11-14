@@ -37,8 +37,15 @@ def beeline_search(block, dest_pattern, actions):
         block.executeAction(next_action)
         return beeline_search(block, dest_pattern, actions)
     else:
+        # Once again, since any face is only ever two moves away from
+        # any other face, the destination face is only ever two moves away.
+        # Taking any default move ensures the ideal move in the next move.
         valid_actions = block.getGoToActions()
         next_action = sample(valid_actions, 1)[0]
+        for action in valid_actions:
+            if block.peekAction(action) == dest_pattern or isTrianglePattern(dest_pattern) and isTrianglePattern(block.peekAction(action)):
+                next_action = action
+                break
         actions.append(next_action)
         block.executeAction(next_action)
         return beeline_search(block, dest_pattern, actions)
