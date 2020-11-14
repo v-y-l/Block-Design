@@ -24,7 +24,7 @@ class TestBlockMethods(unittest.TestCase):
         self.assertEqual(block.getFace(), 1)
         self.assertEqual(block.getPattern(),
                          BlockPattern.BlackTopRightCornerSquare)
-        random_search(block, BlockPattern.WhiteSquare)
+        random_search(block, BlockPattern.WhiteSquare, [])
         self.assertEqual(block.getPattern(), BlockPattern.WhiteSquare)
 
     def test_random_search_puzzle(self):
