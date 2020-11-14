@@ -96,5 +96,14 @@ class TestBlockMethods(unittest.TestCase):
             block.executeAction(BlockAction.GoToFaceSix)
         self.assertEqual(str(context.exception), "Can't go from 1 to 6")
 
+    def test_peek(self):
+        print('\Test peek')
+        block = Block(6)
+        self.assertEqual(block.getPattern(), BlockPattern.BlackBottomRightCornerSquare)
+        self.assertEqual(block.peekAction(BlockAction.RotateRight),
+            BlockPattern.BlackBottomLeftCornerSquare)
+        self.assertEqual(block.peekAction(BlockAction.RotateLeft),
+            BlockPattern.BlackTopRightCornerSquare)                
+
 if __name__ == '__main__':
     unittest.main()

@@ -1,6 +1,7 @@
 from utils.enums import BlockPattern, BlockAction
 from utils.data_structures import Node, BlockNode
 from utils.block_actions import goToFace, rotateRight, rotateLeft
+from utils.helper import isTrianglePattern
 
 '''
 A block has six faces. Each face is assigned a number.
@@ -48,6 +49,15 @@ class Block:
             6: BlockAction.GoToFaceSix
         }
 
+        self.actionToFace = {
+            BlockAction.GoToFaceOne: 1,
+            BlockAction.GoToFaceTwo: 2,
+            BlockAction.GoToFaceThree: 3,
+            BlockAction.GoToFaceFour: 4,
+            BlockAction.GoToFaceFive: 5,
+            BlockAction.GoToFaceSix: 6
+        }
+
         self.patterns = {
             1: BlockPattern.BlackTopRightCornerSquare,
             2: BlockPattern.WhiteSquare,
@@ -56,7 +66,6 @@ class Block:
             5: BlockPattern.BlackSquare,
             6: BlockPattern.BlackBottomRightCornerSquare,
         }
-
         
     ''' Sets up data structures for enabling rotation logic. '''
     def _setupRotationDataStructures(self):
@@ -64,7 +73,13 @@ class Block:
         blackBottomRightCornerSquare = Node(BlockPattern.BlackBottomRightCornerSquare)
         blackBottomLeftCornerSquare = Node(BlockPattern.BlackBottomLeftCornerSquare)
         blackTopLeftCornerSquare = Node(BlockPattern.BlackTopLeftCornerSquare)
+        whiteSquare = Node(BlockPattern.WhiteSquare)
+        blackSquare = Node(BlockPattern.BlackSquare)
 
+        whiteSquare.next = whiteSquare
+        whiteSquare.prev = whiteSquare
+        blackSquare.next = blackSquare
+        blackSquare.prev = blackSquare
         blackTopRightCornerSquare.next = blackBottomRightCornerSquare
         blackTopRightCornerSquare.prev = blackTopLeftCornerSquare
         blackBottomRightCornerSquare.next = blackBottomLeftCornerSquare
@@ -78,7 +93,9 @@ class Block:
             BlockPattern.BlackTopRightCornerSquare: blackTopRightCornerSquare,
             BlockPattern.BlackBottomRightCornerSquare: blackBottomRightCornerSquare,
             BlockPattern.BlackBottomLeftCornerSquare: blackBottomLeftCornerSquare,
-            BlockPattern.BlackTopLeftCornerSquare: blackTopLeftCornerSquare
+            BlockPattern.BlackTopLeftCornerSquare: blackTopLeftCornerSquare,
+            BlockPattern.BlackSquare: blackSquare,
+            BlockPattern.WhiteSquare: whiteSquare,
         }
 
     ''' Setup data structures that enable movement to a neighboring face. '''
@@ -118,13 +135,30 @@ class Block:
     def getPattern(self):
         return self.patterns[self.current_face]
 
+    def peekAction(self, action):
+        if action not in self.getValidActions():
+            raise Exception("Can't {} for {}".format(action, str(block)))
+        if action == BlockAction.RotateLeft:
+            return self.orientations[self.getPattern()].prev.val
+        elif action == BlockAction.RotateRight:
+            return self.orientations[self.getPattern()].next.val
+        else:
+            return self.actionToFace[action]
+
     def executeAction(self, action):
         self.actions[action]()
         
     def getValidActions(self):
-        rotateActions =  [BlockAction.RotateLeft, BlockAction.RotateRight]
-        goToActions = [self.goToFaceAction[face] for face in self.getNeighbors()]
-        return rotateActions + goToActions
+        return self.getRotateActions() + self.getGoToActions()
+
+    def getRotateActions(self):
+        return [BlockAction.RotateLeft, BlockAction.RotateRight]
+
+    def getGoToActions(self):
+        return [self.goToFaceAction[face] for face in self.getNeighbors()]
+
+    def hasTrianglePattern(self):
+        return isTrianglePattern(self.getPattern())
 
     def __str__(self):
         return 'Block {}: face {}, pattern {}'.format(
