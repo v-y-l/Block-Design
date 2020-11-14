@@ -19,6 +19,9 @@ class Puzzle:
         actionsPerBlock = []
 
         for i in puzzlePieceSearcher(self.problem):
-            searchFaceActions = faceSearcher(self.blockBank[i], self.problem[i])
-            actionsPerBlock.append(actionsPerBlock)
+            searchFaceActions = faceSearcher(
+                self.blockBank[i],
+                self.problem[i],
+            actionsPerBlock)
+
         return actionsPerBlock
