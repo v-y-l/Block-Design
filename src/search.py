@@ -1,5 +1,6 @@
 from random import sample
 from utils.enums import SearchType
+from utils.helper import isTrianglePattern
 
 # Face search functions, given some block, search for a face. '''
 
@@ -11,8 +12,8 @@ from utils.enums import SearchType
 def random_search(block, dest_pattern, actions):
     if block.getPattern() == dest_pattern:
         return actions
-    possible_actions = block.getValidActions()
-    next_action = sample(possible_actions, 1)[0]
+    valid_actions = block.getValidActions()
+    next_action = sample(valid_actions, 1)[0]
     actions.append(next_action)
     block.executeAction(next_action)
     return random_search(block, dest_pattern, actions)
@@ -21,20 +22,26 @@ def random_search(block, dest_pattern, actions):
    Take the shortest path to find the destination pattern.
 '''
 def beeline_search(block, dest_pattern, actions):
-    if (block.hasTrianglePattern() and isTrianglePattern(dest_pattern)):
-        rotation_actions = block.getRotateActions()
+    if block.getPattern() == dest_pattern:
+        return actions
+    elif (block.hasTrianglePattern() and isTrianglePattern(dest_pattern)):
+        valid_actions = block.getRotateActions()
         # Since the destination face is only two rotations away,
         # taking any default move ensures the ideal move in the next move.
-        next_action = rotation_actions[0]
-        if block.peekAction(rotation_actions[0]) == dest_pattern:
-            next_action = rotation_actions[0]
-        elif block.peekAction(rotation_actions[1]) == dest_pattern:
-            next_action = rotation_actions[1]
+        next_action = valid_actions[0]
+        if block.peekAction(valid_actions[0]) == dest_pattern:
+            next_action = valid_actions[0]
+        elif block.peekAction(valid_actions[1]) == dest_pattern:
+            next_action = valid_actions[1]
         actions.append(next_action)
         block.executeAction(next_action)
         return beeline_search(block, dest_pattern, actions)
-    elif:
-        pass
+    else:
+        valid_actions = block.getGoToActions()
+        next_action = sample(valid_actions, 1)[0]
+        actions.append(next_action)
+        block.executeAction(next_action)
+        return beeline_search(block, dest_pattern, actions)
 
 '''
    Never go to the same face with this search.
