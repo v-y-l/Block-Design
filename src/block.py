@@ -1,5 +1,5 @@
 from utils.enums import BlockPattern, BlockAction
-from utils.data_structures import Node, BlockNode
+from utils.data_structures import Node, FaceNode
 from utils.block_actions import goToFace, rotateRight, rotateLeft
 from utils.helper import isTrianglePattern
 
@@ -100,12 +100,12 @@ class Block:
 
     ''' Setup data structures that enable movement to a neighboring face. '''
     def _setupGoToDataStructures(self):
-        blockOne = BlockNode(1)
-        blockTwo = BlockNode(2)
-        blockThree = BlockNode(3)
-        blockFour = BlockNode(4)
-        blockFive = BlockNode(5)
-        blockSix = BlockNode(6)
+        blockOne = FaceNode(1)
+        blockTwo = FaceNode(2)
+        blockThree = FaceNode(3)
+        blockFour = FaceNode(4)
+        blockFive = FaceNode(5)
+        blockSix = FaceNode(6)
 
         blockOne.neighbors = {5, 4, 3, 2}
         blockTwo.neighbors = {1, 3, 6, 5}

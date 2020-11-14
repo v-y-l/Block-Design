@@ -8,7 +8,7 @@ class Node:
 
 
 ''' A node to represent a face. '''
-class BlockNode:
+class FaceNode:
     
     def __init__(self, number):
         self.val = number
