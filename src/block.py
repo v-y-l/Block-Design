@@ -100,31 +100,31 @@ class Block:
 
     ''' Setup data structures that enable movement to a neighboring face. '''
     def _setupGoToDataStructures(self):
-        blockOne = FaceNode(1)
-        blockTwo = FaceNode(2)
-        blockThree = FaceNode(3)
-        blockFour = FaceNode(4)
-        blockFive = FaceNode(5)
-        blockSix = FaceNode(6)
+        faceOne = FaceNode(1)
+        faceTwo = FaceNode(2)
+        faceThree = FaceNode(3)
+        faceFour = FaceNode(4)
+        faceFive = FaceNode(5)
+        faceSix = FaceNode(6)
 
-        blockOne.neighbors = {5, 4, 3, 2}
-        blockTwo.neighbors = {1, 3, 6, 5}
-        blockThree.neighbors = {1, 4, 6, 2}
-        blockFour.neighbors = {1, 5, 6, 3}
-        blockFive.neighbors = {1, 2, 6, 4}
-        blockSix.neighbors = {3, 4, 5, 2}
+        faceOne.neighbors = {5, 4, 3, 2}
+        faceTwo.neighbors = {1, 3, 6, 5}
+        faceThree.neighbors = {1, 4, 6, 2}
+        faceFour.neighbors = {1, 5, 6, 3}
+        faceFive.neighbors = {1, 2, 6, 4}
+        faceSix.neighbors = {3, 4, 5, 2}
 
-        self.blocks = {
-            1: blockOne,
-            2: blockTwo,
-            3: blockThree,
-            4: blockFour,
-            5: blockFive,
-            6: blockSix,
+        self.faces = {
+            1: faceOne,
+            2: faceTwo,
+            3: faceThree,
+            4: faceFour,
+            5: faceFive,
+            6: faceSix,
         }
 
     def getNeighbors(self):
-        return self.blocks[self.current_face].neighbors
+        return self.faces[self.current_face].neighbors
 
     def getFace(self):
         return self.current_face
