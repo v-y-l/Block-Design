@@ -103,7 +103,14 @@ class TestBlockMethods(unittest.TestCase):
         self.assertEqual(block.peekAction(BlockAction.RotateRight),
             BlockPattern.BlackBottomLeftCornerSquare)
         self.assertEqual(block.peekAction(BlockAction.RotateLeft),
-            BlockPattern.BlackTopRightCornerSquare)                
+            BlockPattern.BlackTopRightCornerSquare)
+        self.assertEqual(block.peekAction(BlockAction.GoToFaceThree),
+            BlockPattern.WhiteSquare)
+        with self.assertRaises(Exception) as context:
+            block.peekAction(BlockAction.GoToFaceOne)
+        self.assertEqual(str(context.exception),
+                         "Invalid action BlockAction.GoToFaceOne for Block 1: " +
+                         "face 6, pattern BlockPattern.BlackBottomRightCornerSquare")
 
 if __name__ == '__main__':
     unittest.main()

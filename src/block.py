@@ -137,13 +137,13 @@ class Block:
 
     def peekAction(self, action):
         if action not in self.getValidActions():
-            raise Exception("Can't {} for {}".format(action, str(block)))
+            raise Exception("Invalid action {} for {}".format(action, str(self)))
         if action == BlockAction.RotateLeft:
             return self.orientations[self.getPattern()].prev.val
         elif action == BlockAction.RotateRight:
             return self.orientations[self.getPattern()].next.val
         else:
-            return self.actionToFace[action]
+            return self.patterns[self.actionToFace[action]]
 
     def executeAction(self, action):
         self.actions[action]()
