@@ -23,5 +23,6 @@ class Puzzle:
                 self.blockBank[i],
                 self.problem[i],
             actionsPerBlock)
-
+            print("...Solved puzzle piece {} with pattern {}".format(
+                i, self.problem[i]))
         return actionsPerBlock

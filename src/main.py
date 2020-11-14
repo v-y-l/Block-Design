@@ -11,7 +11,10 @@ if __name__=="__main__":
     puzzle_piece_search = puzzle_piece_search_options.get(
         puzzle_piece_search_input, puzzle_piece_search_options['s'])
 
-    print("\nPuzzle starting...")
+    print("\n======================")
+    print("| Puzzle starting... |")
+    print("======================")
+
     solvers = {
         SearchType.Face: face_search,
         SearchType.PuzzlePiece: puzzle_piece_search
@@ -26,7 +29,11 @@ if __name__=="__main__":
         SearchType.PuzzlePiece: puzzle_piece_search
     })
 
-    print("\nPuzzle solving...")
+    print("\n=====================")
+    print("| Puzzle solving... |")
+    print("=====================")
     puzzle.solve()
 
-    print("\nPuzzle solved!")
+    print("\n==================")
+    print("| Puzzle solved! |")
+    print("==================")
