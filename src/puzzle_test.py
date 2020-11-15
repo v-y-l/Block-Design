@@ -3,7 +3,7 @@ import unittest
 from block import BlockPattern, Block
 from puzzle import Puzzle, SearchType, random_search, sequential_search
 
-class TestBlockMethods(unittest.TestCase):
+class TestPuzzle(unittest.TestCase):
 
     def test_init(self):
         print('\nInstantiates a block bank with correct length')
