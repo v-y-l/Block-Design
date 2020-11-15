@@ -6,9 +6,4 @@ class PuzzleImage:
         self.image = imread(image_path)
 
     def getImage(self):
-        print('image' + str(self.image))
         return self.image
-
-if __name__ == '__main__':
-    p = PuzzleImage()
-    i = p.getImage()
