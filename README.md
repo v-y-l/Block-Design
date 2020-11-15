@@ -4,7 +4,7 @@ Models the block design test.
 
 Run python [main.py](https://github.com/v-y-l/Block-Design/blob/main/src/main.py) to get started.
 
-![CLI screenshot](https://github.com/v-y-l/Block-Design/blob/main/screenshots/cli_screenshot.png)
+![Demo gif](https://github.com/v-y-l/Block-Design/blob/main/assets/demo.gif)
 
 ## Block symbolic model
 
