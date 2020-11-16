@@ -25,15 +25,16 @@ Represents block in sprawled-out 2D form
 
 Takes in a puzzle and search strategies to solve a block design test
 
-## Puzzle image
-
-[puzzle_image.py](https://github.com/v-y-l/Block-Design/blob/main/src/puzzle_image.py)
-
-Converts an image to a puzzle model
-
 ### Search strategies
 
 [search.py](https://github.com/v-y-l/Block-Design/blob/main/src/search.py)
 
 * Face search functions look for some face in a block
 * Puzzle piece search functions look for the next puzzle piece to solve for
+
+
+## Puzzle image
+
+[puzzle_image.py](https://github.com/v-y-l/Block-Design/blob/main/src/puzzle_image.py)
+
+Converts an image to a puzzle model
