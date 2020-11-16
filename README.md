@@ -35,6 +35,8 @@ Takes in a puzzle and search strategies to solve a block design test
 
 ## Puzzle image
 
-[puzzle_image.py](https://github.com/v-y-l/Block-Design/blob/main/src/puzzle_image.py)
+[puzzle_image.py](https://github.com/v-y-l/Block-Design/blob/main/src/puzzle_image.py) 
 
-Converts an image to a puzzle model
+Converts an image to a puzzle model by sampling from four points per block
+
+![Sampled points](https://github.com/v-y-l/Block-Design/blob/main/assets/puzzle_image_marks.png)
