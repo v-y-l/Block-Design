@@ -25,11 +25,10 @@ class PuzzleImage:
         return self.image[self.window_r:self.window_r+self.block_length][self.window_c:self.window_c+self.block_length]
 
     def getPattern(self):
-        window = self.getWindow()
-        a = window[self.window_r+int(self.block_length/4)][self.window_c+int(self.block_length/2)]
-        b = window[self.window_r+int(self.block_length/2)][self.window_c+int(3*self.block_length/4)]
-        c = window[self.window_r+int(3*self.block_length/4)][self.window_c+int(self.block_length/2)]
-        d = window[self.window_r+int(self.block_length/2)][self.window_c+int(self.block_length/4)]
+        a = self.image[self.window_r+int(self.block_length/4)][self.window_c+int(self.block_length/2)]
+        b = self.image[self.window_r+int(self.block_length/2)][self.window_c+int(3*self.block_length/4)]
+        c = self.image[self.window_r+int(3*self.block_length/4)][self.window_c+int(self.block_length/2)]
+        d = self.image[self.window_r+int(self.block_length/2)][self.window_c+int(self.block_length/4)]
         if ((a == self.shade_rgb).all()) and ((b == self.shade_rgb).all()) and ((c == self.white_rgb).all()) and ((d == self.white_rgb).all()):
             return BlockPattern.BlackTopRightCornerSquare
         elif ((a == self.white_rgb).all()) and ((b == self.shade_rgb).all()) and ((c == self.shade_rgb).all()) and ((d == self.white_rgb).all()):
