@@ -32,13 +32,15 @@ class PuzzleImage:
         d = window[int(self.block_length/2)][int(self.block_length/4)]
         if ((a == self.shade_rgb).all()) and ((b == self.shade_rgb).all()) and ((c == self.white_rgb).all()) and ((d == self.white_rgb).all()):
             return BlockPattern.BlackTopRightCornerSquare
-        elif ((b == self.shade_rgb).all()) and ((c == self.shade_rgb).all()) and ((a == self.white_rgb).all()) and ((d == self.white_rgb).all()):
-            return BlockPattern.BlackRightCornerSquare
-        else:
+        elif ((a == self.white_rgb).all()) and ((b == self.shade_rgb).all()) and ((c == self.shade_rgb).all()) and ((d == self.white_rgb).all()):
+            return BlockPattern.BlackBottomRightCornerSquare
+        elif ((a == self.white_rgb).all()) and ((b == self.white_rgb).all()) and ((c == self.shade_rgb).all()) and ((d == self.shade_rgb).all()):
+            return BlockPattern.BlackBottomLeftCornerSquare
+        elif ((a == self.shade_rgb).all()) and ((b == self.white_rgb).all()) and ((c == self.white_rgb).all()) and ((d == self.shade_rgb).all()):
+            return BlockPattern.BlackTopLeftCornerSquare
+        elif ((a == self.white_rgb).all()) and ((b == self.white_rgb).all()) and ((c == self.white_rgb).all()) and ((d == self.white_rgb).all()):
             return BlockPattern.WhiteSquare
-        # TODO
-        # WhiteSquare = 1
-        # BlackSquare = 2
-        # BlackTopLeftCornerSquare = 3
-        # BlackBottomLeftCornerSquare = 5
-        # BlackBottomRightCornerSquare = 6
+        elif ((a == self.white_rgb).all()) and ((b == self.white_rgb).all()) and ((c == self.white_rgb).all()) and ((d == self.white_rgb).all()):
+            return BlockPattern.BlackSquare
+        else:
+            raise Exception("Could not determine block pattern based on this sample: {}, {}, {}, {}".format(a, b, c, d))

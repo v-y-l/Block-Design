@@ -15,9 +15,14 @@ class TestPuzzleImage(unittest.TestCase):
         self.assertTrue((img[100][103] == [27, 13, 252]).all()) # Shaded
         self.assertTrue((img[0][0] == [255, 255, 255]).all()) # White
 
-    def test_first_window(self):
-        puzzle = PuzzleImage('./puzzle_images/puzzle_a.png')
+    def test_top_right(self):
+        puzzle = PuzzleImage('./face_images/top_right.png')
         self.assertEqual(puzzle.getPattern(), BlockPattern.BlackTopRightCornerSquare)
+
+    def test_bottom_right(self):
+        puzzle = PuzzleImage('./face_images/bottom_right.png')
+        self.assertEqual(puzzle.getPattern(), BlockPattern.BlackBottomRightCornerSquare)
+
 
 if __name__ == '__main__':
     unittest.main()
