@@ -44,3 +44,8 @@ class PuzzleImage:
             return BlockPattern.BlackSquare
         else:
             raise Exception("Could not determine block pattern based on this sample: {}, {}, {}, {}".format(a, b, c, d))
+
+
+    # def getPuzzle(self):
+    #     for c in range(
+        

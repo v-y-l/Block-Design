@@ -8,36 +8,41 @@ class TestPuzzleImage(unittest.TestCase):
 
     def test_init(self):
         print('\nInstantiates a puzzle image')
-        puzzle = PuzzleImage('./puzzle_images/puzzle_a.png')
-        img = puzzle.getImage()
+        puzzle_image = PuzzleImage('./puzzle_images/puzzle_a.png')
+        img = puzzle_image.getImage()
         self.assertEqual(img.shape, (680,680,3))
         # B, G, R
         self.assertTrue((img[100][103] == [27, 13, 252]).all()) # Shaded
         self.assertTrue((img[0][0] == [255, 255, 255]).all()) # White
 
     def test_top_right(self):
-        puzzle = PuzzleImage('./face_images/top_right.png')
-        self.assertEqual(puzzle.getPattern(), BlockPattern.BlackTopRightCornerSquare)
+        puzzle_image = PuzzleImage('./face_images/top_right.png')
+        self.assertEqual(puzzle_image.getPattern(), BlockPattern.BlackTopRightCornerSquare)
 
     def test_bottom_right(self):
-        puzzle = PuzzleImage('./face_images/bottom_right.png')
-        self.assertEqual(puzzle.getPattern(), BlockPattern.BlackBottomRightCornerSquare)
+        puzzle_image = PuzzleImage('./face_images/bottom_right.png')
+        self.assertEqual(puzzle_image.getPattern(), BlockPattern.BlackBottomRightCornerSquare)
 
     def test_bottom_left(self):
-        puzzle = PuzzleImage('./face_images/bottom_left.png')
-        self.assertEqual(puzzle.getPattern(), BlockPattern.BlackBottomLeftCornerSquare)
+        puzzle_image = PuzzleImage('./face_images/bottom_left.png')
+        self.assertEqual(puzzle_image.getPattern(), BlockPattern.BlackBottomLeftCornerSquare)
 
     def test_top_left(self):
-        puzzle = PuzzleImage('./face_images/top_left.png')
-        self.assertEqual(puzzle.getPattern(), BlockPattern.BlackTopLeftCornerSquare)
+        puzzle_image = PuzzleImage('./face_images/top_left.png')
+        self.assertEqual(puzzle_image.getPattern(), BlockPattern.BlackTopLeftCornerSquare)
 
     def test_white(self):
-        puzzle = PuzzleImage('./face_images/white.png')
-        self.assertEqual(puzzle.getPattern(), BlockPattern.WhiteSquare)
+        puzzle_image = PuzzleImage('./face_images/white.png')
+        self.assertEqual(puzzle_image.getPattern(), BlockPattern.WhiteSquare)
 
     def test_shaded(self):
-        puzzle = PuzzleImage('./face_images/shaded.png')
-        self.assertEqual(puzzle.getPattern(), BlockPattern.BlackSquare)
+        puzzle_image = PuzzleImage('./face_images/shaded.png')
+        self.assertEqual(puzzle_image.getPattern(), BlockPattern.BlackSquare)
+
+    # def test_whole_puzzle(self):
+    #     puzzle_image = PuzzleImage('./puzzle_images/puzzle_a.png')
+    #     expected = []
+    #     self.assertEqual(puzzle_image.getPuzzle(), expected)
 
 if __name__ == '__main__':
     unittest.main()
