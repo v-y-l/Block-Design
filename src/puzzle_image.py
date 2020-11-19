@@ -40,7 +40,7 @@ class PuzzleImage:
             return BlockPattern.BlackTopLeftCornerSquare
         elif ((a == self.white_rgb).all()) and ((b == self.white_rgb).all()) and ((c == self.white_rgb).all()) and ((d == self.white_rgb).all()):
             return BlockPattern.WhiteSquare
-        elif ((a == self.white_rgb).all()) and ((b == self.white_rgb).all()) and ((c == self.white_rgb).all()) and ((d == self.white_rgb).all()):
+        elif ((a == self.shade_rgb).all()) and ((b == self.shade_rgb).all()) and ((c == self.shade_rgb).all()) and ((d == self.shade_rgb).all()):
             return BlockPattern.BlackSquare
         else:
             raise Exception("Could not determine block pattern based on this sample: {}, {}, {}, {}".format(a, b, c, d))

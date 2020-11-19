@@ -23,6 +23,21 @@ class TestPuzzleImage(unittest.TestCase):
         puzzle = PuzzleImage('./face_images/bottom_right.png')
         self.assertEqual(puzzle.getPattern(), BlockPattern.BlackBottomRightCornerSquare)
 
+    def test_bottom_left(self):
+        puzzle = PuzzleImage('./face_images/bottom_left.png')
+        self.assertEqual(puzzle.getPattern(), BlockPattern.BlackBottomLeftCornerSquare)
+
+    def test_top_left(self):
+        puzzle = PuzzleImage('./face_images/top_left.png')
+        self.assertEqual(puzzle.getPattern(), BlockPattern.BlackTopLeftCornerSquare)
+
+    def test_white(self):
+        puzzle = PuzzleImage('./face_images/white.png')
+        self.assertEqual(puzzle.getPattern(), BlockPattern.WhiteSquare)
+
+    def test_shaded(self):
+        puzzle = PuzzleImage('./face_images/shaded.png')
+        self.assertEqual(puzzle.getPattern(), BlockPattern.BlackSquare)
 
 if __name__ == '__main__':
     unittest.main()
