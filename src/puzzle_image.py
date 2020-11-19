@@ -45,7 +45,14 @@ class PuzzleImage:
         else:
             raise Exception("Could not determine block pattern based on this sample: {}, {}, {}, {}".format(a, b, c, d))
 
-
-    # def getPuzzle(self):
-    #     for c in range(
+    def getPuzzle(self):
+        puzzle = []
+        for r in range(0, self.width, self.block_length):
+            for c in range(0, self.width, self.block_length):
+                self.window_r = r + self.block_length
+                self.window_c = c + self.block_length
+                puzzle.append(self.getPattern())
+        self.window_r = self.block_length
+        self.window_c = self.block_length
+        return puzzle
         

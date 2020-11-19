@@ -39,10 +39,10 @@ class TestPuzzleImage(unittest.TestCase):
         puzzle_image = PuzzleImage('./face_images/shaded.png')
         self.assertEqual(puzzle_image.getPattern(), BlockPattern.BlackSquare)
 
-    # def test_whole_puzzle(self):
-    #     puzzle_image = PuzzleImage('./puzzle_images/puzzle_a.png')
-    #     expected = []
-    #     self.assertEqual(puzzle_image.getPuzzle(), expected)
+    def test_whole_puzzle(self):
+        puzzle_image = PuzzleImage('./puzzle_images/puzzle_a.png', 170)
+        expected = []
+        self.assertEqual(puzzle_image.getPuzzle(), expected)
 
 if __name__ == '__main__':
     unittest.main()
