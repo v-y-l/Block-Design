@@ -54,4 +54,3 @@ class PuzzleImage:
         self.window_r = 0
         self.window_c = 0
         return puzzle
-        
