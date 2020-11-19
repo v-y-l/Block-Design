@@ -12,24 +12,24 @@ class PuzzleImage:
         self.block_length = block_length
         self.shade_rgb = shade_rgb
         self.white_rgb = [255, 255, 255]
-        # Captures bottom right corner of a the block window,
+        # Captures top left corner of a the block window,
         # with top left corner of picture as (0,0) and the
         # r and c growing larger rightwards and downwards.
-        self.window_r = block_length
-        self.window_c = block_length
+        self.window_r = 0
+        self.window_c = 0
 
     def getImage(self):
         return self.image
 
     def getWindow(self):
-        return self.image[self.window_r-self.block_length:self.window_r][self.window_c-self.block_length:self.window_c]
+        return self.image[self.window_r:self.window_r+self.block_length][self.window_c:self.window_c+self.block_length]
 
     def getPattern(self):
         window = self.getWindow()
-        a = window[int(self.block_length/4)][int(self.block_length/2)]
-        b = window[int(self.block_length/2)][int(3*self.block_length/4)]
-        c = window[int(3*self.block_length/4)][int(self.block_length/2)]
-        d = window[int(self.block_length/2)][int(self.block_length/4)]
+        a = window[self.window_r+int(self.block_length/4)][self.window_c+int(self.block_length/2)]
+        b = window[self.window_r+int(self.block_length/2)][self.window_c+int(3*self.block_length/4)]
+        c = window[self.window_r+int(3*self.block_length/4)][self.window_c+int(self.block_length/2)]
+        d = window[self.window_r+int(self.block_length/2)][self.window_c+int(self.block_length/4)]
         if ((a == self.shade_rgb).all()) and ((b == self.shade_rgb).all()) and ((c == self.white_rgb).all()) and ((d == self.white_rgb).all()):
             return BlockPattern.BlackTopRightCornerSquare
         elif ((a == self.white_rgb).all()) and ((b == self.shade_rgb).all()) and ((c == self.shade_rgb).all()) and ((d == self.white_rgb).all()):
@@ -47,12 +47,14 @@ class PuzzleImage:
 
     def getPuzzle(self):
         puzzle = []
-        for r in range(0, self.width, self.block_length):
+        for r in range(0, self.height, self.block_length):
+            self.window_r = r
             for c in range(0, self.width, self.block_length):
-                self.window_r = r + self.block_length
-                self.window_c = c + self.block_length
+                self.window_c = c
+                print("row {}, col {}".format(r, c))
+                print('window: {}'.format(self.getWindow()))
                 puzzle.append(self.getPattern())
-        self.window_r = self.block_length
-        self.window_c = self.block_length
+        self.window_r = 0
+        self.window_c = 0
         return puzzle
         
