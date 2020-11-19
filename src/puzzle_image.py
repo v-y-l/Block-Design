@@ -50,8 +50,6 @@ class PuzzleImage:
             self.window_r = r
             for c in range(0, self.width, self.block_length):
                 self.window_c = c
-                print("row {}, col {}".format(r, c))
-                print('window: {}'.format(self.getWindow()))
                 puzzle.append(self.getPattern())
         self.window_r = 0
         self.window_c = 0
