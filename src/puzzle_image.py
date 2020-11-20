@@ -91,3 +91,21 @@ class PuzzleImage:
         self.window_r = 0
         self.window_c = 0
         return puzzle
+
+puzzle_options = {
+    'a': PuzzleImage(
+        './puzzle_images/puzzle_a.png',
+        170,
+        [27, 13, 252]
+    ),
+    'b': PuzzleImage(
+        './puzzle_images/puzzle_b.png',
+        170,
+        [27, 13, 252]
+    ),
+    'c': PuzzleImage(
+        './puzzle_images/puzzle_c.png',
+        170,
+        [27, 13, 252]
+    )
+}
