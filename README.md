@@ -21,7 +21,7 @@ Represents block in sprawled-out 2D form
 
 ## Puzzle model
 
-[puzzle.py](https://github.com/v-y-l/Block-Design/blob/main/src/puzzle.py)
+[puzzle_solver.py](https://github.com/v-y-l/Block-Design/blob/main/src/puzzle_solver.py)
 
 Takes in a puzzle and search strategies to solve a block design test
 
