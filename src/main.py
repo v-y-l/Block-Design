@@ -1,5 +1,5 @@
 from search import face_search_options, puzzle_piece_search_options, SearchType
-from puzzle import Puzzle
+from puzzle_solver import PuzzleSolver
 from block import BlockPattern
 
 if __name__=="__main__":
@@ -19,7 +19,7 @@ if __name__=="__main__":
         SearchType.Face: face_search,
         SearchType.PuzzlePiece: puzzle_piece_search
     }
-    puzzle = Puzzle([
+    puzzle_solver = PuzzleSolver([
         BlockPattern.BlackSquare,
         BlockPattern.BlackBottomLeftCornerSquare,
         BlockPattern.BlackTopRightCornerSquare,
@@ -32,7 +32,7 @@ if __name__=="__main__":
     print("\n=====================")
     print("| Puzzle solving... |")
     print("=====================")
-    puzzle.solve()
+    puzzle_solver.solve()
 
     print("\n==================")
     print("| Puzzle solved! |")

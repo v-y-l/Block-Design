@@ -1,13 +1,13 @@
 import unittest
 
 from block import BlockPattern, Block
-from puzzle import Puzzle, SearchType, random_search, sequential_search
+from puzzle_solver import PuzzleSolver, SearchType, random_search, sequential_search
 
-class TestPuzzle(unittest.TestCase):
+class TestPuzzleSolver(unittest.TestCase):
 
     def test_init(self):
         print('\nInstantiates a block bank with correct length')
-        puzzle = Puzzle([
+        puzzle_solver = PuzzleSolver([
             BlockPattern.BlackSquare,
             BlockPattern.BlackBottomLeftCornerSquare,
             BlockPattern.BlackTopRightCornerSquare,
@@ -16,7 +16,7 @@ class TestPuzzle(unittest.TestCase):
             SearchType.Face: random_search,
             SearchType.PuzzlePiece: sequential_search
         })
-        self.assertEqual(len(puzzle.blockBank), 4)
+        self.assertEqual(len(puzzle_solver.blockBank), 4)
 
     def test_random_search(self):
         print('\nApply random search for a single block')
@@ -35,7 +35,7 @@ class TestPuzzle(unittest.TestCase):
             BlockPattern.BlackTopRightCornerSquare,
             BlockPattern.BlackSquare
         ]
-        puzzle = Puzzle([
+        puzzle_solver = PuzzleSolver([
             BlockPattern.BlackSquare,
             BlockPattern.BlackBottomLeftCornerSquare,
             BlockPattern.BlackTopRightCornerSquare,
@@ -44,9 +44,9 @@ class TestPuzzle(unittest.TestCase):
             SearchType.Face: random_search,
             SearchType.PuzzlePiece: sequential_search
         })
-        puzzle.solve()
+        puzzle_solver.solve()
         actual_patterns = []
-        for block in puzzle.blockBank:
+        for block in puzzle_solver.blockBank:
             actual_patterns.append(block.getPattern())
         self.assertEqual(actual_patterns, expected_patterns)            
         

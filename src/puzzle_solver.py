@@ -1,7 +1,7 @@
 from block import BlockPattern, Block
 from search import SearchType, random_search, sequential_search
 
-class Puzzle:
+class PuzzleSolver:
 
     def __init__(self, problem, solvers):
         self.solvers = solvers
