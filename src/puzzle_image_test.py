@@ -85,5 +85,21 @@ class TestPuzzleImage(unittest.TestCase):
         ]
         self.assertEqual(actual, expected)
 
+    def test_puzzle_c(self):
+        puzzle_image = PuzzleImage('./puzzle_images/puzzle_c.png', 170)
+        actual = puzzle_image.getPuzzle()
+        expected = [
+            BlockPattern.WhiteSquare,
+            BlockPattern.BlackSquare,
+            BlockPattern.BlackTopRightCornerSquare,
+            BlockPattern.BlackSquare,
+            BlockPattern.WhiteSquare,
+            BlockPattern.WhiteSquare,
+            BlockPattern.WhiteSquare,
+            BlockPattern.BlackSquare,
+            BlockPattern.BlackBottomRightCornerSquare,
+        ]
+        self.assertEqual(actual, expected)
+
 if __name__ == '__main__':
     unittest.main()
