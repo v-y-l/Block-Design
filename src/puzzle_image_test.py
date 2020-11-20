@@ -39,7 +39,7 @@ class TestPuzzleImage(unittest.TestCase):
         puzzle_image = PuzzleImage('./face_images/shaded.png')
         self.assertEqual(puzzle_image.getPattern(), BlockPattern.BlackSquare)
 
-    def test_whole_puzzle(self):
+    def test_puzzle_a(self):
         puzzle_image = PuzzleImage('./puzzle_images/puzzle_a.png', 170)
         actual = puzzle_image.getPuzzle()
         expected = [
@@ -59,6 +59,29 @@ class TestPuzzleImage(unittest.TestCase):
             BlockPattern.BlackBottomLeftCornerSquare,
             BlockPattern.BlackBottomRightCornerSquare,
             BlockPattern.BlackBottomLeftCornerSquare
+        ]
+        self.assertEqual(actual, expected)
+
+    def test_puzzle_b(self):
+        puzzle_image = PuzzleImage('./puzzle_images/puzzle_b.png', 170)
+        actual = puzzle_image.getPuzzle()
+        expected = [
+            BlockPattern.BlackTopLeftCornerSquare,
+            BlockPattern.BlackTopRightCornerSquare,
+            BlockPattern.BlackBottomLeftCornerSquare,
+            BlockPattern.BlackBottomRightCornerSquare,
+            BlockPattern.BlackBottomLeftCornerSquare,
+            BlockPattern.BlackBottomRightCornerSquare,
+            BlockPattern.BlackSquare,
+            BlockPattern.BlackTopLeftCornerSquare,
+            BlockPattern.BlackBottomRightCornerSquare,
+            BlockPattern.BlackSquare,
+            BlockPattern.BlackTopLeftCornerSquare,
+            BlockPattern.BlackTopRightCornerSquare,
+            BlockPattern.BlackTopLeftCornerSquare,
+            BlockPattern.BlackTopRightCornerSquare,
+            BlockPattern.BlackBottomLeftCornerSquare,
+            BlockPattern.BlackBottomRightCornerSquare,
         ]
         self.assertEqual(actual, expected)
 
