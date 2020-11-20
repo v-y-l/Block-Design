@@ -18,6 +18,12 @@ class PuzzleImage:
         self.window_r = 0
         self.window_c = 0
 
+    def getColOffset(self, multiplier):
+        return self.window_c + int(self.block_length * multiplier)
+
+    def getRowOffset(self, multiplier):
+        return self.window_r + int(self.block_length * multiplier)
+
     def getImage(self):
         return self.image
 
@@ -25,24 +31,55 @@ class PuzzleImage:
         return self.image[self.window_r:self.window_r+self.block_length][self.window_c:self.window_c+self.block_length]
 
     def getPattern(self):
-        a = self.image[self.window_r+int(self.block_length/4)][self.window_c+int(self.block_length/2)]
-        b = self.image[self.window_r+int(self.block_length/2)][self.window_c+int(3*self.block_length/4)]
-        c = self.image[self.window_r+int(3*self.block_length/4)][self.window_c+int(self.block_length/2)]
-        d = self.image[self.window_r+int(self.block_length/2)][self.window_c+int(self.block_length/4)]
-        if ((a == self.shade_rgb).all()) and ((b == self.shade_rgb).all()) and ((c == self.white_rgb).all()) and ((d == self.white_rgb).all()):
+        a = self.image[self.getRowOffset(.25)][self.getColOffset(.5)]
+        b = self.image[self.getRowOffset(.5)][self.getColOffset(.75)]
+        c = self.image[self.getRowOffset(.75)][self.getColOffset(.5)]
+        d = self.image[self.getRowOffset(.5)][self.getColOffset(.25)]
+        if (
+            ((a == self.shade_rgb).all())
+            and ((b == self.shade_rgb).all())
+            and ((c == self.white_rgb).all())
+            and ((d == self.white_rgb).all())
+        ):
             return BlockPattern.BlackTopRightCornerSquare
-        elif ((a == self.white_rgb).all()) and ((b == self.shade_rgb).all()) and ((c == self.shade_rgb).all()) and ((d == self.white_rgb).all()):
+        elif (
+                ((a == self.white_rgb).all())
+                and ((b == self.shade_rgb).all())
+                and ((c == self.shade_rgb).all())
+                and ((d == self.white_rgb).all())
+        ):
             return BlockPattern.BlackBottomRightCornerSquare
-        elif ((a == self.white_rgb).all()) and ((b == self.white_rgb).all()) and ((c == self.shade_rgb).all()) and ((d == self.shade_rgb).all()):
+        elif (
+                ((a == self.white_rgb).all())
+                and ((b == self.white_rgb).all())
+                and ((c == self.shade_rgb).all())
+                and ((d == self.shade_rgb).all())
+        ):
             return BlockPattern.BlackBottomLeftCornerSquare
-        elif ((a == self.shade_rgb).all()) and ((b == self.white_rgb).all()) and ((c == self.white_rgb).all()) and ((d == self.shade_rgb).all()):
+        elif (
+                ((a == self.shade_rgb).all())
+                and ((b == self.white_rgb).all())
+                and ((c == self.white_rgb).all())
+                and ((d == self.shade_rgb).all())
+        ):
             return BlockPattern.BlackTopLeftCornerSquare
-        elif ((a == self.white_rgb).all()) and ((b == self.white_rgb).all()) and ((c == self.white_rgb).all()) and ((d == self.white_rgb).all()):
+        elif (
+                ((a == self.white_rgb).all())
+                and ((b == self.white_rgb).all())
+                and ((c == self.white_rgb).all())
+                and ((d == self.white_rgb).all())
+        ):
             return BlockPattern.WhiteSquare
-        elif ((a == self.shade_rgb).all()) and ((b == self.shade_rgb).all()) and ((c == self.shade_rgb).all()) and ((d == self.shade_rgb).all()):
+        elif (
+                ((a == self.shade_rgb).all())
+                and ((b == self.shade_rgb).all())
+                and ((c == self.shade_rgb).all())
+                and ((d == self.shade_rgb).all())
+        ):
             return BlockPattern.BlackSquare
         else:
-            raise Exception("Could not determine block pattern based on this sample: {}, {}, {}, {}".format(a, b, c, d))
+            raise Exception("Could not determine block pattern " +
+                            "based on this sample: {}, {}, {}, {}".format(a, b, c, d))
 
     def getPuzzle(self):
         puzzle = []
