@@ -28,7 +28,7 @@ class PuzzleImage:
         return self.image
 
     def getWindow(self):
-        return self.image[self.window_r:self.window_r+self.block_length][self.window_c:self.window_c+self.block_length]
+        return self.image[self.window_r:self.getRowOffset(1)][self.window_c:self.getColOffset(1)]
 
     def getPattern(self):
         a = self.image[self.getRowOffset(.25)][self.getColOffset(.5)]
