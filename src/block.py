@@ -66,6 +66,17 @@ class Block:
             5: BlockPattern.BlackSquare,
             6: BlockPattern.BlackBottomRightCornerSquare,
         }
+
+        self.actionCounter = {
+            BlockAction.GoToFaceOne: 0,
+            BlockAction.GoToFaceTwo: 0,
+            BlockAction.GoToFaceThree: 0,
+            BlockAction.GoToFaceFour: 0,
+            BlockAction.GoToFaceFive: 0,
+            BlockAction.GoToFaceSix: 0,
+            BlockAction.RotateLeft: 0,
+            BlockAction.RotateRight: 0
+        }
         
     ''' Sets up data structures for enabling rotation logic. '''
     def _setupRotationDataStructures(self):
@@ -146,6 +157,7 @@ class Block:
             return self.patterns[self.actionToFace[action]]
 
     def executeAction(self, action):
+        self.actionCounter[action] += 1
         self.actions[action]()
         
     def getValidActions(self):
@@ -162,6 +174,9 @@ class Block:
 
     def printBlockInitialState(self):
         print('[Instantiate block] ' + str(self))
+
+    def getActionCounter(self):
+        return self.actionCounter
 
     def __str__(self):
         return 'Block {} state: face {}, pattern {}'.format(
