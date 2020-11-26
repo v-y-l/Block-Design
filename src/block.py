@@ -22,7 +22,7 @@ class Block:
         self._setupBlockDataStructures()
         self._setupRotationDataStructures()
         self._setupGoToDataStructures()
-        print(str(self))
+        self.printBlockInitialState()
 
     '''
     Setup the data structures that coordinate between the different
@@ -160,6 +160,9 @@ class Block:
     def hasTrianglePattern(self):
         return isTrianglePattern(self.getPattern())
 
+    def printBlockInitialState(self):
+        print('[Instantiate block] ' + str(self))
+
     def __str__(self):
-        return 'Block {}: face {}, pattern {}'.format(
+        return 'Block {} state: face {}, pattern {}'.format(
             self.getNumber(), self.getFace(), self.getPattern())

@@ -23,6 +23,10 @@ class PuzzleSolver:
                 self.blockBank[i],
                 self.problem[i],
             actionsPerBlock)
-            print("...Solved puzzle piece {} with pattern {} using block {}".format(
-                i, self.problem[i], self.blockBank[i].getNumber()))
+            self.printSolvedPuzzlePiece(i)
         return actionsPerBlock
+
+    def printSolvedPuzzlePiece(self, pieceNumber):
+        print("...[Solved puzzle piece {}] {}\n".format(
+            pieceNumber + 1,
+            str(self.blockBank[pieceNumber])))
