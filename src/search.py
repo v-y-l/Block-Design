@@ -65,7 +65,6 @@ def sequential_search(problem):
 face_search_options = {
     'r': random_search,
     'b': beeline_search,
-    'm': memory_search
 }
 
 puzzle_piece_search_options = {
