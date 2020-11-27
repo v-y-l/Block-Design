@@ -21,7 +21,8 @@ if __name__=="__main__":
                 face_search_input = arg
             elif opt in ("-s", "--piecesearch"):
                 puzzle_piece_search_input = arg
-    except getopt.GetoptError:
+            # TODO: Add failure if not all three fields are present
+    except GetoptError:
         puzzle_input = input("Specify puzzle: " +
                              "puzzle_[a].png, puzzle_[b].png, or puzzle_[c].png... ")
         face_search_input = input("Specify face search: " +
