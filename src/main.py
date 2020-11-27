@@ -75,7 +75,9 @@ if __name__=="__main__":
     print("==================")
 
     if csv_input != '':
-        with open(csv_input, 'w', newline='') as csvfile:
+        with open(csv_input, 'a', newline='') as csvfile:
             record_writer = csv.writer(csvfile, delimiter=' ',
                                     quotechar='|', quoting=csv.QUOTE_MINIMAL)
             record_writer.writerow([puzzle_input, face_search_input, puzzle_piece_search_input])
+            for action, count in puzzle_solver.getActionCounter().items():
+                record_writer.writerow([action, count])
