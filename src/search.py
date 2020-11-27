@@ -18,10 +18,8 @@ def random_search(block, dest_pattern, actions):
     block.executeAction(next_action)
     return random_search(block, dest_pattern, actions)
 
-'''
-   Take the shortest path to find the destination pattern.
-'''
 def beeline_search(block, dest_pattern, actions):
+    ''' Take the shortest path to find the destination pattern. '''
     if block.getPattern() == dest_pattern:
         return actions
     elif (block.hasTrianglePattern() and isTrianglePattern(dest_pattern)):

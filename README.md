@@ -4,6 +4,12 @@ Models the block design test.
 
 Run python [main.py](https://github.com/v-y-l/Block-Design/blob/main/src/main.py) to get started.
 
+Example:
+
+> python main.py -p b -f b -s s
+
+...will solve puzzle_b.png using the beeline face search and sequential puzzle piece search.
+
 ![Demo gif](https://github.com/v-y-l/Block-Design/blob/main/assets/demo.gif)
 
 ## Block symbolic model

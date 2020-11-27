@@ -46,6 +46,9 @@ if __name__=="__main__":
     print("| Puzzle starting... |")
     print("======================")
 
+    print("[Configuration] Puzzle '{}', face search '{}', puzzle piece search '{}'".format(
+        puzzle_input, face_search_input, puzzle_piece_search_input))
+
     solvers = {
         SearchType.Face: face_search,
         SearchType.PuzzlePiece: puzzle_piece_search
