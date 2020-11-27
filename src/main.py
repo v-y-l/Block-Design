@@ -3,7 +3,7 @@ from puzzle_solver import PuzzleSolver
 from puzzle_image import PuzzleImage, puzzle_options
 from block import BlockPattern
 from getopt import getopt, GetoptError
-from sys import argv
+from sys import argv, exit
 
 if __name__=="__main__":
     puzzle_input = ''
@@ -15,18 +15,26 @@ if __name__=="__main__":
             if opt == '-h':
                 print('main.py -p <puzzle_[a].png, puzzle_[b].png, or puzzle_[c].png> ' +
                       '-f <[r]andom_search or [b]eeline_search> -s <[s]equential_search>')
+                exit()
             elif opt in ("-p", "--puzzle"):
                 puzzle_input = arg
             elif opt in ("-f", "--facesearch"):
                 face_search_input = arg
             elif opt in ("-s", "--piecesearch"):
                 puzzle_piece_search_input = arg
-            # TODO: Add failure if not all three fields are present
-    except GetoptError:
+    except GetoptError as err:
+        print(err)
+        exit(2)
+
+    if puzzle_input == '':
         puzzle_input = input("Specify puzzle: " +
                              "puzzle_[a].png, puzzle_[b].png, or puzzle_[c].png... ")
+
+    if face_search_input == '':
         face_search_input = input("Specify face search: " +
                                   "[r]andom_search or [b]eeline_search... ")
+
+    if puzzle_piece_search_input == '':
         puzzle_piece_search_input = input("Specify puzzle piece search: [s]equential_search... ")       
 
     puzzle = puzzle_options.get(puzzle_input, puzzle_options['a'])
