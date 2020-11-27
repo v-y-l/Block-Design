@@ -81,3 +81,4 @@ if __name__=="__main__":
             record_writer.writerow([puzzle_input, face_search_input, puzzle_piece_search_input])
             for action, count in puzzle_solver.getActionCounter().items():
                 record_writer.writerow([action, count])
+            print("...aggregate stats written to {}".format(csv_input))
