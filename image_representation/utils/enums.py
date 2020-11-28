@@ -1,6 +1,5 @@
 from enum import Enum
 
-
 '''
 Represents the possible orientations of the block.
 '''

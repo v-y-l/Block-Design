@@ -2,7 +2,7 @@ from cv2 import imread
 from utils.enums import BlockAction, BlockPattern, BlockOrientation
 from utils.data_structures import Node, FaceNode
 from utils.block_actions import goToFace, rotateRight, rotateLeft
-from utils.helper import isTrianglePattern, shade_rgb, face_to_coordinate
+from utils.helper import isTrianglePattern, shade_rgb, face_to_coordinate, getPattern
 
 '''
 A block has six faces. Each face is assigned a number.
@@ -18,13 +18,12 @@ across the entire 2D image.
 class BlockImage:
 
     def __init__(self, face=1, number=1):
-        self.current_face = face
-        self.block_number = number
-        self.block_length = 170
-        self.block_orientation = BlockOrientation.Up
-        self.block_image = imread('./block_images/block_up.png')
+        self.face = face
+        self.number = number
+        self.orientation = BlockOrientation.Up
+        self.image = imread('./block_images/block_up.png')
         self.face_to_coordinate = face_to_coordinate
-        self.r, self.c = face_to_coordinate[self.block_orientation][face]
+        self.r, self.c = face_to_coordinate[self.orientation][face]
         
         self._setupBlockDataStructures()
         self._setupRotationDataStructures()
@@ -125,16 +124,16 @@ class BlockImage:
         }
 
     def getNeighbors(self):
-        return self.faces[self.current_face].neighbors
+        return self.faces[self.face].neighbors
 
     def getFace(self):
-        return self.current_face
+        return self.face
 
     def getNumber(self):
-        return self.block_number
+        return self.number
         
     def getPattern(self):
-        return getPattern(self.self.block_image, self.r, self.c)
+        return getPattern(self.image, self.r, self.c)
 
     def peekAction(self, action):
         if action not in self.getValidActions():
