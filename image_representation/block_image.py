@@ -78,10 +78,10 @@ class BlockImage:
     ''' Sets up data structures for enabling rotation logic. '''
     def _setupRotationDataStructures(self):
         ''' Essential for the rotating the block as whole. '''
-        up = Node(BlockPattern.BlackTopRightCornerSquare)
-        right = Node(BlockPattern.BlackBottomRightCornerSquare)
-        down = Node(BlockPattern.BlackBottomLeftCornerSquare)
-        left = Node(BlockPattern.BlackTopLeftCornerSquare)
+        up = Node(BlockOrientation.Up)
+        right = Node(BlockOrientation.Right)
+        down = Node(BlockOrientation.Down)
+        left = Node(BlockOrientation.Left)
 
         up.next = right
         up.prev = left
@@ -174,7 +174,9 @@ class BlockImage:
         elif action == BlockAction.RotateRight:
             return self.faceOrientations[self.getPattern()].next.val
         else:
-            return self.patterns[self.actionToFace[action]]
+            peek_face = self.actionToFace[action]
+            peek_r, peek_c = self.face_to_coordinate[self.orientation][peek_face]
+            return getPattern(peek_r, peek_c, self.image)
 
     def executeAction(self, action):
         self.actionCounter[action] += 1
