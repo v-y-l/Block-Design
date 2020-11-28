@@ -14,14 +14,14 @@ def goToFace(block, next_face):
 ''' Change orientation, but stay on the same face. '''
 def rotateRight(block):
     block.image = rot90(block.image, 3)
-    block.orientation = block.blockOrientations[block.orientation].prev.val
+    block.orientation = block.blockOrientations[block.orientation].next.val
     block.r, block.c = block.face_to_coordinate[block.orientation][block.face]
     printAction('[Right rotate block] ', block)
         
 ''' Change orientation, but stay on the same face. '''
 def rotateLeft(block):
     block.image = rot90(block.image)
-    block.orientation = block.blockOrientations[block.orientation].next.val
+    block.orientation = block.blockOrientations[block.orientation].prev.val
     block.r, block.c = block.face_to_coordinate[block.orientation][block.face]
     printAction('[Left rotate block] ', block)
 
