@@ -1,14 +1,3 @@
-from enum import Enum
-
-'''
-Represents the possible orientations of the block.
-'''
-class BlockOrientation(Enum):
-    Up = 1
-    Right = 2
-    Down = 3
-    Left = 4
-
 '''
 Coordinates are represented row by column.
 '''

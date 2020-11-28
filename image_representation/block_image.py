@@ -1,7 +1,7 @@
-from utils.enums import BlockPattern, BlockAction
+from utils.enums import BlockAction, BlockPattern, BlockOrientation
 from utils.data_structures import Node, FaceNode
 from utils.block_actions import goToFace, rotateRight, rotateLeft
-from utils.helper import isTrianglePattern
+from utils.helper import isTrianglePattern, shade_rgb, face_to_coordinate
 
 '''
 A block has six faces. Each face is assigned a number.
@@ -16,14 +16,15 @@ across the entire 2D image.
 '''
 class BlockImage:
 
-    def __init__(self,
-                 number=1,
-                 starting_coordinate=,
-                 image_path='./puzzle_images/puzzle_a.png',
-                 block_length=170,
-                 shade_rgb=[27, 13, 252]):
+    def __init__(self, face=1, number=1):
         self.current_face = face
         self.block_number = number
+        self.block_length = 170
+        self.block_orientation = BlockOrientation.Up
+        self.block_image = imread('./block_images/block_up.png')
+        self.r = face_to_coordinate[self.block_orientation][1][0]
+        self.c = face_to_coordinate[self.block_orientation][1][1]
+        
         self._setupBlockDataStructures()
         self._setupRotationDataStructures()
         self._setupGoToDataStructures()
@@ -63,15 +64,6 @@ class BlockImage:
             BlockAction.GoToFaceSix: 6
         }
 
-        self.patterns = {
-            1: BlockPattern.BlackTopRightCornerSquare,
-            2: BlockPattern.WhiteSquare,
-            3: BlockPattern.WhiteSquare,
-            4: BlockPattern.BlackSquare,
-            5: BlockPattern.BlackSquare,
-            6: BlockPattern.BlackBottomRightCornerSquare,
-        }
-
         self.actionCounter = {
             BlockAction.GoToFaceOne: 0,
             BlockAction.GoToFaceTwo: 0,
@@ -85,33 +77,25 @@ class BlockImage:
         
     ''' Sets up data structures for enabling rotation logic. '''
     def _setupRotationDataStructures(self):
-        blackTopRightCornerSquare = Node(BlockPattern.BlackTopRightCornerSquare)
-        blackBottomRightCornerSquare = Node(BlockPattern.BlackBottomRightCornerSquare)
-        blackBottomLeftCornerSquare = Node(BlockPattern.BlackBottomLeftCornerSquare)
-        blackTopLeftCornerSquare = Node(BlockPattern.BlackTopLeftCornerSquare)
-        whiteSquare = Node(BlockPattern.WhiteSquare)
-        blackSquare = Node(BlockPattern.BlackSquare)
+        up = Node(BlockPattern.BlackTopRightCornerSquare)
+        right = Node(BlockPattern.BlackBottomRightCornerSquare)
+        down = Node(BlockPattern.BlackBottomLeftCornerSquare)
+        left = Node(BlockPattern.BlackTopLeftCornerSquare)
 
-        whiteSquare.next = whiteSquare
-        whiteSquare.prev = whiteSquare
-        blackSquare.next = blackSquare
-        blackSquare.prev = blackSquare
-        blackTopRightCornerSquare.next = blackBottomRightCornerSquare
-        blackTopRightCornerSquare.prev = blackTopLeftCornerSquare
-        blackBottomRightCornerSquare.next = blackBottomLeftCornerSquare
-        blackBottomRightCornerSquare.prev = blackTopRightCornerSquare
-        blackBottomLeftCornerSquare.next = blackTopLeftCornerSquare
-        blackBottomLeftCornerSquare.prev = blackBottomRightCornerSquare
-        blackTopLeftCornerSquare.next = blackTopRightCornerSquare
-        blackTopLeftCornerSquare.prev = blackBottomLeftCornerSquare
+        up.next = right
+        up.prev = left
+        right.next = down
+        right.prev = up
+        down.next = left
+        down.prev = right
+        left.next = up
+        left.prev = down
 
         self.orientations = {
-            BlockPattern.BlackTopRightCornerSquare: blackTopRightCornerSquare,
-            BlockPattern.BlackBottomRightCornerSquare: blackBottomRightCornerSquare,
-            BlockPattern.BlackBottomLeftCornerSquare: blackBottomLeftCornerSquare,
-            BlockPattern.BlackTopLeftCornerSquare: blackTopLeftCornerSquare,
-            BlockPattern.BlackSquare: blackSquare,
-            BlockPattern.WhiteSquare: whiteSquare,
+            BlockOrientation.Up: up,
+            BlockOrientation.Right: right,
+            BlockOrientation.Down: down,
+            BlockOrientation.Left: left,
         }
 
     ''' Setup data structures that enable movement to a neighboring face. '''
@@ -149,7 +133,7 @@ class BlockImage:
         return self.block_number
         
     def getPattern(self):
-        return self.patterns[self.current_face]
+        return getPattern(self.self.block_image, self.r, self.c)
 
     def peekAction(self, action):
         if action not in self.getValidActions():
