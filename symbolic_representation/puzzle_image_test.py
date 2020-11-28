@@ -1,7 +1,6 @@
 import unittest
-from utils.enums import BlockPattern
-
 import numpy as np
+from utils.enums import BlockPattern
 from puzzle_image import PuzzleImage
 
 class TestPuzzleImage(unittest.TestCase):

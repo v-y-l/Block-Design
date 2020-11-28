@@ -179,5 +179,5 @@ class Block:
         return self.actionCounter
 
     def __str__(self):
-        return 'Block {} state: face {}, pattern {}'.format(
+        return 'Block {}: face {}, pattern {}'.format(
             self.getNumber(), self.getFace(), self.getPattern())
