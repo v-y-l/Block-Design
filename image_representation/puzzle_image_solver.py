@@ -1,4 +1,5 @@
-from cv2 import imread
+from cv2 import imread, cvtColor, COLOR_BGR2RGB
+from PIL import Image
 from utils.enums import BlockPattern
 from utils.helper import getPattern, block_length
 
@@ -13,11 +14,10 @@ class PuzzleImageSolver:
         self.r = 0
         self.c = 0
 
-    def getImage(self):
-        return self.image
-
     def getWindow(self):
-        return self.image[self.r:getRowOffset(self.r, self.c, 1)][self.c:getColOffset(self.r, self.c, 1)]
+        rowOffset = getRowOffset(self.r, self.c, 1)
+        colOffset = getColOffset(self.r, self.c, 1)
+        return self.image[self.r:rowOffset][self.c:colOffset]
 
     def getPattern(self):
         return getPattern(self.r, self.c, self.image)
@@ -32,6 +32,12 @@ class PuzzleImageSolver:
         self.r = 0
         self.c = 0
         return puzzle
+
+    def getImage(self):
+        return self.image
+
+    def showImage(self):
+        Image.fromarray(cvtColor(self.image, COLOR_BGR2RGB), 'RGB').show()
 
 puzzle_options = {
     'a': PuzzleImageSolver(
