@@ -1,7 +1,7 @@
 from utils.enums import BlockPattern, BlockOrientation
 
-shade_rgb = [27, 13, 252]
-white_rgb = [255, 255, 255]
+shade_bgr = [27, 13, 252]
+white_bgr = [255, 255, 255]
 block_length = 170
 
 def getColOffset(r, c, multiplier):
@@ -16,45 +16,45 @@ def getPattern(row, col, block_image):
     c = block_image[getRowOffset(row, col, .75)][getColOffset(row, col, .5)]
     d = block_image[getRowOffset(row, col, .5)][getColOffset(row, col, .25)]
     if (
-            ((a == shade_rgb).all())
-            and ((b == shade_rgb).all())
-            and ((c == white_rgb).all())
-            and ((d == white_rgb).all())
+            ((a == shade_bgr).all())
+            and ((b == shade_bgr).all())
+            and ((c == white_bgr).all())
+            and ((d == white_bgr).all())
     ):
         return BlockPattern.BlackTopRightCornerSquare
     elif (
-                ((a == white_rgb).all())
-            and ((b == shade_rgb).all())
-            and ((c == shade_rgb).all())
-            and ((d == white_rgb).all())
+                ((a == white_bgr).all())
+            and ((b == shade_bgr).all())
+            and ((c == shade_bgr).all())
+            and ((d == white_bgr).all())
     ):
         return BlockPattern.BlackBottomRightCornerSquare
     elif (
-                ((a == white_rgb).all())
-            and ((b == white_rgb).all())
-            and ((c == shade_rgb).all())
-            and ((d == shade_rgb).all())
+                ((a == white_bgr).all())
+            and ((b == white_bgr).all())
+            and ((c == shade_bgr).all())
+            and ((d == shade_bgr).all())
     ):
             return BlockPattern.BlackBottomLeftCornerSquare
     elif (
-                ((a == shade_rgb).all())
-            and ((b == white_rgb).all())
-            and ((c == white_rgb).all())
-            and ((d == shade_rgb).all())
+                ((a == shade_bgr).all())
+            and ((b == white_bgr).all())
+            and ((c == white_bgr).all())
+            and ((d == shade_bgr).all())
     ):
         return BlockPattern.BlackTopLeftCornerSquare
     elif (
-                ((a == white_rgb).all())
-            and ((b == white_rgb).all())
-            and ((c == white_rgb).all())
-            and ((d == white_rgb).all())
+                ((a == white_bgr).all())
+            and ((b == white_bgr).all())
+            and ((c == white_bgr).all())
+            and ((d == white_bgr).all())
     ):
         return BlockPattern.WhiteSquare
     elif (
-                ((a == shade_rgb).all())
-            and ((b == shade_rgb).all())
-            and ((c == shade_rgb).all())
-            and ((d == shade_rgb).all())
+                ((a == shade_bgr).all())
+            and ((b == shade_bgr).all())
+            and ((c == shade_bgr).all())
+            and ((d == shade_bgr).all())
     ):
         return BlockPattern.BlackSquare
     else:

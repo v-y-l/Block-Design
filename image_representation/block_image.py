@@ -205,5 +205,5 @@ class BlockImage:
         Image.fromarray(cvtColor(self.image, COLOR_BGR2RGB), 'RGB').show()
 
     def __str__(self):
-        return 'Block {} state: face {}, pattern {}'.format(
+        return 'Block {}: face {}, pattern {}'.format(
             self.getNumber(), self.getFace(), self.getPattern())
