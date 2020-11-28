@@ -2,7 +2,7 @@
 
 A symbolic model for the block design test.
 
-Run python [main.py](https://github.com/v-y-l/Block-Design/blob/main/src/main.py) to get started.
+Run python [main.py](https://github.com/v-y-l/Block-Design/blob/main/symbolic_representation/main.py) to get started.
 
 Example:
 
@@ -10,7 +10,7 @@ Example:
 
 ...will solve puzzle_b.png using the beeline face search and sequential puzzle piece search.
 
-![Demo gif](https://github.com/v-y-l/Block-Design/blob/main/assets/demo.gif)
+![Demo gif](https://github.com/v-y-l/Block-Design/blob/main/assets/symbolic_rep_demo.gif)
 
 ## Block symbolic model
 
@@ -27,13 +27,13 @@ Represents block in sprawled-out 2D form
 
 ## Puzzle model
 
-[puzzle_solver.py](https://github.com/v-y-l/Block-Design/blob/main/src/puzzle_solver.py)
+[puzzle_solver.py](https://github.com/v-y-l/Block-Design/blob/main/symbolic_representation/puzzle_solver.py)
 
 Takes in a puzzle and search strategies to solve a block design test
 
 ### Search strategies
 
-[search.py](https://github.com/v-y-l/Block-Design/blob/main/src/search.py)
+[search.py](https://github.com/v-y-l/Block-Design/blob/main/symbolic_representation/search.py)
 
 * Face search functions look for some face in a block
 * Puzzle piece search functions look for the next puzzle piece to solve for
@@ -41,7 +41,7 @@ Takes in a puzzle and search strategies to solve a block design test
 
 ## Puzzle image
 
-[puzzle_image.py](https://github.com/v-y-l/Block-Design/blob/main/src/puzzle_image.py) 
+[puzzle_image.py](https://github.com/v-y-l/Block-Design/blob/main/symbolic_representation/puzzle_image.py) 
 
 Converts an image to a puzzle model by sampling from four points per block
 

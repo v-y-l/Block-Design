@@ -1,3 +1,3 @@
 # Block-Design
 
-Provides a image model and symbolic model for the block design test.
+Provides an [image representation](https://github.com/v-y-l/Block-Design/tree/main/image_representation) and [symbolic representation](https://github.com/v-y-l/Block-Design/tree/main/symbolic_representation) of the block design test.
