@@ -46,3 +46,7 @@ Takes in a puzzle and search strategies to solve a block design test
 Converts an image to a puzzle model by sampling from four points per block
 
 ![Sampled points](https://github.com/v-y-l/Block-Design/blob/main/assets/puzzle_image_marks.png)
+
+## Testing
+
+> python -m unittest test/test_something.py
