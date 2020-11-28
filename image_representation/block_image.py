@@ -1,3 +1,4 @@
+from cv2 import imread
 from utils.enums import BlockAction, BlockPattern, BlockOrientation
 from utils.data_structures import Node, FaceNode
 from utils.block_actions import goToFace, rotateRight, rotateLeft
@@ -22,8 +23,8 @@ class BlockImage:
         self.block_length = 170
         self.block_orientation = BlockOrientation.Up
         self.block_image = imread('./block_images/block_up.png')
-        self.r = face_to_coordinate[self.block_orientation][1][0]
-        self.c = face_to_coordinate[self.block_orientation][1][1]
+        self.face_to_coordinate = face_to_coordinate
+        self.r, self.c = face_to_coordinate[self.block_orientation][face]
         
         self._setupBlockDataStructures()
         self._setupRotationDataStructures()

@@ -1,4 +1,4 @@
-from cv2 import imread, IMREAD_COLOR
+from cv2 import imread
 from utils.enums import BlockPattern
 
 class PuzzleImage:
