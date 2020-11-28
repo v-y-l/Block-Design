@@ -3,7 +3,7 @@ from PIL import Image
 from utils.enums import BlockAction, BlockPattern, BlockOrientation
 from utils.data_structures import Node, FaceNode
 from utils.block_actions import goToFace, rotateRight, rotateLeft
-from utils.helper import isTrianglePattern, shade_rgb, face_to_coordinate, getPattern
+from utils.helper import isTrianglePattern, shade_bgr, face_to_coordinate, getPattern
 
 '''
 A block has six faces. Each face is assigned a number.
