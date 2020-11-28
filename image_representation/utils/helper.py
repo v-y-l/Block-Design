@@ -2,6 +2,7 @@ from utils.enums import BlockPattern, BlockOrientation
 
 shade_bgr = [27, 13, 252]
 white_bgr = [255, 255, 255]
+edge_offset = 5 # Give a 5 pixel leeway to the potentially overcropped image
 block_length = 170
 
 def getColOffset(r, c, multiplier):
