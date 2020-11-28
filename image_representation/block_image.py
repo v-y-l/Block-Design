@@ -1,4 +1,5 @@
-from cv2 import imread
+from cv2 import imread, cvtColor, COLOR_BGR2RGB
+from PIL import Image
 from utils.enums import BlockAction, BlockPattern, BlockOrientation
 from utils.data_structures import Node, FaceNode
 from utils.block_actions import goToFace, rotateRight, rotateLeft
@@ -199,6 +200,9 @@ class BlockImage:
 
     def getActionCounter(self):
         return self.actionCounter
+
+    def showImage(self):
+        Image.fromarray(cvtColor(self.image, COLOR_BGR2RGB), 'RGB').show()
 
     def __str__(self):
         return 'Block {} state: face {}, pattern {}'.format(
