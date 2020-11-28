@@ -77,6 +77,7 @@ class BlockImage:
         
     ''' Sets up data structures for enabling rotation logic. '''
     def _setupRotationDataStructures(self):
+        ''' Essential for the rotating the block as whole. '''
         up = Node(BlockPattern.BlackTopRightCornerSquare)
         right = Node(BlockPattern.BlackBottomRightCornerSquare)
         down = Node(BlockPattern.BlackBottomLeftCornerSquare)
@@ -91,11 +92,41 @@ class BlockImage:
         left.next = up
         left.prev = down
 
-        self.orientations = {
+        self.blockOrientations = {
             BlockOrientation.Up: up,
             BlockOrientation.Right: right,
             BlockOrientation.Down: down,
             BlockOrientation.Left: left,
+        }
+
+        ''' Essential for the peek operation. '''
+        blackTopRightCornerSquare = Node(BlockPattern.BlackTopRightCornerSquare)
+        blackBottomRightCornerSquare = Node(BlockPattern.BlackBottomRightCornerSquare)
+        blackBottomLeftCornerSquare = Node(BlockPattern.BlackBottomLeftCornerSquare)
+        blackTopLeftCornerSquare = Node(BlockPattern.BlackTopLeftCornerSquare)
+        whiteSquare = Node(BlockPattern.WhiteSquare)
+        blackSquare = Node(BlockPattern.BlackSquare)
+
+        whiteSquare.next = whiteSquare
+        whiteSquare.prev = whiteSquare
+        blackSquare.next = blackSquare
+        blackSquare.prev = blackSquare
+        blackTopRightCornerSquare.next = blackBottomRightCornerSquare
+        blackTopRightCornerSquare.prev = blackTopLeftCornerSquare
+        blackBottomRightCornerSquare.next = blackBottomLeftCornerSquare
+        blackBottomRightCornerSquare.prev = blackTopRightCornerSquare
+        blackBottomLeftCornerSquare.next = blackTopLeftCornerSquare
+        blackBottomLeftCornerSquare.prev = blackBottomRightCornerSquare
+        blackTopLeftCornerSquare.next = blackTopRightCornerSquare
+        blackTopLeftCornerSquare.prev = blackBottomLeftCornerSquare
+
+        self.faceOrientations = {
+            BlockPattern.BlackTopRightCornerSquare: blackTopRightCornerSquare,
+            BlockPattern.BlackBottomRightCornerSquare: blackBottomRightCornerSquare,
+            BlockPattern.BlackBottomLeftCornerSquare: blackBottomLeftCornerSquare,
+            BlockPattern.BlackTopLeftCornerSquare: blackTopLeftCornerSquare,
+            BlockPattern.BlackSquare: blackSquare,
+            BlockPattern.WhiteSquare: whiteSquare,
         }
 
     ''' Setup data structures that enable movement to a neighboring face. '''
@@ -133,15 +164,15 @@ class BlockImage:
         return self.number
         
     def getPattern(self):
-        return getPattern(self.image, self.r, self.c)
+        return getPattern(self.r, self.c, self.image)
 
     def peekAction(self, action):
         if action not in self.getValidActions():
             raise Exception("Invalid action {} for {}".format(action, str(self)))
         if action == BlockAction.RotateLeft:
-            return self.orientations[self.getPattern()].prev.val
+            return self.faceOrientations[self.getPattern()].prev.val
         elif action == BlockAction.RotateRight:
-            return self.orientations[self.getPattern()].next.val
+            return self.faceOrientations[self.getPattern()].next.val
         else:
             return self.patterns[self.actionToFace[action]]
 
