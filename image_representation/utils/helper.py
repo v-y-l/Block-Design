@@ -10,11 +10,11 @@ def getColOffset(r, c, multiplier):
 def getRowOffset(r, c, multiplier):
     return r + int(block_length * multiplier)
 
-def getPattern(r, c, block_image):
-    a = block_image[getRowOffset(r, c, .25)][getColOffset(r, c, .5)]
-    b = block_image[getRowOffset(r, c, .5)][getColOffset(r, c, .75)]
-    c = block_image[getRowOffset(r, c, .75)][getColOffset(r, c, .5)]
-    d = block_image[getRowOffset(r, c, .5)][getColOffset(r, c, .25)]
+def getPattern(row, col, block_image):
+    a = block_image[getRowOffset(row, col, .25)][getColOffset(row, col, .5)]
+    b = block_image[getRowOffset(row, col, .5)][getColOffset(row, col, .75)]
+    c = block_image[getRowOffset(row, col, .75)][getColOffset(row, col, .5)]
+    d = block_image[getRowOffset(row, col, .5)][getColOffset(row, col, .25)]
     if (
             ((a == shade_rgb).all())
             and ((b == shade_rgb).all())
@@ -59,7 +59,7 @@ def getPattern(r, c, block_image):
         return BlockPattern.BlackSquare
     else:
         raise Exception("Could not determine block pattern " +
-                        "based on this sample: {}, {}, {}, {}".format(a, b, c, d))
+                        "based on this sample: \na={}, \nb={}, \nc={}, \nd={}".format(a, b, c, d))
 
 ''' Check if the block has a triangle pattern. '''    
 def isTrianglePattern(pattern):

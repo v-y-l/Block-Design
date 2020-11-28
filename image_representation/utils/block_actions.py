@@ -5,7 +5,7 @@ def goToFace(block, next_face):
     if next_face in block.getNeighbors():
         old_face = block.getFace()
         block.face = next_face
-        block.r, block.c = block.face_to_coordinate[block.orientation][next_face]
+        block.r, block.c = block.face_to_coordinate[block.orientation][block.face]
         printAction('[Go to face {}] '.format(next_face), block)
     else:
         raise Exception("Can't go from {} to {}".format(
