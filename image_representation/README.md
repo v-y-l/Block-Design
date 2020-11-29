@@ -1,6 +1,6 @@
 # Block-Design
 
-A symbolic model for the block design test.
+An image model for the block design test.
 
 Run python [main.py](https://github.com/v-y-l/Block-Design/blob/main/image_representation/main.py) to get started.
 
@@ -16,7 +16,7 @@ Example:
 
 [block_image.py](https://github.com/v-y-l/Block-Design/blob/main/image_representation/block_image.py)
 
-Represents block in sprawled-out 2D form
+Represents block in sprawled-out 2D form using the underlying image:
 
 ![2D block](https://github.com/v-y-l/Block-Design/blob/main/assets/labeled_block.png)
 
