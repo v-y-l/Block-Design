@@ -10,7 +10,7 @@ Example:
 
 ...will solve puzzle_b.png using the beeline face search and sequential puzzle piece search.
 
-![Demo gif](https://github.com/v-y-l/Block-Design/blob/main/assets/symbolic_rep_demo.gif)
+![Demo gif](https://github.com/v-y-l/Block-Design/blob/main/assets/cli_demo.gif)
 
 ## Block symbolic model
 

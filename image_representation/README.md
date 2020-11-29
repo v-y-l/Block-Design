@@ -10,15 +10,15 @@ Example:
 
 ...will solve puzzle_b.png using the beeline face search and sequential puzzle piece search.
 
-![Demo gif](https://github.com/v-y-l/Block-Design/blob/main/assets/symbolic_rep_demo.gif)
+![Demo gif](https://github.com/v-y-l/Block-Design/blob/main/assets/cli_demo.gif)
 
 ## Block symbolic model
 
-[block_image.py](https://github.com/v-y-l/Block-Design/blob/main/image_representation/block_image.py
+[block_image.py](https://github.com/v-y-l/Block-Design/blob/main/image_representation/block_image.py)
 
 Represents block in sprawled-out 2D form
 
-![2D block](https://github.com/v-y-l/Block-Design/blob/main/image_representation/block_images/block_up.png)
+![2D block](https://github.com/v-y-l/Block-Design/blob/main/assets/labeled_block.png)
 
 * Traverse to neighboring faces by specifying the number
 * Rotations rotate the entire 2D block
