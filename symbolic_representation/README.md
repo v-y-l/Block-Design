@@ -14,7 +14,7 @@ Example:
 
 ## Block symbolic model
 
-[block.py](https://docs.google.com/document/d/1gwEpj-OWHED0i5rjxqZPLjMwJhysZOsv8D_8StMi4UE/edit?usp=sharing)
+[block.py](https://github.com/v-y-l/Block-Design/blob/main/symbolic_representation/block.py)
 
 Represents block in sprawled-out 2D form
 
@@ -37,7 +37,6 @@ Takes in a puzzle and search strategies to solve a block design test
 
 * Face search functions look for some face in a block
 * Puzzle piece search functions look for the next puzzle piece to solve for
-
 
 ## Puzzle image
 
