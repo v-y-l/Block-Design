@@ -103,13 +103,7 @@ class PuzzleImageSolver:
             print(action, ": ", count)
 
 puzzle_options = {
-    'a': PuzzleImageSolver(
-        './puzzle_images/puzzle_a.png',
-    ),
-    'b': PuzzleImageSolver(
-        './puzzle_images/puzzle_b.png',
-    ),
-    'c': PuzzleImageSolver(
-        './puzzle_images/puzzle_c.png',
-    )
+    'a': './puzzle_images/puzzle_a.png',
+    'b': './puzzle_images/puzzle_b.png',
+    'c': './puzzle_images/puzzle_c.png',
 }
