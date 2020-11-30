@@ -12,7 +12,7 @@ Example:
 
 ![Demo gif](https://github.com/v-y-l/Block-Design/blob/main/assets/cli_demo.gif)
 
-## Block symbolic model
+## Block image model
 
 [block_image.py](https://github.com/v-y-l/Block-Design/blob/main/image_representation/block_image.py)
 
