@@ -33,7 +33,11 @@ class BlockAction(Enum):
     GoToFaceSix = 6
     RotateLeft = 7
     RotateRight = 8
-    PlaceInPuzzle = 9
+    PickUpBlock = 9
+    PlaceInPuzzle = 10
+
+class PuzzleAction(Enum):
+    LookAtPuzzle = 1
 
 ''' Represents the type of search functions for the puzzle. '''
 class SearchType(Enum):

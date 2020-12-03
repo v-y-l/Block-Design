@@ -4,6 +4,7 @@ from utils.enums import BlockPattern, SearchType, BlockAction
 from utils.helper import getPattern, block_length, edge_offset
 from search import random_search, sequential_search
 from block_image import BlockImage
+from copy import deepcopy
 import numpy as np
 
 class PuzzleImageSolver:
@@ -21,7 +22,7 @@ class PuzzleImageSolver:
                  }
     ):
         self.image = imread(image_path)
-        self.originalImage = np.copy.deepcopy(self.image)
+        self.originalImage = deepcopy(self.image)
         self.height, self.width, _ = self.image.shape
         # Captures top left corner of a the block window,
         # with top left corner of picture as (0,0) and the
@@ -42,6 +43,7 @@ class PuzzleImageSolver:
             BlockAction.GoToFaceSix: 0,
             BlockAction.RotateLeft: 0,
             BlockAction.RotateRight: 0,
+            BlockAction.PickUpBlock: 0,
             BlockAction.PlaceInPuzzle: 0
         }
 
@@ -74,6 +76,7 @@ class PuzzleImageSolver:
 
     ''' Sets a memory_loss_factor amount of the image to black to simulate forgetfulness. '''
     def forget(self, memory_loss_factor):
+        if (memory_loss_factor) == 0: return
         height, width, bgr_len = self.image.shape
         total_pixels = height * width
         total_pixels_to_forget = int(total_pixels * memory_loss_factor)
@@ -108,9 +111,11 @@ class PuzzleImageSolver:
         self.printPuzzleStats()
         return actionsPerBlock
 
+    ''' Calculates the total and individual number of executed moves. '''
     def addBlockToStats(self, block):
         for action, count in block.getActionCounter().items():
             self.actionCounter[action] += count
+        self.actionCounter[BlockAction.PickUpBlock] += 1
         self.actionCounter[BlockAction.PlaceInPuzzle] += 1
 
     def printSolvedPuzzlePiece(self, pieceNumber):
