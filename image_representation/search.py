@@ -52,17 +52,20 @@ def beeline_search(block, dest_pattern, actions):
         block.executeAction(next_action)
         return beeline_search(block, dest_pattern, actions)
 
-'''
-   Never go to the same face with this search.
-'''
+''' Never go to the same face with this search. '''
 def memory_search(block, dest_pattern, actions):
     pass
 
 # Puzzle piece search functions, given some puzzle,
 # return the next puzzle piece to solve for.
 
+''' Search the puzzle in sequential order. '''
 def sequential_search(problem):
     return range(len(problem))
+
+''' Search the puzzle in sequential order, but skip unknown (forgotten) blocks. '''
+def skip_unknown_search(problem):
+    pass
 
 face_search_options = {
     'r': random_search,

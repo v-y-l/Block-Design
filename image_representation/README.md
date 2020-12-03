@@ -6,7 +6,7 @@ Run python [main.py](https://github.com/v-y-l/Block-Design/blob/main/image_repre
 
 Example:
 
-> python main.py --puzzle b --facesearch b --piecesearch s --csv stats.csv
+> python main.py --puzzle b --facesearch b --piecesearch s --puzzlememoryloss 0.5 --csv stats.csv
 
 ...will solve puzzle_b.png using the beeline face search and sequential puzzle piece search.
 

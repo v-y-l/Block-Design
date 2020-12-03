@@ -11,14 +11,15 @@ if __name__=="__main__":
     face_search_input = ''
     puzzle_piece_search_input = ''
     csv_input = ''
+    puzzle_memory_loss_factor = 1.0
     try:
         opts, args = getopt(argv[1:],"hp:f:s:c:",
-            ["puzzle=", "facesearch=", "piecesearch=", "csv="])
+            ["puzzle=", "facesearch=", "piecesearch=", "puzzlememoryloss=", "csv="])
         for opt, arg in opts:
             if opt == '-h':
                 print('main.py -p <puzzle_[a].png, puzzle_[b].png, or puzzle_[c].png> ' +
                       '-f <[r]andom_search or [b]eeline_search> -s <[s]equential_search> ' +
-                      '-c <example.csv>')
+                      '-l <.5> -c <example.csv>')
                 exit()
             elif opt in ("-p", "--puzzle"):
                 puzzle_input = arg
@@ -26,6 +27,8 @@ if __name__=="__main__":
                 face_search_input = arg
             elif opt in ("-s", "--piecesearch"):
                 puzzle_piece_search_input = arg
+            elif opt in ("-l", "--puzzlememoryloss"):
+                puzzle_memory_loss_factor = float(arg)
             elif opt in ("-c", "--csv"):
                 csv_input = arg
     except GetoptError as err:
@@ -47,6 +50,10 @@ if __name__=="__main__":
     face_search = face_search_options.get(face_search_input, face_search_options['r'])
     puzzle_piece_search = puzzle_piece_search_options.get(
         puzzle_piece_search_input, puzzle_piece_search_options['s'])
+    
+    config = {
+        'puzzle_memory_loss_factor': puzzle_memory_loss_factor
+    }
 
     print("\n======================")
     print("| Puzzle starting... |")
