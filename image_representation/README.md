@@ -23,6 +23,10 @@ Represents block in sprawled-out 2D form using the underlying image:
 * Traverse to neighboring faces by specifying the number
 * Rotations rotate the entire 2D block
 
+Forgetfulness is modeled as blotted out pixels
+
+![50% forgetfulness](https://github.com/v-y-l/Block-Design/blob/main/assets/50_percent_forgotten_puzzle.png)
+
 ## Puzzle model
 
 [puzzle_image_solver.py](https://github.com/v-y-l/Block-Design/blob/main/image_representation/puzzle_image_solver.py)
