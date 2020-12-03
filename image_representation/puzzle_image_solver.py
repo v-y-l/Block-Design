@@ -1,10 +1,9 @@
 from cv2 import imread, cvtColor, COLOR_BGR2RGB
 from PIL import Image
-from utils.enums import BlockPattern, SearchType, BlockAction
+from utils.enums import BlockPattern, SearchType, BlockAction, PuzzleAction
 from utils.helper import getPattern, block_length, edge_offset
 from search import random_search, sequential_search
 from block_image import BlockImage
-from copy import deepcopy
 import numpy as np
 
 class PuzzleImageSolver:
@@ -18,11 +17,11 @@ class PuzzleImageSolver:
                  config={
                      # Value from 0 to 1, represents % of memory
                      # loss on the puzzle each turn
-                     'puzzle_memory_loss_factor': 0
+                     'puzzle_memory_loss_factor': .5
                  }
     ):
+        self.image_path = image_path
         self.image = imread(image_path)
-        self.originalImage = deepcopy(self.image)
         self.height, self.width, _ = self.image.shape
         # Captures top left corner of a the block window,
         # with top left corner of picture as (0,0) and the
@@ -44,7 +43,8 @@ class PuzzleImageSolver:
             BlockAction.RotateLeft: 0,
             BlockAction.RotateRight: 0,
             BlockAction.PickUpBlock: 0,
-            BlockAction.PlaceInPuzzle: 0
+            BlockAction.PlaceInPuzzle: 0,
+            PuzzleAction.LookAtPuzzle: 0,
         }
 
     def getWindow(self):
@@ -90,7 +90,7 @@ class PuzzleImageSolver:
 
     ''' Take a look at the puzzle to refresh our memory of it. '''
     def remember(self):
-        self.image = self.originalImage
+        self.image = imread(self.image_path)
         self.problem = self.getPuzzle()
 
     ''' Returns a list of actions executed by each block to solve the problem. '''
@@ -100,13 +100,20 @@ class PuzzleImageSolver:
 
         # The actions taken for each block to get to the destination state
         actionsPerBlock = []
-
-        for i in puzzlePieceSearcher(self.problem):
+        puzzlePieceIndices = puzzlePieceSearcher(self.problem)
+        for i in puzzlePieceIndices:
             block = self.blockBank[i]
             searchFaceActions = faceSearcher(
                 block,
                 self.problem[i],
                 actionsPerBlock)
+            if (len(searchFaceActions) == 0):
+                self.actionCounter[PuzzleAction.LookAtPuzzle] += 1
+                self.remember()
+                searchFaceActions = faceSearcher(
+                    block,
+                    self.problem[i],
+                    actionsPerBlock)
             self.forget(self.config["puzzle_memory_loss_factor"])
             self.addBlockToStats(block)
             self.printSolvedPuzzlePiece(i)

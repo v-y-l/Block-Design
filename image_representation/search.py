@@ -10,7 +10,7 @@ from utils.helper import isTrianglePattern
   then returns those actions as a list.
 '''
 def random_search(block, dest_pattern, actions):
-    if block.getPattern() == BlockPattern.Unknown:
+    if dest_pattern == BlockPattern.Unknown:
         return []
     if block.getPattern() == dest_pattern:
         return actions
@@ -21,7 +21,7 @@ def random_search(block, dest_pattern, actions):
     return random_search(block, dest_pattern, actions)
 
 def beeline_search(block, dest_pattern, actions):
-    if block.getPattern() == BlockPattern.Unknown:
+    if dest_pattern == BlockPattern.Unknown:
         return []
     ''' Take the shortest path to find the destination pattern. '''
     if block.getPattern() == dest_pattern:
