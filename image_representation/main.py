@@ -69,7 +69,7 @@ if __name__=="__main__":
     puzzle_solver = PuzzleImageSolver(puzzle_image, {
         SearchType.Face: face_search,
         SearchType.PuzzlePiece: puzzle_piece_search
-    })
+    }, config)
 
     print("\n=====================")
     print("| Puzzle solving... |")

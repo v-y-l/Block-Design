@@ -17,7 +17,7 @@ class PuzzleImageSolver:
                  config={
                      # Value from 0 to 1, represents % of memory
                      # loss on the puzzle each turn
-                     'puzzle_memory_loss_factor': .5
+                     'puzzle_memory_loss_factor': 0
                  }
     ):
         self.image_path = image_path
