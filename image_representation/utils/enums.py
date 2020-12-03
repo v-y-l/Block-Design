@@ -19,6 +19,7 @@ class BlockPattern(Enum):
     BlackTopRightCornerSquare = 4
     BlackBottomLeftCornerSquare = 5
     BlackBottomRightCornerSquare = 6
+    Unknown = 7 # Refers to a forgotten block
 
 '''
 Represents the possible actions for the block.
@@ -32,6 +33,7 @@ class BlockAction(Enum):
     GoToFaceSix = 6
     RotateLeft = 7
     RotateRight = 8
+    PlaceInPuzzle = 9
 
 ''' Represents the type of search functions for the puzzle. '''
 class SearchType(Enum):

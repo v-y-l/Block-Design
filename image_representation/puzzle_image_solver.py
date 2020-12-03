@@ -12,6 +12,11 @@ class PuzzleImageSolver:
                  solvers={
                      SearchType.Face: random_search,
                      SearchType.PuzzlePiece: sequential_search
+                 },
+                 config={
+                     # Value from 0 to 1, represents % of memory
+                     # loss on the puzzle each turn
+                     'puzzle_memory_loss_factor': 0
                  }
     ):
         self.image = imread(image_path)
@@ -33,7 +38,8 @@ class PuzzleImageSolver:
             BlockAction.GoToFaceFive: 0,
             BlockAction.GoToFaceSix: 0,
             BlockAction.RotateLeft: 0,
-            BlockAction.RotateRight: 0
+            BlockAction.RotateRight: 0,
+            BlockAction.PlaceInPuzzle: 0
         }
 
     def getWindow(self):
@@ -61,6 +67,11 @@ class PuzzleImageSolver:
     def showImage(self):
         Image.fromarray(cvtColor(self.image, COLOR_BGR2RGB), 'RGB').show()
 
+    # def forget(self, memory_loss_factor):
+    #     height, width, _ = self.image.shape
+
+    # def remember(self):
+
     '''
     Returns a list of actions executed by each block to solve the problem.
     '''
@@ -86,6 +97,7 @@ class PuzzleImageSolver:
     def addBlockToStats(self, block):
         for action, count in block.getActionCounter().items():
             self.actionCounter[action] += count
+        self.actionCounter[BlockAction.PlaceInPuzzle] += 1
 
     def printSolvedPuzzlePiece(self, pieceNumber):
         print("...[Solved puzzle piece {}] {}\n".format(
@@ -99,8 +111,11 @@ class PuzzleImageSolver:
         print('========================')
         print('| Puzzle statistics... |')
         print('========================')
+        totalActionCount = 0
         for action, count in self.getActionCounter().items():
             print(action, ": ", count)
+            totalActionCount += count
+        print("Total actions taken: {}".format(totalActionCount))
 
 puzzle_options = {
     'a': './puzzle_images/puzzle_a.png',

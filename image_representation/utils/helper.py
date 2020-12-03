@@ -59,9 +59,8 @@ def getPattern(row, col, block_image):
     ):
         return BlockPattern.BlackSquare
     else:
-        raise Exception("Could not determine block pattern " +
-                        "based on this sample: \na={}, \nb={}, \nc={}, \nd={}".format(a, b, c, d))
-
+        return BlockPattern.Unknown
+    
 ''' Check if the block has a triangle pattern. '''    
 def isTrianglePattern(pattern):
     return pattern == BlockPattern.BlackTopLeftCornerSquare or pattern == BlockPattern.BlackTopRightCornerSquare or pattern == BlockPattern.BlackBottomLeftCornerSquare or pattern == BlockPattern.BlackBottomRightCornerSquare
