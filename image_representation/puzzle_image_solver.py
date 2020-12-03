@@ -4,6 +4,7 @@ from utils.enums import BlockPattern, SearchType, BlockAction
 from utils.helper import getPattern, block_length, edge_offset
 from search import random_search, sequential_search
 from block_image import BlockImage
+import numpy as np
 
 class PuzzleImageSolver:
 
@@ -20,6 +21,7 @@ class PuzzleImageSolver:
                  }
     ):
         self.image = imread(image_path)
+        self.originalImage = np.copy.deepcopy(self.image)
         self.height, self.width, _ = self.image.shape
         # Captures top left corner of a the block window,
         # with top left corner of picture as (0,0) and the
@@ -28,6 +30,7 @@ class PuzzleImageSolver:
         self.c = 0
     
         self.solvers = solvers
+        self.config = config
         self.problem = self.getPuzzle()
         self.blockBank = [BlockImage(1, i+1) for i in range(len(self.problem))]
         self.actionCounter = {
@@ -61,20 +64,31 @@ class PuzzleImageSolver:
         self.c = 0
         return puzzle
 
+    ''' Returns a numpy array with shape of height x width x bgr pixels. '''
     def getImage(self):
         return self.image
 
+    ''' Opens the puzzle as an image. '''
     def showImage(self):
         Image.fromarray(cvtColor(self.image, COLOR_BGR2RGB), 'RGB').show()
 
-    # def forget(self, memory_loss_factor):
-    #     height, width, _ = self.image.shape
+    ''' Sets a memory_loss_factor amount of the image to black to simulate forgetfulness. '''
+    def forget(self, memory_loss_factor):
+        height, width, bgr_len = self.image.shape
+        total_pixels = height * width
+        total_pixels_to_forget = int(total_pixels * memory_loss_factor)
+        tmp_image = self.image.reshape(total_pixels, bgr_len)
+        mask = np.ones((total_pixels, bgr_len), np.uint8)
+        mask[:total_pixels_to_forget] = [0, 0, 0]
+        np.random.shuffle(mask)
+        tmp_image *= mask
+        self.image = tmp_image.reshape(height, width, bgr_len)
 
-    # def remember(self):
+    ''' Take a look at the puzzle to refresh our memory of it. '''
+    def remember(self):
+        self.image = self.originalImage
 
-    '''
-    Returns a list of actions executed by each block to solve the problem.
-    '''
+    ''' Returns a list of actions executed by each block to solve the problem. '''
     def solve(self):
         faceSearcher = self.solvers[SearchType.Face]
         puzzlePieceSearcher = self.solvers[SearchType.PuzzlePiece]
@@ -88,10 +102,10 @@ class PuzzleImageSolver:
                 block,
                 self.problem[i],
                 actionsPerBlock)
+            self.forget(self.config["puzzle_memory_loss_factor"])
             self.addBlockToStats(block)
             self.printSolvedPuzzlePiece(i)
         self.printPuzzleStats()
-
         return actionsPerBlock
 
     def addBlockToStats(self, block):
