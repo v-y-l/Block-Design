@@ -17,27 +17,27 @@ class TestPuzzleImageSolver(unittest.TestCase):
 
     def test_top_right(self):
         puzzle_solver = PuzzleImageSolver('./face_images/top_right.png')
-        self.assertEqual(puzzle_solver.getPattern(), BlockPattern.BlackTopRightCornerSquare)
+        self.assertEqual(puzzle_solver.getPattern(0, 0), BlockPattern.BlackTopRightCornerSquare)
 
     def test_bottom_right(self):
         puzzle_solver = PuzzleImageSolver('./face_images/bottom_right.png')
-        self.assertEqual(puzzle_solver.getPattern(), BlockPattern.BlackBottomRightCornerSquare)
+        self.assertEqual(puzzle_solver.getPattern(0, 0), BlockPattern.BlackBottomRightCornerSquare)
 
     def test_bottom_left(self):
         puzzle_solver = PuzzleImageSolver('./face_images/bottom_left.png')
-        self.assertEqual(puzzle_solver.getPattern(), BlockPattern.BlackBottomLeftCornerSquare)
+        self.assertEqual(puzzle_solver.getPattern(0, 0), BlockPattern.BlackBottomLeftCornerSquare)
 
     def test_top_left(self):
         puzzle_solver = PuzzleImageSolver('./face_images/top_left.png')
-        self.assertEqual(puzzle_solver.getPattern(), BlockPattern.BlackTopLeftCornerSquare)
+        self.assertEqual(puzzle_solver.getPattern(0, 0), BlockPattern.BlackTopLeftCornerSquare)
 
     def test_white(self):
         puzzle_solver = PuzzleImageSolver('./face_images/white.png')
-        self.assertEqual(puzzle_solver.getPattern(), BlockPattern.WhiteSquare)
+        self.assertEqual(puzzle_solver.getPattern(0, 0), BlockPattern.WhiteSquare)
 
     def test_shaded(self):
         puzzle_solver = PuzzleImageSolver('./face_images/shaded.png')
-        self.assertEqual(puzzle_solver.getPattern(), BlockPattern.BlackSquare)
+        self.assertEqual(puzzle_solver.getPattern(0, 0), BlockPattern.BlackSquare)
 
     def test_puzzle_a(self):
         puzzle_solver = PuzzleImageSolver('./puzzle_images/puzzle_a.png')

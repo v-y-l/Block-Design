@@ -23,11 +23,6 @@ class PuzzleImageSolver:
         self.image_path = image_path
         self.image = imread(image_path)
         self.height, self.width, _ = self.image.shape
-        # Captures top left corner of a the block window,
-        # with top left corner of picture as (0,0) and the
-        # r and c growing larger rightwards and downwards.
-        self.r = 0
-        self.c = 0
     
         self.solvers = solvers
         self.config = config
@@ -47,21 +42,22 @@ class PuzzleImageSolver:
             PuzzleAction.LookAtPuzzle: 0,
         }
 
-    def getWindow(self):
-        rowOffset = getRowOffset(self.r, self.c, 1)
-        colOffset = getColOffset(self.r, self.c, 1)
+    ''' Returns the puzzle piece in image form given some r, c. '''
+    def getWindow(self, r, c):
+        rowOffset = getRowOffset(r, c, 1)
+        colOffset = getColOffset(r, c, 1)
         return self.image[self.r:rowOffset][self.c:colOffset]
 
-    def getPattern(self):
-        return getPattern(self.r, self.c, self.image)
+    ''' Returns the puzzle piece in symbolic form given some r, c. '''
+    def getPattern(self, r, c):
+        return getPattern(r, c, self.image)
 
+    ''' Return the image puzzle in symbolic form. '''
     def getPuzzle(self):
         puzzle = []
         for r in range(0, self.height - edge_offset, block_length):
-            self.r = r
             for c in range(0, self.width - edge_offset, block_length):
-                self.c = c
-                puzzle.append(self.getPattern())
+                puzzle.append(self.getPattern(r, c))
         self.r = 0
         self.c = 0
         return puzzle
