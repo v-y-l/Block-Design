@@ -6,7 +6,7 @@ from search import random_search, beeline_search
 class TestSearchMethods(unittest.TestCase):
 
     def test_random_search(self):
-        print('\nRandom search')
+        print('\n Random search')
         actions = random_search(BlockImage(), BlockPattern.BlackTopLeftCornerSquare, [])
         block = BlockImage()
         for action in actions:
@@ -14,7 +14,7 @@ class TestSearchMethods(unittest.TestCase):
         self.assertEqual(block.get_pattern(), BlockPattern.BlackTopLeftCornerSquare)
 
     def test_beeline_search_rotations(self):
-        print('\Beeline search - rotations')
+        print('\n Beeline search - rotations')
         actions = beeline_search(BlockImage(), BlockPattern.BlackTopLeftCornerSquare, [])
         block = BlockImage()
         self.assertEqual(block.get_pattern(), BlockPattern.BlackTopRightCornerSquare)
@@ -32,7 +32,7 @@ class TestSearchMethods(unittest.TestCase):
         self.assertEqual(block.get_pattern(), BlockPattern.BlackBottomLeftCornerSquare)
 
     def test_beeline_search_complex(self):
-        print('\Beeline search - complex')
+        print('\n Beeline search - complex')
         actions = beeline_search(BlockImage(3), BlockPattern.BlackTopLeftCornerSquare, [])
         block = BlockImage(3)
         self.assertEqual(block.get_pattern(), BlockPattern.WhiteSquare)

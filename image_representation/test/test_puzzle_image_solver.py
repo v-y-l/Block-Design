@@ -7,7 +7,7 @@ from puzzle_image_solver import PuzzleImageSolver, SearchType, random_search, se
 class TestPuzzleImageSolver(unittest.TestCase):
 
     def test_init(self):
-        print('\nInstantiates a puzzle image')
+        print('\n Instantiates a puzzle image')
         puzzle_solver = PuzzleImageSolver('./puzzle_images/puzzle_a.png')
         img = puzzle_solver.get_image()
         self.assertEqual(img.shape, (680,680,3))
@@ -102,7 +102,7 @@ class TestPuzzleImageSolver(unittest.TestCase):
         self.assertEqual(actual, expected)
 
     def test_block_bank(self):
-        print('\nInstantiates a block bank with correct length')
+        print('\n Instantiates a block bank with correct length')
         puzzle_solver = PuzzleImageSolver('./puzzle_images/puzzle_c.png')
         self.assertEqual(len(puzzle_solver.block_bank), 9)
 
@@ -116,7 +116,7 @@ class TestPuzzleImageSolver(unittest.TestCase):
         self.assertEqual(block.get_pattern(), BlockPattern.WhiteSquare)
 
     def test_random_search_puzzle(self):
-        print('\nApply random search for the puzzle')
+        print('\n Apply random search for the puzzle')
         expected_patterns = [
             BlockPattern.WhiteSquare,
             BlockPattern.BlackSquare,
