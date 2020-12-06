@@ -1,29 +1,29 @@
 from numpy import rot90
 
-''' Go to the new face, if possible. '''
-def goToFace(block, next_face):
-    if next_face in block.getNeighbors():
-        old_face = block.getFace()
+''' _go to the new face, if possible. '''
+def go_to_face(block, next_face):
+    if next_face in block.get_neighbors():
+        old_face = block.get_face()
         block.face = next_face
         block.r, block.c = block.face_to_coordinate[block.orientation][block.face]
-        printAction('[Go to face {}] '.format(next_face), block)
+        print_action('[Go to face {}] '.format(next_face), block)
     else:
         raise Exception("Can't go from {} to {}".format(
             block.face, next_face))
 
-''' Change orientation, but stay on the same face. '''
-def rotateRight(block):
+''' _change orientation, but stay on the same face. '''
+def rotate_right(block):
     block.image = rot90(block.image, 3)
-    block.orientation = block.blockOrientations[block.orientation].next.val
+    block.orientation = block.block_orientations[block.orientation].next.val
     block.r, block.c = block.face_to_coordinate[block.orientation][block.face]
-    printAction('[Right rotate block] ', block)
+    print_action('[Right rotate block] ', block)
         
-''' Change orientation, but stay on the same face. '''
-def rotateLeft(block):
+''' _change orientation, but stay on the same face. '''
+def rotate_left(block):
     block.image = rot90(block.image)
-    block.orientation = block.blockOrientations[block.orientation].prev.val
+    block.orientation = block.block_orientations[block.orientation].prev.val
     block.r, block.c = block.face_to_coordinate[block.orientation][block.face]
-    printAction('[Left rotate block] ', block)
+    print_action('[Left rotate block] ', block)
 
-def printAction(actionPrefix, block):
-    print(actionPrefix + str(block))
+def print_action(action_prefix, block):
+    print(action_prefix + str(block))

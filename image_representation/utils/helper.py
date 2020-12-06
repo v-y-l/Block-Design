@@ -5,17 +5,17 @@ white_bgr = [255, 255, 255]
 edge_offset = 5 # Give a 5 pixel leeway to the potentially overcropped image
 block_length = 170
 
-def getColOffset(r, c, multiplier):
+def get_col_offset(r, c, multiplier):
     return c + int(block_length * multiplier)
 
-def getRowOffset(r, c, multiplier):
+def get_row_offset(r, c, multiplier):
     return r + int(block_length * multiplier)
 
-def getPattern(row, col, block_image):
-    a = block_image[getRowOffset(row, col, .25)][getColOffset(row, col, .5)]
-    b = block_image[getRowOffset(row, col, .5)][getColOffset(row, col, .75)]
-    c = block_image[getRowOffset(row, col, .75)][getColOffset(row, col, .5)]
-    d = block_image[getRowOffset(row, col, .5)][getColOffset(row, col, .25)]
+def get_pattern(row, col, block_image):
+    a = block_image[get_row_offset(row, col, .25)][get_col_offset(row, col, .5)]
+    b = block_image[get_row_offset(row, col, .5)][get_col_offset(row, col, .75)]
+    c = block_image[get_row_offset(row, col, .75)][get_col_offset(row, col, .5)]
+    d = block_image[get_row_offset(row, col, .5)][get_col_offset(row, col, .25)]
     if (
             ((a == shade_bgr).all())
             and ((b == shade_bgr).all())
@@ -62,8 +62,13 @@ def getPattern(row, col, block_image):
         return BlockPattern.Unknown
     
 ''' Check if the block has a triangle pattern. '''    
-def isTrianglePattern(pattern):
-    return pattern == BlockPattern.BlackTopLeftCornerSquare or pattern == BlockPattern.BlackTopRightCornerSquare or pattern == BlockPattern.BlackBottomLeftCornerSquare or pattern == BlockPattern.BlackBottomRightCornerSquare
+def is_triangle_pattern(pattern):
+    return (
+        pattern == BlockPattern.BlackTopLeftCornerSquare or
+        pattern == BlockPattern.BlackTopRightCornerSquare or
+        pattern == BlockPattern.BlackBottomLeftCornerSquare or
+        pattern == BlockPattern.BlackBottomRightCornerSquare
+    )
 
 '''
 Coordinates are represented row by column.

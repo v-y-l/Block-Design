@@ -5,109 +5,109 @@ from block_image import BlockImage, BlockPattern, BlockAction
 class TestBlockImageMethods(unittest.TestCase):
 
     def test_simple_sequence_one(self):
-        print('\nSimple sequence one')
+        print('\n Simple sequence one')
         block = BlockImage()
-        self.assertEqual(block.getFace(), 1)
-        self.assertEqual(block.getPattern(), BlockPattern.BlackTopRightCornerSquare)
+        self.assertEqual(block.get_face(), 1)
+        self.assertEqual(block.get_pattern(), BlockPattern.BlackTopRightCornerSquare)
         
-        block.executeAction(BlockAction.GoToFaceFour)
-        self.assertEqual(block.getFace(), 4)
-        self.assertEqual(block.getPattern(), BlockPattern.BlackSquare)
+        block.execute_action(BlockAction.GoToFaceFour)
+        self.assertEqual(block.get_face(), 4)
+        self.assertEqual(block.get_pattern(), BlockPattern.BlackSquare)
         
-        block.executeAction(BlockAction.GoToFaceFive)
-        self.assertEqual(block.getFace(), 5)
-        self.assertEqual(block.getPattern(), BlockPattern.BlackSquare)
+        block.execute_action(BlockAction.GoToFaceFive)
+        self.assertEqual(block.get_face(), 5)
+        self.assertEqual(block.get_pattern(), BlockPattern.BlackSquare)
         
-        block.executeAction(BlockAction.GoToFaceOne)
-        self.assertEqual(block.getFace(), 1)
-        self.assertEqual(block.getPattern(), BlockPattern.BlackTopRightCornerSquare)
+        block.execute_action(BlockAction.GoToFaceOne)
+        self.assertEqual(block.get_face(), 1)
+        self.assertEqual(block.get_pattern(), BlockPattern.BlackTopRightCornerSquare)
 
     def test_simple_sequence_two(self):
-        print('\nSimple sequence two')
+        print('\n Simple sequence two')
         block = BlockImage()
-        self.assertEqual(block.getFace(), 1)
-        self.assertEqual(block.getPattern(), BlockPattern.BlackTopRightCornerSquare)
+        self.assertEqual(block.get_face(), 1)
+        self.assertEqual(block.get_pattern(), BlockPattern.BlackTopRightCornerSquare)
         
-        block.executeAction(BlockAction.RotateRight)
-        self.assertEqual(block.getFace(), 1)
-        self.assertEqual(block.getPattern(), BlockPattern.BlackBottomRightCornerSquare)
+        block.execute_action(BlockAction.RotateRight)
+        self.assertEqual(block.get_face(), 1)
+        self.assertEqual(block.get_pattern(), BlockPattern.BlackBottomRightCornerSquare)
         
-        block.executeAction(BlockAction.GoToFaceFour)
-        self.assertEqual(block.getFace(), 4)
-        self.assertEqual(block.getPattern(), BlockPattern.BlackSquare)
+        block.execute_action(BlockAction.GoToFaceFour)
+        self.assertEqual(block.get_face(), 4)
+        self.assertEqual(block.get_pattern(), BlockPattern.BlackSquare)
         
-        block.executeAction(BlockAction.GoToFaceSix)
-        self.assertEqual(block.getFace(), 6)
-        self.assertEqual(block.getPattern(), BlockPattern.BlackBottomLeftCornerSquare)
+        block.execute_action(BlockAction.GoToFaceSix)
+        self.assertEqual(block.get_face(), 6)
+        self.assertEqual(block.get_pattern(), BlockPattern.BlackBottomLeftCornerSquare)
 
     def test_complex_sequence(self):
-        print('\Complex sequence')
+        print('\n Complex sequence')
         block = BlockImage()
-        self.assertEqual(block.getFace(), 1)
-        self.assertEqual(block.getPattern(), BlockPattern.BlackTopRightCornerSquare)
+        self.assertEqual(block.get_face(), 1)
+        self.assertEqual(block.get_pattern(), BlockPattern.BlackTopRightCornerSquare)
         
-        block.executeAction(BlockAction.GoToFaceFour)
-        self.assertEqual(block.getFace(), 4)
-        self.assertEqual(block.getPattern(), BlockPattern.BlackSquare)
+        block.execute_action(BlockAction.GoToFaceFour)
+        self.assertEqual(block.get_face(), 4)
+        self.assertEqual(block.get_pattern(), BlockPattern.BlackSquare)
         
-        block.executeAction(BlockAction.GoToFaceThree)
-        self.assertEqual(block.getFace(), 3)
-        self.assertEqual(block.getPattern(), BlockPattern.WhiteSquare)
+        block.execute_action(BlockAction.GoToFaceThree)
+        self.assertEqual(block.get_face(), 3)
+        self.assertEqual(block.get_pattern(), BlockPattern.WhiteSquare)
         
-        block.executeAction(BlockAction.RotateRight)
-        self.assertEqual(block.getFace(), 3)
-        self.assertEqual(block.getPattern(), BlockPattern.WhiteSquare)
+        block.execute_action(BlockAction.RotateRight)
+        self.assertEqual(block.get_face(), 3)
+        self.assertEqual(block.get_pattern(), BlockPattern.WhiteSquare)
         
-        block.executeAction(BlockAction.GoToFaceOne)
-        self.assertEqual(block.getFace(), 1)
-        self.assertEqual(block.getPattern(), BlockPattern.BlackBottomRightCornerSquare)
+        block.execute_action(BlockAction.GoToFaceOne)
+        self.assertEqual(block.get_face(), 1)
+        self.assertEqual(block.get_pattern(), BlockPattern.BlackBottomRightCornerSquare)
         
-        block.executeAction(BlockAction.GoToFaceFive)
-        self.assertEqual(block.getFace(), 5)
-        self.assertEqual(block.getPattern(), BlockPattern.BlackSquare)
+        block.execute_action(BlockAction.GoToFaceFive)
+        self.assertEqual(block.get_face(), 5)
+        self.assertEqual(block.get_pattern(), BlockPattern.BlackSquare)
         
-        block.executeAction(BlockAction.GoToFaceSix)
-        self.assertEqual(block.getFace(), 6)
-        self.assertEqual(block.getPattern(), BlockPattern.BlackBottomLeftCornerSquare)
+        block.execute_action(BlockAction.GoToFaceSix)
+        self.assertEqual(block.get_face(), 6)
+        self.assertEqual(block.get_pattern(), BlockPattern.BlackBottomLeftCornerSquare)
         
-        block.executeAction(BlockAction.RotateRight)
-        self.assertEqual(block.getFace(), 6)
-        self.assertEqual(block.getPattern(), BlockPattern.BlackTopLeftCornerSquare)
+        block.execute_action(BlockAction.RotateRight)
+        self.assertEqual(block.get_face(), 6)
+        self.assertEqual(block.get_pattern(), BlockPattern.BlackTopLeftCornerSquare)
         
-        block.executeAction(BlockAction.GoToFaceThree)
-        self.assertEqual(block.getFace(), 3)
-        self.assertEqual(block.getPattern(), BlockPattern.WhiteSquare)
+        block.execute_action(BlockAction.GoToFaceThree)
+        self.assertEqual(block.get_face(), 3)
+        self.assertEqual(block.get_pattern(), BlockPattern.WhiteSquare)
         
-        block.executeAction(BlockAction.GoToFaceOne)
-        self.assertEqual(block.getFace(), 1)
-        self.assertEqual(block.getPattern(), BlockPattern.BlackBottomLeftCornerSquare)
+        block.execute_action(BlockAction.GoToFaceOne)
+        self.assertEqual(block.get_face(), 1)
+        self.assertEqual(block.get_pattern(), BlockPattern.BlackBottomLeftCornerSquare)
         
-        block.executeAction(BlockAction.RotateLeft)
-        self.assertEqual(block.getFace(), 1)
-        self.assertEqual(block.getPattern(), BlockPattern.BlackBottomRightCornerSquare)
+        block.execute_action(BlockAction.RotateLeft)
+        self.assertEqual(block.get_face(), 1)
+        self.assertEqual(block.get_pattern(), BlockPattern.BlackBottomRightCornerSquare)
 
     def test_invalid_sequence(self):
-        print('\Invalid sequence should not be possible')
+        print('\n Invalid sequence should not be possible')
         block = BlockImage()
-        self.assertEqual(block.getFace(), 1)
-        self.assertEqual(block.getPattern(), BlockPattern.BlackTopRightCornerSquare)
+        self.assertEqual(block.get_face(), 1)
+        self.assertEqual(block.get_pattern(), BlockPattern.BlackTopRightCornerSquare)
 
         with self.assertRaises(Exception) as context:
-            block.executeAction(BlockAction.GoToFaceSix)
+            block.execute_action(BlockAction.GoToFaceSix)
         self.assertEqual(str(context.exception), "Can't go from 1 to 6")
 
     def test_peek(self):
-        print('\Test peek')
+        print('\n Test peek')
         block = BlockImage(6)
-        self.assertEqual(block.getPattern(), BlockPattern.BlackBottomRightCornerSquare)
-        self.assertEqual(block.peekAction(BlockAction.RotateRight),
+        self.assertEqual(block.get_pattern(), BlockPattern.BlackBottomRightCornerSquare)
+        self.assertEqual(block.peek_action(BlockAction.RotateRight),
             BlockPattern.BlackBottomLeftCornerSquare)
-        self.assertEqual(block.peekAction(BlockAction.RotateLeft),
+        self.assertEqual(block.peek_action(BlockAction.RotateLeft),
             BlockPattern.BlackTopRightCornerSquare)
-        self.assertEqual(block.peekAction(BlockAction.GoToFaceThree),
+        self.assertEqual(block.peek_action(BlockAction.GoToFaceThree),
             BlockPattern.WhiteSquare)
         with self.assertRaises(Exception) as context:
-            block.peekAction(BlockAction.GoToFaceOne)
+            block.peek_action(BlockAction.GoToFaceOne)
         self.assertEqual(str(context.exception),
                          "Invalid action BlockAction.GoToFaceOne for Block 1: " +
                          "face 6, pattern BlockPattern.BlackBottomRightCornerSquare")

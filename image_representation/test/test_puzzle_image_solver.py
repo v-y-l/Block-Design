@@ -9,7 +9,7 @@ class TestPuzzleImageSolver(unittest.TestCase):
     def test_init(self):
         print('\nInstantiates a puzzle image')
         puzzle_solver = PuzzleImageSolver('./puzzle_images/puzzle_a.png')
-        img = puzzle_solver.getImage()
+        img = puzzle_solver.get_image()
         self.assertEqual(img.shape, (680,680,3))
         # B, G, R
         self.assertTrue((img[100][103] == [27, 13, 252]).all()) # Shaded
@@ -17,31 +17,31 @@ class TestPuzzleImageSolver(unittest.TestCase):
 
     def test_top_right(self):
         puzzle_solver = PuzzleImageSolver('./face_images/top_right.png')
-        self.assertEqual(puzzle_solver.getPattern(0, 0), BlockPattern.BlackTopRightCornerSquare)
+        self.assertEqual(puzzle_solver.get_pattern(0, 0), BlockPattern.BlackTopRightCornerSquare)
 
     def test_bottom_right(self):
         puzzle_solver = PuzzleImageSolver('./face_images/bottom_right.png')
-        self.assertEqual(puzzle_solver.getPattern(0, 0), BlockPattern.BlackBottomRightCornerSquare)
+        self.assertEqual(puzzle_solver.get_pattern(0, 0), BlockPattern.BlackBottomRightCornerSquare)
 
     def test_bottom_left(self):
         puzzle_solver = PuzzleImageSolver('./face_images/bottom_left.png')
-        self.assertEqual(puzzle_solver.getPattern(0, 0), BlockPattern.BlackBottomLeftCornerSquare)
+        self.assertEqual(puzzle_solver.get_pattern(0, 0), BlockPattern.BlackBottomLeftCornerSquare)
 
     def test_top_left(self):
         puzzle_solver = PuzzleImageSolver('./face_images/top_left.png')
-        self.assertEqual(puzzle_solver.getPattern(0, 0), BlockPattern.BlackTopLeftCornerSquare)
+        self.assertEqual(puzzle_solver.get_pattern(0, 0), BlockPattern.BlackTopLeftCornerSquare)
 
     def test_white(self):
         puzzle_solver = PuzzleImageSolver('./face_images/white.png')
-        self.assertEqual(puzzle_solver.getPattern(0, 0), BlockPattern.WhiteSquare)
+        self.assertEqual(puzzle_solver.get_pattern(0, 0), BlockPattern.WhiteSquare)
 
     def test_shaded(self):
         puzzle_solver = PuzzleImageSolver('./face_images/shaded.png')
-        self.assertEqual(puzzle_solver.getPattern(0, 0), BlockPattern.BlackSquare)
+        self.assertEqual(puzzle_solver.get_pattern(0, 0), BlockPattern.BlackSquare)
 
     def test_puzzle_a(self):
         puzzle_solver = PuzzleImageSolver('./puzzle_images/puzzle_a.png')
-        actual = puzzle_solver.getPuzzle()
+        actual = puzzle_solver.get_puzzle()
         expected = [
             BlockPattern.BlackTopRightCornerSquare,
             BlockPattern.BlackTopLeftCornerSquare,
@@ -64,7 +64,7 @@ class TestPuzzleImageSolver(unittest.TestCase):
 
     def test_puzzle_b(self):
         puzzle_solver = PuzzleImageSolver('./puzzle_images/puzzle_b.png')
-        actual = puzzle_solver.getPuzzle()
+        actual = puzzle_solver.get_puzzle()
         expected = [
             BlockPattern.BlackTopLeftCornerSquare,
             BlockPattern.BlackTopRightCornerSquare,
@@ -87,7 +87,7 @@ class TestPuzzleImageSolver(unittest.TestCase):
 
     def test_puzzle_c(self):
         puzzle_solver = PuzzleImageSolver('./puzzle_images/puzzle_c.png')
-        actual = puzzle_solver.getPuzzle()
+        actual = puzzle_solver.get_puzzle()
         expected = [
             BlockPattern.WhiteSquare,
             BlockPattern.BlackSquare,
@@ -104,16 +104,16 @@ class TestPuzzleImageSolver(unittest.TestCase):
     def test_block_bank(self):
         print('\nInstantiates a block bank with correct length')
         puzzle_solver = PuzzleImageSolver('./puzzle_images/puzzle_c.png')
-        self.assertEqual(len(puzzle_solver.blockBank), 9)
+        self.assertEqual(len(puzzle_solver.block_bank), 9)
 
     def test_random_search(self):
         print('\nApply random search for a single block')
         block = BlockImage(1, 1)
-        self.assertEqual(block.getFace(), 1)
-        self.assertEqual(block.getPattern(),
+        self.assertEqual(block.get_face(), 1)
+        self.assertEqual(block.get_pattern(),
                          BlockPattern.BlackTopRightCornerSquare)
         random_search(block, BlockPattern.WhiteSquare, [])
-        self.assertEqual(block.getPattern(), BlockPattern.WhiteSquare)
+        self.assertEqual(block.get_pattern(), BlockPattern.WhiteSquare)
 
     def test_random_search_puzzle(self):
         print('\nApply random search for the puzzle')
@@ -135,8 +135,8 @@ class TestPuzzleImageSolver(unittest.TestCase):
         })
         puzzle_solver.solve()
         actual_patterns = []
-        for block in puzzle_solver.blockBank:
-            actual_patterns.append(block.getPattern())
+        for block in puzzle_solver.block_bank:
+            actual_patterns.append(block.get_pattern())
         self.assertEqual(actual_patterns, expected_patterns)            
 
 if __name__ == '__main__':
