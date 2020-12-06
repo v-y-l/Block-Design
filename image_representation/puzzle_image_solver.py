@@ -82,12 +82,12 @@ class PuzzleImageSolver:
         np.random.shuffle(mask)
         tmp_image *= mask
         self.image = tmp_image.reshape(height, width, bgr_len)
-        self.problem = self.getPuzzle()
+        self.problem = self.get_puzzle()
 
     ''' Take a look at the puzzle to refresh our memory of it. '''
     def remember(self):
         self.image = imread(self.image_path)
-        self.problem = self.getPuzzle()
+        self.problem = self.get_puzzle()
 
     ''' Returns a list of actions executed by each block to solve the problem. '''
     def solve(self):
