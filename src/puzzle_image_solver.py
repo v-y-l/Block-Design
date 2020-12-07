@@ -10,11 +10,11 @@ class PuzzleImageSolver:
 
     def __init__(self,
                  image_path='./puzzle_images/puzzle_a.png',
-                 solvers={
-                     SearchType.Face: random_search,
-                     SearchType.PuzzlePiece: sequential_search
-                 },
                  config={
+                     'solvers': {
+                         SearchType.Face: random_search,
+                         SearchType.PuzzlePiece: sequential_search
+                     },
                      # Value from 0 to 1, represents % of memory
                      # loss on the puzzle each turn
                      'puzzle_memory_loss_factor': 0
@@ -24,8 +24,8 @@ class PuzzleImageSolver:
         self.image = imread(image_path)
         self.height, self.width, _ = self.image.shape
     
-        self.solvers = solvers
-        self.config = config
+        self.solvers = config["solvers"]
+        self.puzzle_memory_loss_factor = config["puzzle_memory_loss_factor"]
         self.problem = self.get_puzzle()
         self.block_bank = [BlockImage(1, i+1) for i in range(len(self.problem))]
         self.action_counter = {
@@ -110,7 +110,7 @@ class PuzzleImageSolver:
                     block,
                     self.problem[i],
                     actions_per_block)
-            self.forget(self.config["puzzle_memory_loss_factor"])
+            self.forget(self.puzzle_memory_loss_factor)
             self.add_block_to_stats(block)
             self.print_solved_puzzle_piece(i)
         self.print_puzzle_stats()

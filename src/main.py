@@ -53,26 +53,15 @@ if __name__=="__main__":
     puzzle_image = puzzle_options[puzzle_input]
     face_search = face_search_options[face_search_input]
     puzzle_piece_search = puzzle_piece_search_options[puzzle_piece_search_input]
-    
-    config = {
-        'puzzle_memory_loss_factor': puzzle_memory_loss_factor_input
+
+    puzzle_solver_config = {
+        'puzzle_memory_loss_factor': puzzle_memory_loss_factor_input,
+        'solvers': {
+            SearchType.Face: face_search,
+            SearchType.PuzzlePiece: puzzle_piece_search
+        }
     }
-
-    print("\n======================")
-    print("| Puzzle starting... |")
-    print("======================")
-
-    print("[Configuration] Puzzle '{}', face search '{}', puzzle piece search '{}'".format(
-        puzzle_input, face_search_input, puzzle_piece_search_input))
-
-    solvers = {
-        SearchType.Face: face_search,
-        SearchType.PuzzlePiece: puzzle_piece_search
-    }
-    puzzle_solver = PuzzleImageSolver(puzzle_image, {
-        SearchType.Face: face_search,
-        SearchType.PuzzlePiece: puzzle_piece_search
-    }, config)
+    puzzle_solver = PuzzleImageSolver(puzzle_image, puzzle_solver_config)
 
     print("\n=====================")
     print("| Puzzle solving... |")
