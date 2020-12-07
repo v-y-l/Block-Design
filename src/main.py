@@ -13,11 +13,11 @@ if __name__=="__main__":
     csv_input = ''
     puzzle_memory_loss_factor_input = 1.0
     try:
-        opts, args = getopt(argv[1:], "",
+        opts, args = getopt(argv[1:], "h",
             ["puzzle=", "face_search=", "piece_search=", "puzzle_memory_loss=", "csv="])
         for opt, arg in opts:
             if opt == '-h':
-                print('main.py --puzzle <puzzle_[a].png, puzzle_[b].png, or puzzle_[c].png> ' +
+                print('main.py --puzzle <[puzzle_a].png, [puzzle_b].png, or [puzzle_c].png> ' +
                       '--face_search <random_search or beeline_search> ' +
                       '--piece_search <sequential_search> ' +
                       '-puzzle_memory_loss <0-1> --csv <example.csv>')
@@ -38,7 +38,7 @@ if __name__=="__main__":
 
     if puzzle_input not in puzzle_options:
         raise Exception("Specify puzzle: " +
-                        "puzzle_[a].png, puzzle_[b].png, or puzzle_[c].png")
+                        "[puzzle_a].png, [puzzle_b].png, or [puzzle_c].png")
 
     if face_search_input not in face_search_options:
         raise Exception("Specify face search: " +
@@ -85,7 +85,7 @@ if __name__=="__main__":
 
     if csv_input != '':
         with open(csv_input, 'a', newline='') as csvfile:
-            record_writer = csv.writer(csvfile, delimiter='g ',
+            record_writer = csv.writer(csvfile, delimiter=',',
                                     quotechar='|', quoting=csv.QUOTE_MINIMAL)
             record_writer.writerow([puzzle_input, face_search_input, puzzle_piece_search_input])
             for action, count in puzzle_solver.get_action_counter().items():

@@ -142,7 +142,7 @@ class PuzzleImageSolver:
         print("Total actions taken: {}".format(total_action_count))
 
 puzzle_options = {
-    'a': './puzzle_images/puzzle_a.png',
-    'b': './puzzle_images/puzzle_b.png',
-    'c': './puzzle_images/puzzle_c.png',
+    'puzzle_a': './puzzle_images/puzzle_a.png',
+    'puzzle_b': './puzzle_images/puzzle_b.png',
+    'puzzle_c': './puzzle_images/puzzle_c.png',
 }
