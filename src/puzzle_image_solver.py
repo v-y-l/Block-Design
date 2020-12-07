@@ -48,11 +48,11 @@ class PuzzleImageSolver:
         col_offset = get_col_offset(r, c, 1)
         return self.image[self.r:row_offset][self.c:col_offset]
 
-    ''' _returns the puzzle piece in symbolic form given some r, c. '''
+    ''' Returns the puzzle piece in symbolic form given some r, c. '''
     def get_pattern(self, r, c):
         return get_pattern(r, c, self.image)
 
-    ''' _return the image puzzle in symbolic form. '''
+    ''' Return the image puzzle in symbolic form. '''
     def get_puzzle(self):
         puzzle = []
         for r in range(0, self.height - EDGE_OFFSET, BLOCK_LENGTH):
@@ -62,11 +62,11 @@ class PuzzleImageSolver:
         self.c = 0
         return puzzle
 
-    ''' _returns a numpy array with shape of height x width x bgr pixels. '''
+    ''' Returns a numpy array with shape of height x width x bgr pixels. '''
     def get_image(self):
         return self.image
 
-    ''' _opens the puzzle as an image. '''
+    ''' Opens the puzzle as an image. '''
     def show_image(self):
         Image.fromarray(cvtColor(self.image, COLOR_BGR2RGB), 'RGB').show()
 
@@ -116,7 +116,7 @@ class PuzzleImageSolver:
         self.print_puzzle_stats()
         return actions_per_block
 
-    ''' _calculates the total and individual number of executed moves. '''
+    ''' Calculates the total and individual number of executed moves. '''
     def add_block_to_stats(self, block):
         for action, count in block.get_action_counter().items():
             self.action_counter[action] += count
@@ -124,7 +124,7 @@ class PuzzleImageSolver:
         self.action_counter[BlockAction.PlaceInPuzzle] += 1
 
     def print_solved_puzzle_piece(self, piece_number):
-        print("...[_solved puzzle piece {}] {}\n".format(
+        print("...[Solved puzzle piece {}] {}\n".format(
             piece_number + 1,
             str(self.block_bank[piece_number])))
 
