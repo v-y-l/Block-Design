@@ -77,7 +77,7 @@ class BlockImage:
         
     ''' Sets up data structures for enabling rotation logic. '''
     def _setup_rotation_data_structures(self):
-        ''' Essential for the rotating the block as whole. '''
+        ''' For rotating the block as whole. '''
         up = Node(BlockOrientation.Up)
         right = Node(BlockOrientation.Right)
         down = Node(BlockOrientation.Down)
@@ -99,7 +99,7 @@ class BlockImage:
             BlockOrientation.Left: left,
         }
 
-        ''' Essential for the peek operation. '''
+        ''' For the peek operation. '''
         black_top_right_corner_square = Node(BlockPattern.BlackTopRightCornerSquare)
         black_bottom_right_corner_square = Node(BlockPattern.BlackBottomRightCornerSquare)
         black_bottom_left_corner_square = Node(BlockPattern.BlackBottomLeftCornerSquare)
@@ -195,7 +195,7 @@ class BlockImage:
         return is_triangle_pattern(self.get_pattern())
 
     def print_block_initial_state(self):
-        print('[_instantiate block] ' + str(self))
+        print('[Instantiate block] ' + str(self))
 
     def get_action_counter(self):
         return self.action_counter

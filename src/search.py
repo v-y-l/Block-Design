@@ -72,10 +72,10 @@ def skip_unknown_search(problem):
     pass
 
 face_search_options = {
-    'r': random_search,
-    'b': beeline_search,
+    'random_search': random_search,
+    'beeline_search': beeline_search,
 }
 
 puzzle_piece_search_options = {
-    's': sequential_search
+    'sequential_search': sequential_search
 }

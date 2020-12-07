@@ -11,49 +11,51 @@ if __name__=="__main__":
     face_search_input = ''
     puzzle_piece_search_input = ''
     csv_input = ''
-    puzzle_memory_loss_factor = 1.0
+    puzzle_memory_loss_factor_input = 1.0
     try:
         opts, args = getopt(argv[1:], "",
             ["puzzle=", "face_search=", "piece_search=", "puzzle_memory_loss=", "csv="])
         for opt, arg in opts:
             if opt == '-h':
                 print('main.py --puzzle <puzzle_[a].png, puzzle_[b].png, or puzzle_[c].png> ' +
-                      '--face_search <[r]andom_search or [b]eeline_search> ' +
-                      '--piece_search <[s]equential_search> ' +
-                      '-puzzle_memory_loss <.5> --csv <example.csv>')
+                      '--face_search <random_search or beeline_search> ' +
+                      '--piece_search <sequential_search> ' +
+                      '-puzzle_memory_loss <0-1> --csv <example.csv>')
                 exit()
             elif opt in ("--puzzle"):
                 puzzle_input = arg
-            elif opt in ("-f", "--face_search"):
+            elif opt in ("--face_search"):
                 face_search_input = arg
-            elif opt in ("-s", "--piece_search"):
+            elif opt in ("--piece_search"):
                 puzzle_piece_search_input = arg
-            elif opt in ("-l", "--puzzle_memory_loss"):
-                puzzle_memory_loss_factor = float(arg)
-            elif opt in ("-c", "--csv"):
+            elif opt in ("--puzzle_memory_loss"):
+                puzzle_memory_loss_factor_input = float(arg)
+            elif opt in ("--csv"):
                 csv_input = arg
     except GetoptError as err:
         print(err)
         exit(2)
 
-    if puzzle_input == '':
-        puzzle_input = input("Specify puzzle: " +
-                             "puzzle_[a].png, puzzle_[b].png, or puzzle_[c].png... ")
+    if puzzle_input not in puzzle_options:
+        raise Exception("Specify puzzle: " +
+                        "puzzle_[a].png, puzzle_[b].png, or puzzle_[c].png")
 
-    if face_search_input == '':
-        face_search_input = input("Specify face search: " +
-                                  "[r]andom_search or [b]eeline_search... ")
+    if face_search_input not in face_search_options:
+        raise Exception("Specify face search: " +
+                        "random_search or beeline_search")
 
-    if puzzle_piece_search_input == '':
-        puzzle_piece_search_input = input("Specify puzzle piece search: [s]equential_search... ")       
+    if puzzle_piece_search_input not in puzzle_piece_search_options:
+        raise Exception("Specify puzzle piece search: [s]equential_search")
 
-    puzzle_image = puzzle_options.get(puzzle_input, puzzle_options['a'])
-    face_search = face_search_options.get(face_search_input, face_search_options['r'])
-    puzzle_piece_search = puzzle_piece_search_options.get(
-        puzzle_piece_search_input, puzzle_piece_search_options['s'])
+    if not 0 <= puzzle_memory_loss_factor_input <= 1:
+        raise Exception("Specify puzzle memory loss factor: 0-1")
+
+    puzzle_image = puzzle_options[puzzle_input]
+    face_search = face_search_options[face_search_input]
+    puzzle_piece_search = puzzle_piece_search_options[puzzle_piece_search_input]
     
     config = {
-        'puzzle_memory_loss_factor': puzzle_memory_loss_factor
+        'puzzle_memory_loss_factor': puzzle_memory_loss_factor_input
     }
 
     print("\n======================")
@@ -83,7 +85,7 @@ if __name__=="__main__":
 
     if csv_input != '':
         with open(csv_input, 'a', newline='') as csvfile:
-            record_writer = csv.writer(csvfile, delimiter=' ',
+            record_writer = csv.writer(csvfile, delimiter='g ',
                                     quotechar='|', quoting=csv.QUOTE_MINIMAL)
             record_writer.writerow([puzzle_input, face_search_input, puzzle_piece_search_input])
             for action, count in puzzle_solver.get_action_counter().items():
