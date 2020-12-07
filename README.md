@@ -1,3 +1,48 @@
 # Block-Design
 
-Provides an [image representation](https://github.com/v-y-l/Block-Design/tree/main/image_representation) and [symbolic representation](https://github.com/v-y-l/Block-Design/tree/main/symbolic_representation) of the block design test.
+An image model for the block design test.
+
+Run python [main.py](https://github.com/v-y-l/Block-Design/blob/main/image_representation/main.py) to get started.
+
+Example:
+
+> python main.py --puzzle b --facesearch b --piecesearch s --puzzlememoryloss 0.5 --csv stats.csv
+
+...will solve puzzle_b.png using the beeline face search and sequential puzzle piece search.
+
+![Demo gif](https://github.com/v-y-l/Block-Design/blob/main/assets/cli_demo.gif)
+
+## Block image model
+
+[block_image.py](https://github.com/v-y-l/Block-Design/blob/main/image_representation/block_image.py)
+
+Represents block in sprawled-out 2D form using the underlying image:
+
+![2D block](https://github.com/v-y-l/Block-Design/blob/main/assets/labeled_block.png)
+
+* Traverse to neighboring faces by specifying the number
+* Rotations rotate the entire 2D block
+
+Forgetfulness is modeled as blotted out pixels
+
+![50% forgetfulness](https://github.com/v-y-l/Block-Design/blob/main/assets/50_percent_forgotten_puzzle.png)
+
+## Puzzle model
+
+[puzzle_image_solver.py](https://github.com/v-y-l/Block-Design/blob/main/image_representation/puzzle_image_solver.py)
+
+* Takes in a puzzle and search strategies to solve a block design test
+* Converts the image to a puzzle model by sampling from four points per block
+
+### Search strategies
+
+[search.py](https://github.com/v-y-l/Block-Design/blob/main/image_representation/search.py)
+
+* Face search functions look for some face in a block
+* Puzzle piece search functions look for the next puzzle piece to solve for
+
+![Sampled points](https://github.com/v-y-l/Block-Design/blob/main/assets/puzzle_image_marks.png)
+
+## Testing
+
+> python -m unittest test/test_something.py
