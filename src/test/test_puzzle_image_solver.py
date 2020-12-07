@@ -130,8 +130,11 @@ class TestPuzzleImageSolver(unittest.TestCase):
         ]
         puzzle_solver = PuzzleImageSolver(
             './puzzle_images/puzzle_c.png', {
-            SearchType.Face: random_search,
-            SearchType.PuzzlePiece: sequential_search
+            'solvers': {
+                SearchType.Face: random_search,
+                SearchType.PuzzlePiece: sequential_search
+            },
+            'puzzle_memory_loss_factor': 0
         })
         puzzle_solver.solve()
         actual_patterns = []
