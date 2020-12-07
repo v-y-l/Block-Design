@@ -13,21 +13,22 @@ if __name__=="__main__":
     csv_input = ''
     puzzle_memory_loss_factor = 1.0
     try:
-        opts, args = getopt(argv[1:],"hp:f:s:c:",
-            ["puzzle=", "facesearch=", "piecesearch=", "puzzlememoryloss=", "csv="])
+        opts, args = getopt(argv[1:], "",
+            ["puzzle=", "face_search=", "piece_search=", "puzzle_memory_loss=", "csv="])
         for opt, arg in opts:
             if opt == '-h':
-                print('main.py -p <puzzle_[a].png, puzzle_[b].png, or puzzle_[c].png> ' +
-                      '-f <[r]andom_search or [b]eeline_search> -s <[s]equential_search> ' +
-                      '-l <.5> -c <example.csv>')
+                print('main.py --puzzle <puzzle_[a].png, puzzle_[b].png, or puzzle_[c].png> ' +
+                      '--face_search <[r]andom_search or [b]eeline_search> ' +
+                      '--piece_search <[s]equential_search> ' +
+                      '-puzzle_memory_loss <.5> --csv <example.csv>')
                 exit()
-            elif opt in ("-p", "--puzzle"):
+            elif opt in ("--puzzle"):
                 puzzle_input = arg
-            elif opt in ("-f", "--facesearch"):
+            elif opt in ("-f", "--face_search"):
                 face_search_input = arg
-            elif opt in ("-s", "--piecesearch"):
+            elif opt in ("-s", "--piece_search"):
                 puzzle_piece_search_input = arg
-            elif opt in ("-l", "--puzzlememoryloss"):
+            elif opt in ("-l", "--puzzle_memory_loss"):
                 puzzle_memory_loss_factor = float(arg)
             elif opt in ("-c", "--csv"):
                 csv_input = arg
@@ -85,6 +86,6 @@ if __name__=="__main__":
             record_writer = csv.writer(csvfile, delimiter=' ',
                                     quotechar='|', quoting=csv.QUOTE_MINIMAL)
             record_writer.writerow([puzzle_input, face_search_input, puzzle_piece_search_input])
-            for action, count in puzzle_solver.getActionCounter().items():
+            for action, count in puzzle_solver.get_action_counter().items():
                 record_writer.writerow([action, count])
             print("...aggregate stats written to {}".format(csv_input))

@@ -2,7 +2,7 @@
 
 An image model for the block design test.
 
-Run python [main.py](https://github.com/v-y-l/Block-Design/blob/main/image_representation/main.py) to get started.
+Run python [main.py](https://github.com/v-y-l/Block-Design/blob/main/src/main.py) to get started.
 
 Example:
 
@@ -14,7 +14,7 @@ Example:
 
 ## Block image model
 
-[block_image.py](https://github.com/v-y-l/Block-Design/blob/main/image_representation/block_image.py)
+[block_image.py](https://github.com/v-y-l/Block-Design/blob/main/src/block_image.py)
 
 Represents block in sprawled-out 2D form using the underlying image:
 
@@ -29,14 +29,14 @@ Forgetfulness is modeled as blotted out pixels
 
 ## Puzzle model
 
-[puzzle_image_solver.py](https://github.com/v-y-l/Block-Design/blob/main/image_representation/puzzle_image_solver.py)
+[puzzle_image_solver.py](https://github.com/v-y-l/Block-Design/blob/main/src/puzzle_image_solver.py)
 
 * Takes in a puzzle and search strategies to solve a block design test
 * Converts the image to a puzzle model by sampling from four points per block
 
 ### Search strategies
 
-[search.py](https://github.com/v-y-l/Block-Design/blob/main/image_representation/search.py)
+[search.py](https://github.com/v-y-l/Block-Design/blob/main/src/search.py)
 
 * Face search functions look for some face in a block
 * Puzzle piece search functions look for the next puzzle piece to solve for
