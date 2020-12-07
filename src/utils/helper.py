@@ -1,15 +1,15 @@
 from utils.enums import BlockPattern, BlockOrientation
 
-shade_bgr = [27, 13, 252]
-white_bgr = [255, 255, 255]
-edge_offset = 5 # Give a 5 pixel leeway to the potentially overcropped image
-block_length = 170
+SHADE_BGR = [27, 13, 252]
+WHITE_BGR = [255, 255, 255]
+EDGE_OFFSET = 5 # Give a 5 pixel leeway to the potentially overcropped image
+BLOCK_LENGTH = 170
 
 def get_col_offset(r, c, multiplier):
-    return c + int(block_length * multiplier)
+    return c + int(BLOCK_LENGTH * multiplier)
 
 def get_row_offset(r, c, multiplier):
-    return r + int(block_length * multiplier)
+    return r + int(BLOCK_LENGTH * multiplier)
 
 def get_pattern(row, col, block_image):
     a = block_image[get_row_offset(row, col, .25)][get_col_offset(row, col, .5)]
@@ -17,45 +17,45 @@ def get_pattern(row, col, block_image):
     c = block_image[get_row_offset(row, col, .75)][get_col_offset(row, col, .5)]
     d = block_image[get_row_offset(row, col, .5)][get_col_offset(row, col, .25)]
     if (
-            ((a == shade_bgr).all())
-            and ((b == shade_bgr).all())
-            and ((c == white_bgr).all())
-            and ((d == white_bgr).all())
+            ((a == SHADE_BGR).all())
+            and ((b == SHADE_BGR).all())
+            and ((c == WHITE_BGR).all())
+            and ((d == WHITE_BGR).all())
     ):
         return BlockPattern.BlackTopRightCornerSquare
     elif (
-                ((a == white_bgr).all())
-            and ((b == shade_bgr).all())
-            and ((c == shade_bgr).all())
-            and ((d == white_bgr).all())
+                ((a == WHITE_BGR).all())
+            and ((b == SHADE_BGR).all())
+            and ((c == SHADE_BGR).all())
+            and ((d == WHITE_BGR).all())
     ):
         return BlockPattern.BlackBottomRightCornerSquare
     elif (
-                ((a == white_bgr).all())
-            and ((b == white_bgr).all())
-            and ((c == shade_bgr).all())
-            and ((d == shade_bgr).all())
+                ((a == WHITE_BGR).all())
+            and ((b == WHITE_BGR).all())
+            and ((c == SHADE_BGR).all())
+            and ((d == SHADE_BGR).all())
     ):
             return BlockPattern.BlackBottomLeftCornerSquare
     elif (
-                ((a == shade_bgr).all())
-            and ((b == white_bgr).all())
-            and ((c == white_bgr).all())
-            and ((d == shade_bgr).all())
+                ((a == SHADE_BGR).all())
+            and ((b == WHITE_BGR).all())
+            and ((c == WHITE_BGR).all())
+            and ((d == SHADE_BGR).all())
     ):
         return BlockPattern.BlackTopLeftCornerSquare
     elif (
-                ((a == white_bgr).all())
-            and ((b == white_bgr).all())
-            and ((c == white_bgr).all())
-            and ((d == white_bgr).all())
+                ((a == WHITE_BGR).all())
+            and ((b == WHITE_BGR).all())
+            and ((c == WHITE_BGR).all())
+            and ((d == WHITE_BGR).all())
     ):
         return BlockPattern.WhiteSquare
     elif (
-                ((a == shade_bgr).all())
-            and ((b == shade_bgr).all())
-            and ((c == shade_bgr).all())
-            and ((d == shade_bgr).all())
+                ((a == SHADE_BGR).all())
+            and ((b == SHADE_BGR).all())
+            and ((c == SHADE_BGR).all())
+            and ((d == SHADE_BGR).all())
     ):
         return BlockPattern.BlackSquare
     else:

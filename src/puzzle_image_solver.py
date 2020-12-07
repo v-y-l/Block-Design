@@ -1,7 +1,7 @@
 from cv2 import imread, cvtColor, COLOR_BGR2RGB
 from PIL import Image
 from utils.enums import BlockPattern, SearchType, BlockAction, PuzzleAction
-from utils.helper import get_pattern, block_length, edge_offset
+from utils.helper import get_pattern, BLOCK_LENGTH, EDGE_OFFSET
 from search import random_search, sequential_search
 from block_image import BlockImage
 import numpy as np
@@ -55,8 +55,8 @@ class PuzzleImageSolver:
     ''' _return the image puzzle in symbolic form. '''
     def get_puzzle(self):
         puzzle = []
-        for r in range(0, self.height - edge_offset, block_length):
-            for c in range(0, self.width - edge_offset, block_length):
+        for r in range(0, self.height - EDGE_OFFSET, BLOCK_LENGTH):
+            for c in range(0, self.width - EDGE_OFFSET, BLOCK_LENGTH):
                 puzzle.append(self.get_pattern(r, c))
         self.r = 0
         self.c = 0
