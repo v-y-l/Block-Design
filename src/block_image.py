@@ -28,7 +28,6 @@ class BlockImage:
         self._setup_block_data_structures()
         self._setup_rotation_data_structures()
         self._setup_go_to_data_structures()
-        self.print_block_initial_state()
 
     '''
     Setup the data structures that coordinate between the different
@@ -154,18 +153,6 @@ class BlockImage:
             6: face_six,
         }
 
-    def get_neighbors(self):
-        return self.faces[self.face].neighbors
-
-    def get_face(self):
-        return self.face
-
-    def get_number(self):
-        return self.number
-        
-    def get_pattern(self):
-        return get_pattern(self.r, self.c, self.image)
-
     def peek_action(self, action):
         if action not in self.get_valid_actions():
             raise Exception("Invalid action {} for {}".format(action, str(self)))
@@ -181,24 +168,33 @@ class BlockImage:
     def execute_action(self, action):
         self.action_counter[action] += 1
         self.actions[action]()
-        
-    def get_valid_actions(self):
-        return self.get_rotate_actions() + self.get_go_to_actions()
 
-    def get_rotate_actions(self):
-        return [BlockAction.RotateLeft, BlockAction.RotateRight]
+    def get_action_counter(self):
+        return self.action_counter
+
+    def get_face(self):
+        return self.face
 
     def get_go_to_actions(self):
         return [self.go_to_face_action[face] for face in self.get_neighbors()]
 
+    def get_neighbors(self):
+        return self.faces[self.face].neighbors
+
+    def get_number(self):
+        return self.number
+
+    def get_pattern(self):
+        return get_pattern(self.r, self.c, self.image)
+
+    def get_rotate_actions(self):
+        return [BlockAction.RotateLeft, BlockAction.RotateRight]
+
+    def get_valid_actions(self):
+        return self.get_rotate_actions() + self.get_go_to_actions()
+
     def has_triangle_pattern(self):
         return is_triangle_pattern(self.get_pattern())
-
-    def print_block_initial_state(self):
-        print('[Instantiate block] ' + str(self))
-
-    def get_action_counter(self):
-        return self.action_counter
 
     def show_image(self):
         Image.fromarray(cvtColor(self.image, COLOR_BGR2RGB), 'RGB').show()
