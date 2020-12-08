@@ -5,8 +5,6 @@ from utils.constants  import PUZZLE_OPTIONS
 from getopt import getopt, GetoptError
 from sys import argv, exit
 
-import csv
-
 if __name__=="__main__":
     puzzle_input = ''
     face_search_input = ''
@@ -64,13 +62,4 @@ if __name__=="__main__":
     puzzle_solver = PuzzleImageSolver(puzzle_input, puzzle_solver_config)
 
     puzzle_solver.solve()
-    puzzle_solver.print_history()
-
-    if csv_input != '':
-        with open(csv_input, 'a', newline='') as csvfile:
-            record_writer = csv.writer(csvfile, delimiter=',',
-                                    quotechar='|', quoting=csv.QUOTE_MINIMAL)
-            record_writer.writerow([puzzle_input, face_search_input, puzzle_piece_search_input])
-            for action, count in puzzle_solver.get_action_counter().items():
-                record_writer.writerow([action, count])
-            print("...aggregate stats written to {}".format(csv_input))
+    puzzle_solver.print_history(csv_input)

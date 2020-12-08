@@ -6,6 +6,7 @@ from utils.helper import get_pattern
 from search import random_search, sequential_search
 from block_image import BlockImage
 import numpy as np
+import csv
 
 class PuzzleImageSolver:
 
@@ -131,9 +132,25 @@ class PuzzleImageSolver:
     def get_action_counter(self):
         return self.action_counter
 
-    def print_history(self):
+    def print_history(self, csv_path=''):
+        csv_writer = None
+        if csv_path != '':
+            file = open(csv_path, 'w')
+            csv_writer = csv.writer(file,
+                                    delimiter=',',
+                                    quotechar='|',
+                                    quoting=csv.QUOTE_MINIMAL)
+
         for i, action in enumerate(self.action_history):
-            print("{},{}".format(i+1, action))
+            row = "{},{}".format(i+1, action)
+            if csv_writer:
+                csv_writer.writerow([row])
+            else:
+                print(row)
+
+        if csv_writer:
+            print("Solution written to {}".format(csv_path))
+            file.close()
 
     def __str__(self):
         return 'Puzzle,{}'.format(self.puzzle_option)
