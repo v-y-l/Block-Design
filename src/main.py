@@ -1,6 +1,7 @@
 from search import face_search_options, puzzle_piece_search_options, SearchType
-from puzzle_image_solver import PuzzleImageSolver, puzzle_options
+from puzzle_image_solver import PuzzleImageSolver
 from block_image import BlockPattern
+from utils.constants  import PUZZLE_OPTIONS
 from getopt import getopt, GetoptError
 from sys import argv, exit
 
@@ -36,7 +37,7 @@ if __name__=="__main__":
         print(err)
         exit(2)
 
-    if puzzle_input not in puzzle_options:
+    if puzzle_input not in PUZZLE_OPTIONS:
         raise Exception("Specify puzzle: " +
                         "[puzzle_a].png, [puzzle_b].png, or [puzzle_c].png")
 
@@ -50,7 +51,6 @@ if __name__=="__main__":
     if not 0 <= puzzle_memory_loss_factor_input <= 1:
         raise Exception("Specify puzzle memory loss factor: 0-1")
 
-    puzzle_image = puzzle_options[puzzle_input]
     face_search = face_search_options[face_search_input]
     puzzle_piece_search = puzzle_piece_search_options[puzzle_piece_search_input]
 
@@ -61,7 +61,7 @@ if __name__=="__main__":
             SearchType.PuzzlePiece: puzzle_piece_search
         }
     }
-    puzzle_solver = PuzzleImageSolver(puzzle_image, puzzle_solver_config)
+    puzzle_solver = PuzzleImageSolver(puzzle_input, puzzle_solver_config)
 
     print("\n=====================")
     print("| Puzzle solving... |")

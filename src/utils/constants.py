@@ -50,5 +50,12 @@ NUMBER_TO_GO_TO_FACE_ACTION = {
     6: BlockAction.GoToFaceSix,
 }
 
+
+PUZZLE_OPTIONS = {
+    'puzzle_a': './puzzle_images/puzzle_a.png',
+    'puzzle_b': './puzzle_images/puzzle_b.png',
+    'puzzle_c': './puzzle_images/puzzle_c.png',
+}
+
 SHADE_BGR = [27, 13, 252]
 WHITE_BGR = [255, 255, 255]

@@ -201,6 +201,9 @@ class BlockImage:
     def show_image(self):
         Image.fromarray(cvtColor(self.image, COLOR_BGR2RGB), 'RGB').show()
 
+    def to_csv_row(self, action):
+        return str(self) + "action," + action.name
+
     def __str__(self):
         return 'Block,{},Face,{},Pattern,{}'.format(
             self.get_number(), self.get_face(), self.get_pattern().name)

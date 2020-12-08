@@ -1,6 +1,6 @@
 from cv2 import imread, cvtColor, COLOR_BGR2RGB
 from PIL import Image
-from utils.constants import BLOCK_LENGTH, EDGE_OFFSET
+from utils.constants import BLOCK_LENGTH, EDGE_OFFSET, PUZZLE_OPTIONS
 from utils.enums import BlockPattern, SearchType, BlockAction, PuzzleAction
 from utils.helper import get_pattern
 from search import random_search, sequential_search
@@ -10,7 +10,7 @@ import numpy as np
 class PuzzleImageSolver:
 
     def __init__(self,
-                 image_path='./puzzle_images/puzzle_a.png',
+                 option='puzzle_a',
                  config={
                      'solvers': {
                          SearchType.Face: random_search,
@@ -21,8 +21,8 @@ class PuzzleImageSolver:
                      'puzzle_memory_loss_factor': 0
                  }
     ):
-        self.image_path = image_path
-        self.image = imread(image_path)
+        self.image_path = PUZZLE_OPTIONS[option]
+        self.image = imread(self.image_path)
         self.height, self.width, _ = self.image.shape
     
         self.solvers = config["solvers"]
@@ -124,6 +124,9 @@ class PuzzleImageSolver:
         self.print_puzzle_stats()
         return actions_per_block
 
+    def to_csv_row(self, action):
+        return str(self) + "action," + action.name
+
     ''' Calculates the total and individual number of executed moves. '''
     def add_block_to_stats(self, block):
         for action, count in block.get_action_counter().items():
@@ -149,8 +152,5 @@ class PuzzleImageSolver:
             total_action_count += count
         print("Total actions taken: {}".format(total_action_count))
 
-puzzle_options = {
-    'puzzle_a': './puzzle_images/puzzle_a.png',
-    'puzzle_b': './puzzle_images/puzzle_b.png',
-    'puzzle_c': './puzzle_images/puzzle_c.png',
-}
+    def __str__(self):
+        return 'Puzzle,{}'.format(self.puzzle_option)

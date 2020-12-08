@@ -65,6 +65,3 @@ def is_triangle_pattern(pattern):
         pattern == BlockPattern.BlackBottomLeftCornerSquare or
         pattern == BlockPattern.BlackBottomRightCornerSquare
     )
-
-def to_csv_row(action, block):
-    return str(block) + "action," + action.name
