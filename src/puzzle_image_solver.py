@@ -24,6 +24,7 @@ class PuzzleImageSolver:
         self.image_path = PUZZLE_OPTIONS[option]
         self.image = imread(self.image_path)
         self.height, self.width, _ = self.image.shape
+        self.puzzle_option = option
     
         self.solvers = config["solvers"]
         self.puzzle_memory_loss_factor = config["puzzle_memory_loss_factor"]
@@ -92,6 +93,7 @@ class PuzzleImageSolver:
 
     ''' Take a look at the puzzle to refresh our memory of it. '''
     def remember(self):
+        self.add_to_history(self.to_csv_row(PuzzleAction.LookAtPuzzle))
         self.image = imread(self.image_path)
         self.problem = self.get_puzzle()
 
@@ -106,6 +108,7 @@ class PuzzleImageSolver:
         puzzle_piece_indices = puzzle_piece_searcher(self.problem)
         for i in puzzle_piece_indices:
             block = self.block_bank[i]
+            self.add_to_history(block.to_csv_row(BlockAction.PickUpFromBank))
             search_face_actions = face_searcher(
                 block,
                 self.problem[i],
@@ -118,25 +121,12 @@ class PuzzleImageSolver:
                     block,
                     self.problem[i],
                     actions_per_block)
+            self.add_to_history(block.to_csv_row(BlockAction.PlaceInPuzzle))
             self.forget(self.puzzle_memory_loss_factor)
-            self.add_block_to_stats(block)
-            self.print_solved_puzzle_piece(i)
         return actions_per_block
 
     def to_csv_row(self, action):
-        return str(self) + "action," + action.name
-
-    ''' Calculates the total and individual number of executed moves. '''
-    def add_block_to_stats(self, block):
-        for action, count in block.get_action_counter().items():
-            self.action_counter[action] += count
-        self.action_counter[BlockAction.PickUpBlock] += 1
-        self.action_counter[BlockAction.PlaceInPuzzle] += 1
-
-    def print_solved_puzzle_piece(self, piece_number):
-        print("...[Solved puzzle piece {}] {}\n".format(
-            piece_number + 1,
-            str(self.block_bank[piece_number])))
+        return str(self) + ",action," + action.name
 
     def get_action_counter(self):
         return self.action_counter
