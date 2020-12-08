@@ -109,8 +109,8 @@ class TestBlockImageMethods(unittest.TestCase):
         with self.assertRaises(Exception) as context:
             block.peek_action(BlockAction.GoToFaceOne)
         self.assertEqual(str(context.exception),
-                         "Invalid action BlockAction.GoToFaceOne for Block 1: " +
-                         "face 6, pattern BlockPattern.BlackBottomRightCornerSquare")
+                         "Invalid action BlockAction.GoToFaceOne for " +
+                         "Block,1,Face,6,Pattern,BlockPattern.BlackBottomRightCornerSquare")
 
 if __name__ == '__main__':
     unittest.main()

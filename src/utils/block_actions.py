@@ -1,5 +1,6 @@
 from numpy import rot90
 from utils.constants import NUMBER_TO_WORD, FACE_TO_COORDINATE
+from utils.helper import to_csv_row
 
 ''' Go to the new face, if possible. '''
 def go_to_face(block, next_face):
@@ -25,6 +26,3 @@ def rotate_left(block):
     block.orientation = block.block_orientations[block.orientation].prev.val
     block.r, block.c = FACE_TO_COORDINATE[block.orientation][block.face]
     return to_csv_row('LeftRotate,', block)
-
-def to_csv_row(action_prefix, block):
-    return str(block) + "action," + action_prefix
