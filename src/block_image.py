@@ -26,8 +26,8 @@ class BlockImage:
         self.r, self.c = face_to_coordinate[self.orientation][face]
         
         self._setup_block_data_structures()
-        self._setup_rotation_data_structures()
         self._setup_go_to_data_structures()
+        self._setup_rotation_data_structures()
 
     '''
     Setup the data structures that coordinate between the different
@@ -73,6 +73,32 @@ class BlockImage:
             BlockAction.RotateLeft: 0,
             BlockAction.RotateRight: 0
         }
+
+    ''' Setup data structures that enable movement to a neighboring face. '''
+    def _setup_go_to_data_structures(self):
+        face_one = FaceNode(1)
+        face_two = FaceNode(2)
+        face_three = FaceNode(3)
+        face_four = FaceNode(4)
+        face_five = FaceNode(5)
+        face_six = FaceNode(6)
+
+        face_one.neighbors = {5, 4, 3, 2}
+        face_two.neighbors = {1, 3, 6, 5}
+        face_three.neighbors = {1, 4, 6, 2}
+        face_four.neighbors = {1, 5, 6, 3}
+        face_five.neighbors = {1, 2, 6, 4}
+        face_six.neighbors = {3, 4, 5, 2}
+
+        self.faces = {
+            1: face_one,
+            2: face_two,
+            3: face_three,
+            4: face_four,
+            5: face_five,
+            6: face_six,
+        }
+
         
     ''' Sets up data structures for enabling rotation logic. '''
     def _setup_rotation_data_structures(self):
@@ -128,31 +154,6 @@ class BlockImage:
             BlockPattern.WhiteSquare: white_square,
         }
 
-    ''' Setup data structures that enable movement to a neighboring face. '''
-    def _setup_go_to_data_structures(self):
-        face_one = FaceNode(1)
-        face_two = FaceNode(2)
-        face_three = FaceNode(3)
-        face_four = FaceNode(4)
-        face_five = FaceNode(5)
-        face_six = FaceNode(6)
-
-        face_one.neighbors = {5, 4, 3, 2}
-        face_two.neighbors = {1, 3, 6, 5}
-        face_three.neighbors = {1, 4, 6, 2}
-        face_four.neighbors = {1, 5, 6, 3}
-        face_five.neighbors = {1, 2, 6, 4}
-        face_six.neighbors = {3, 4, 5, 2}
-
-        self.faces = {
-            1: face_one,
-            2: face_two,
-            3: face_three,
-            4: face_four,
-            5: face_five,
-            6: face_six,
-        }
-
     def peek_action(self, action):
         if action not in self.get_valid_actions():
             raise Exception("Invalid action {} for {}".format(action, str(self)))
@@ -200,5 +201,5 @@ class BlockImage:
         Image.fromarray(cvtColor(self.image, COLOR_BGR2RGB), 'RGB').show()
 
     def __str__(self):
-        return 'Block {}: face {}, pattern {}'.format(
+        return 'Block,{},Face,{},Pattern,{}'.format(
             self.get_number(), self.get_face(), self.get_pattern())

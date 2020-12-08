@@ -96,6 +96,7 @@ class PuzzleImageSolver:
 
         # The actions taken for each block to get to the destination state
         actions_per_block = []
+        puzzle_actions = []
         puzzle_piece_indices = puzzle_piece_searcher(self.problem)
         for i in puzzle_piece_indices:
             block = self.block_bank[i]
@@ -103,6 +104,7 @@ class PuzzleImageSolver:
                 block,
                 self.problem[i],
                 actions_per_block)
+            puzzle_actions.extend(search_face_actions)
             if (len(search_face_actions) == 0):
                 self.action_counter[PuzzleAction.LookAtPuzzle] += 1
                 self.remember()
