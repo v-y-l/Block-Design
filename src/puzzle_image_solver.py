@@ -1,7 +1,8 @@
 from cv2 import imread, cvtColor, COLOR_BGR2RGB
 from PIL import Image
+from utils.constants import BLOCK_LENGTH, EDGE_OFFSET
 from utils.enums import BlockPattern, SearchType, BlockAction, PuzzleAction
-from utils.helper import get_pattern, BLOCK_LENGTH, EDGE_OFFSET
+from utils.helper import get_pattern
 from search import random_search, sequential_search
 from block_image import BlockImage
 import numpy as np
@@ -28,6 +29,7 @@ class PuzzleImageSolver:
         self.puzzle_memory_loss_factor = config["puzzle_memory_loss_factor"]
         self.problem = self.get_puzzle()
         self.block_bank = [BlockImage(1, i+1) for i in range(len(self.problem))]
+
         self.action_counter = {
             BlockAction.GoToFaceOne: 0,
             BlockAction.GoToFaceTwo: 0,

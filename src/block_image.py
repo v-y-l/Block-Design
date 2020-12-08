@@ -3,7 +3,8 @@ from PIL import Image
 from utils.enums import BlockAction, BlockPattern, BlockOrientation
 from utils.data_structures import Node, FaceNode
 from utils.block_actions import go_to_face, rotate_right, rotate_left
-from utils.helper import is_triangle_pattern, face_to_coordinate, get_pattern
+from utils.helper import is_triangle_pattern, get_pattern
+from utils.constants import FACE_TO_COORDINATE
 
 '''
 A block has six faces. Each face is assigned a number.
@@ -22,8 +23,7 @@ class BlockImage:
         self.number = number
         self.orientation = BlockOrientation.Up
         self.image = imread('./block_images/block_up.png')
-        self.face_to_coordinate = face_to_coordinate
-        self.r, self.c = face_to_coordinate[self.orientation][face]
+        self.r, self.c = FACE_TO_COORDINATE[self.orientation][face]
         
         self._setup_block_data_structures()
         self._setup_go_to_data_structures()
@@ -163,7 +163,7 @@ class BlockImage:
             return self.face_orientations[self.get_pattern()].next.val
         else:
             peek_face = self.action_to_face[action]
-            peek_r, peek_c = self.face_to_coordinate[self.orientation][peek_face]
+            peek_r, peek_c = FACE_TO_COORDINATE[self.orientation][peek_face]
             return get_pattern(peek_r, peek_c, self.image)
 
     def execute_action(self, action):
