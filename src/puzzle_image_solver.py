@@ -121,7 +121,6 @@ class PuzzleImageSolver:
             self.forget(self.puzzle_memory_loss_factor)
             self.add_block_to_stats(block)
             self.print_solved_puzzle_piece(i)
-        self.print_puzzle_stats()
         return actions_per_block
 
     def to_csv_row(self, action):
@@ -142,15 +141,9 @@ class PuzzleImageSolver:
     def get_action_counter(self):
         return self.action_counter
 
-    def print_puzzle_stats(self):
-        print('========================')
-        print('| Puzzle statistics... |')
-        print('========================')
-        total_action_count = 0
-        for action, count in self.get_action_counter().items():
-            print(action, ": ", count)
-            total_action_count += count
-        print("Total actions taken: {}".format(total_action_count))
+    def print_history(self):
+        for i, action in enumerate(self.action_history):
+            print("{},{}".format(i+1, action))
 
     def __str__(self):
         return 'Puzzle,{}'.format(self.puzzle_option)

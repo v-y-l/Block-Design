@@ -63,14 +63,8 @@ if __name__=="__main__":
     }
     puzzle_solver = PuzzleImageSolver(puzzle_input, puzzle_solver_config)
 
-    print("\n=====================")
-    print("| Puzzle solving... |")
-    print("=====================")
     puzzle_solver.solve()
-    print(puzzle_solver.action_history)
-    print("\n==================")
-    print("| Puzzle solved! |")
-    print("==================")
+    puzzle_solver.print_history()
 
     if csv_input != '':
         with open(csv_input, 'a', newline='') as csvfile:
