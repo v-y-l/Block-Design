@@ -1,4 +1,4 @@
-from utils.enums import BlockOrientation
+from utils.enums import BlockOrientation, BlockAction
 
 BLOCK_LENGTH = 170
 
@@ -41,13 +41,13 @@ FACE_TO_COORDINATE = {
     },
 }
 
-NUMBER_TO_WORD = {
-    1: 'One',
-    2: 'Two',
-    3: 'Three',
-    4: 'Four',
-    5: 'Five',
-    6: 'Six'
+NUMBER_TO_GO_TO_FACE_ACTION = {
+    1: BlockAction.GoToFaceOne,
+    2: BlockAction.GoToFaceTwo,
+    3: BlockAction.GoToFaceThree,
+    4: BlockAction.GoToFaceFour,
+    5: BlockAction.GoToFaceFive,
+    6: BlockAction.GoToFaceSix,
 }
 
 SHADE_BGR = [27, 13, 252]

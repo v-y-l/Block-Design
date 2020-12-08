@@ -18,12 +18,13 @@ across the entire 2D image.
 '''
 class BlockImage:
 
-    def __init__(self, face=1, number=1):
+    def __init__(self, face=1, number=1, puzzle=None):
         self.face = face
         self.number = number
         self.orientation = BlockOrientation.Up
         self.image = imread('./block_images/block_up.png')
         self.r, self.c = FACE_TO_COORDINATE[self.orientation][face]
+        self.puzzle = puzzle
         
         self._setup_block_data_structures()
         self._setup_go_to_data_structures()
@@ -202,4 +203,4 @@ class BlockImage:
 
     def __str__(self):
         return 'Block,{},Face,{},Pattern,{}'.format(
-            self.get_number(), self.get_face(), self.get_pattern())
+            self.get_number(), self.get_face(), self.get_pattern().name)

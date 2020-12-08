@@ -67,7 +67,7 @@ if __name__=="__main__":
     print("| Puzzle solving... |")
     print("=====================")
     puzzle_solver.solve()
-
+    print(puzzle_solver.action_history)
     print("\n==================")
     print("| Puzzle solved! |")
     print("==================")

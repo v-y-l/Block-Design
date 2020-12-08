@@ -28,7 +28,8 @@ class PuzzleImageSolver:
         self.solvers = config["solvers"]
         self.puzzle_memory_loss_factor = config["puzzle_memory_loss_factor"]
         self.problem = self.get_puzzle()
-        self.block_bank = [BlockImage(1, i+1) for i in range(len(self.problem))]
+        self.block_bank = [BlockImage(1, i+1, self) for i in range(len(self.problem))]
+        self.action_history = []
 
         self.action_counter = {
             BlockAction.GoToFaceOne: 0,
@@ -43,6 +44,9 @@ class PuzzleImageSolver:
             BlockAction.PlaceInPuzzle: 0,
             PuzzleAction.LookAtPuzzle: 0,
         }
+
+    def add_to_history(self, row):
+        self.action_history.append(row)
 
     ''' Returns the puzzle piece in image form given some r, c. '''
     def get_window(self, r, c):
