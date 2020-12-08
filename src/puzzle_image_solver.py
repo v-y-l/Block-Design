@@ -137,9 +137,8 @@ class PuzzleImageSolver:
         if csv_path != '':
             file = open(csv_path, 'w')
             csv_writer = csv.writer(file,
-                                    delimiter=',',
-                                    quotechar='|',
-                                    quoting=csv.QUOTE_MINIMAL)
+                                    delimiter=' ',
+                                    quoting=csv.QUOTE_NONE)
 
         for i, action in enumerate(self.action_history):
             row = "{},{}".format(i+1, action)

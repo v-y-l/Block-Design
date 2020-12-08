@@ -55,6 +55,12 @@ PUZZLE_OPTIONS = {
     'puzzle_a': './puzzle_images/puzzle_a.png',
     'puzzle_b': './puzzle_images/puzzle_b.png',
     'puzzle_c': './puzzle_images/puzzle_c.png',
+    'top_right': './face_images/top_right.png',
+    'bottom_right': './face_images/bottom_right.png',
+    'bottom_left': './face_images/bottom_left.png',
+    'top_left': './face_images/top_left.png',
+    'white': './face_images/white.png',
+    'shaded': './face_images/shaded.png',
 }
 
 SHADE_BGR = [27, 13, 252]
