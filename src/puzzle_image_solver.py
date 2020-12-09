@@ -19,12 +19,17 @@ class PuzzleImageSolver:
                      },
                      # Value from 0 to 1, represents % of memory
                      # loss on the puzzle each turn
-                     'puzzle_memory_loss_factor': 0
+                     'puzzle_memory_loss_factor': 0,
+                     # Number of puzzle pieces solved before memory loss
+                     # e.g. if = 4, then memory loss happens on 4th piece
+                     'puzzle_memory_loss_counter_limit': 0
                  }
     ):
         self.name = name
         self.solvers = config["solvers"]
         self.puzzle_memory_loss_factor = config["puzzle_memory_loss_factor"]
+        self.puzzle_memory_loss_counter_limit = config[
+            "puzzle_memory_loss_counter_limit"]
         self._setup_puzzle()
 
     def _setup_puzzle(self):
@@ -40,6 +45,7 @@ class PuzzleImageSolver:
             range(len(self.unsolved_pieces))]
         self.solved_pieces = {piece:None for piece in self.unsolved_pieces}
         self.action_history = []
+        self.puzzle_memory_loss_counter = 0
     
     def add_to_history(self, row):
         self.action_history.append(row)
@@ -70,14 +76,27 @@ class PuzzleImageSolver:
         tmp_image = self.image.reshape(total_pixels, bgr_len)
         mask = np.ones((total_pixels, bgr_len), np.uint8)
         mask[:total_pixels_to_forget] = [0, 0, 0]
-        np.random.shuffle(mask)
+        np.random.shuffle(mask) # Expensive
         tmp_image *= mask
         self.image = tmp_image.reshape(height, width, bgr_len)
+
+    ''' Increment the turn counter in turns of forgetfulness. '''
+    def increment_memory_loss_counter(self):
+        if self.puzzle_memory_loss_counter_limit > 0:
+            self.puzzle_memory_loss_counter = (
+                (self.puzzle_memory_loss_counter + 1)
+                % self.puzzle_memory_loss_counter_limit
+            )
 
     ''' Take a look at the puzzle to refresh our memory of it. '''
     def look_at_puzzle(self):
         self.add_to_history(self.to_csv_row(PuzzleAction.LookAtPuzzle))
         self.image = imread(self.image_path)
+
+    ''' If the solver is forgetting some of the puzzle on this turn '''
+    def should_forget(self):
+        return (self.puzzle_memory_loss_counter
+                == self.puzzle_memory_loss_counter_limit - 1)
 
     ''' Returns a list of actions executed by each block to solve the problem. '''
     def solve(self):
@@ -90,12 +109,17 @@ class PuzzleImageSolver:
         while self.unsolved_pieces:
             block = self.block_bank.pop()
             self.add_to_history(block.to_csv_row(BlockAction.PickUpFromBank))
-            self.forget_puzzle()
+
+            if self.should_forget():
+                self.forget_puzzle()
+            self.increment_memory_loss_counter()
+
             unsolved_piece_pattern, unsolved_piece = sequential_search(self)
             search_face_actions = face_searcher(
                 block,
                 unsolved_piece_pattern,
                 actions_per_block)
+
             self.solved_pieces[unsolved_piece] = block
             self.add_to_history(block.to_csv_row(BlockAction.PlaceInPuzzle))
         return actions_per_block

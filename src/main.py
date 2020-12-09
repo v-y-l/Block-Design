@@ -10,16 +10,24 @@ if __name__=="__main__":
     face_search_input = ''
     puzzle_piece_search_input = ''
     csv_input = ''
-    puzzle_memory_loss_factor_input = 1.0
+    puzzle_memory_loss_factor_input = 0.0
+    puzzle_memory_loss_counter_limit_input = 0
     try:
         opts, args = getopt(argv[1:], "h",
-            ["puzzle=", "face_search=", "piece_search=", "puzzle_memory_loss=", "csv="])
+            ["puzzle=",
+             "face_search=",
+             "piece_search=",
+             "puzzle_memory_loss=",
+             "puzzle_memory_loss_counter_limit=",
+             "csv="])
         for opt, arg in opts:
             if opt == '-h':
                 print('main.py --puzzle <[puzzle_a].png, [puzzle_b].png, or [puzzle_c].png> ' +
-                      '--face_search <random_search or beeline_search> ' +
+                      '--face_search <[random_search] or [beeline_search]> ' +
                       '--piece_search <sequential_search> ' +
-                      '-puzzle_memory_loss <0-1> --csv <example.csv>')
+                      '-puzzle_memory_loss <[0-1]> ' +
+                      '-puzzle_memory_loss_counter_limit <[>0]> ' +
+                      '--csv <example.csv>')
                 exit()
             elif opt in ("--puzzle"):
                 puzzle_input = arg
@@ -29,6 +37,8 @@ if __name__=="__main__":
                 puzzle_piece_search_input = arg
             elif opt in ("--puzzle_memory_loss"):
                 puzzle_memory_loss_factor_input = float(arg)
+            elif opt in ("--puzzle_memory_loss_counter_limit"):
+                puzzle_memory_loss_counter_limit_input = int(arg)
             elif opt in ("--csv"):
                 csv_input = arg
     except GetoptError as err:
@@ -54,6 +64,7 @@ if __name__=="__main__":
 
     puzzle_solver_config = {
         'puzzle_memory_loss_factor': puzzle_memory_loss_factor_input,
+        'puzzle_memory_loss_counter_limit': puzzle_memory_loss_counter_limit_input,
         'solvers': {
             SearchType.Face: face_search,
             SearchType.PuzzlePiece: puzzle_piece_search
