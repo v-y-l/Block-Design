@@ -60,25 +60,24 @@ class PuzzleImageSolver:
     def show_image(self):
         Image.fromarray(cvtColor(self.image, COLOR_BGR2RGB), 'RGB').show()
 
-    ''' Sets a memory_loss_factor amount of the image to black to simulate forgetfulness. '''
-    def forget(self, memory_loss_factor):
-        if (memory_loss_factor) == 0: return
+    ''' Sets a memory_loss_factor % of image to black to simulate forgetfulness. '''
+    def forget_puzzle(self):
+        if (self.puzzle_memory_loss_factor) == 0: return
         height, width, bgr_len = self.image.shape
         total_pixels = height * width
-        total_pixels_to_forget = int(total_pixels * memory_loss_factor)
+        total_pixels_to_forget =int(
+            total_pixels * self.puzzle_memory_loss_factor)
         tmp_image = self.image.reshape(total_pixels, bgr_len)
         mask = np.ones((total_pixels, bgr_len), np.uint8)
         mask[:total_pixels_to_forget] = [0, 0, 0]
         np.random.shuffle(mask)
         tmp_image *= mask
         self.image = tmp_image.reshape(height, width, bgr_len)
-        self.problem = self.get_puzzle()
 
     ''' Take a look at the puzzle to refresh our memory of it. '''
-    def remember(self):
+    def look_at_puzzle(self):
         self.add_to_history(self.to_csv_row(PuzzleAction.LookAtPuzzle))
         self.image = imread(self.image_path)
-        self.problem = self.get_puzzle()
 
     ''' Returns a list of actions executed by each block to solve the problem. '''
     def solve(self):
@@ -91,20 +90,14 @@ class PuzzleImageSolver:
         while self.unsolved_pieces:
             block = self.block_bank.pop()
             self.add_to_history(block.to_csv_row(BlockAction.PickUpFromBank))
+            self.forget_puzzle()
             unsolved_piece_pattern, unsolved_piece = sequential_search(self)
             search_face_actions = face_searcher(
                 block,
                 unsolved_piece_pattern,
                 actions_per_block)
             self.solved_pieces[unsolved_piece] = block
-            if (len(search_face_actions) == 0):
-                self.remember()
-                search_face_actions = face_searcher(
-                    block,
-                    self.problem[i],
-                    actions_per_block)
             self.add_to_history(block.to_csv_row(BlockAction.PlaceInPuzzle))
-            self.forget(self.puzzle_memory_loss_factor)
         return actions_per_block
 
     def to_csv_row(self, action):
