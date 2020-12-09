@@ -66,7 +66,7 @@ def memory_search(block, dest_pattern, actions):
 ''' Search the puzzle in sequential order. '''
 def sequential_search(problem):
     r, c = problem.unsolved_pieces.pop(0)
-    return problem.get_pattern(r, c)
+    return problem.get_pattern(r, c), (r, c)
 
 ''' Search the puzzle in sequential order, but skip unknown (forgotten) blocks. '''
 def skip_unknown_search(problem):

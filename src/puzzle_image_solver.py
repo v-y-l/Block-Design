@@ -38,6 +38,7 @@ class PuzzleImageSolver:
         self.block_bank = [
             BlockImage(1, i+1, self) for i in
             range(len(self.unsolved_pieces))]
+        self.solved_pieces = {piece:None for piece in self.unsolved_pieces}
         self.action_history = []
     
     def add_to_history(self, row):
@@ -51,7 +52,7 @@ class PuzzleImageSolver:
     def get_image(self):
         return self.image
 
-    ''' Use this function for testing purposes to see if the full puzzle is correctly parsed. '''
+    ''' For testing purposes to check if full puzzle is correctly parsed. '''
     def get_puzzle(self):
         return [self.get_pattern(r, c) for (r, c) in self.unsolved_pieces]
 
@@ -90,11 +91,12 @@ class PuzzleImageSolver:
         while self.unsolved_pieces:
             block = self.block_bank.pop()
             self.add_to_history(block.to_csv_row(BlockAction.PickUpFromBank))
-            unsolved_piece = sequential_search(self)
+            unsolved_piece_pattern, unsolved_piece = sequential_search(self)
             search_face_actions = face_searcher(
                 block,
-                unsolved_piece,
+                unsolved_piece_pattern,
                 actions_per_block)
+            self.solved_pieces[unsolved_piece] = block
             if (len(search_face_actions) == 0):
                 self.remember()
                 search_face_actions = face_searcher(

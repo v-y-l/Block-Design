@@ -138,9 +138,10 @@ class TestPuzzleImageSolver(unittest.TestCase):
         })
         puzzle_solver.solve()
         actual_patterns = []
-        for block in puzzle_solver.block_bank:
+        for pieces in sorted(puzzle_solver.solved_pieces):
+            block = puzzle_solver.solved_pieces[pieces]
             actual_patterns.append(block.get_pattern())
-        self.assertEqual(actual_patterns, expected_patterns)            
+        self.assertEqual(actual_patterns, expected_patterns)
 
 if __name__ == '__main__':
     unittest.main()
