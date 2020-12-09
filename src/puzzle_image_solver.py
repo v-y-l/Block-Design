@@ -51,6 +51,10 @@ class PuzzleImageSolver:
     def get_image(self):
         return self.image
 
+    ''' Use this function for testing purposes to see if the full puzzle is correctly parsed. '''
+    def get_puzzle(self):
+        return [self.get_pattern(r, c) for (r, c) in self.unsolved_pieces]
+
     ''' Opens the puzzle as an image. '''
     def show_image(self):
         Image.fromarray(cvtColor(self.image, COLOR_BGR2RGB), 'RGB').show()
