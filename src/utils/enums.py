@@ -33,9 +33,8 @@ class BlockAction(Enum):
     GoToFaceSix = 6
     RotateLeft = 7
     RotateRight = 8
-    PickUpBlock = 9
+    PickUpFromBank = 9
     PlaceInPuzzle = 10
-    PickUpFromBank = 11
 
 class PuzzleAction(Enum):
     LookAtPuzzle = 1
