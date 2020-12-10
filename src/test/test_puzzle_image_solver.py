@@ -6,9 +6,12 @@ from search import random_search, sequential_search, beeline_search
 from puzzle_image_solver import PuzzleImageSolver, SearchType
 
 class TestPuzzleImageSolver(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        print('\n\nPUZZLE IMAGE SOLVER TESTS')
 
     def test_init(self):
-        print('Instantiates puzzle a image')
+        print('\nTests puzzle a image instantiation')
         puzzle_solver = PuzzleImageSolver('puzzle_a')
         img = puzzle_solver.get_image()
         self.assertEqual(img.shape, (680,680,3))
@@ -17,37 +20,37 @@ class TestPuzzleImageSolver(unittest.TestCase):
         self.assertTrue((img[0][0] == [255, 255, 255]).all()) # White
 
     def test_top_right(self):
-        print('Instantiates top right image')
+        print('\nTests top right image instantiation')
         puzzle_solver = PuzzleImageSolver('top_right')
         self.assertEqual(puzzle_solver.get_pattern(0, 0), BlockPattern.BlackTopRightCornerSquare)
 
     def test_bottom_right(self):
-        print('Instantiates bottom right image')
+        print('\nTests bottom right image instantiation')
         puzzle_solver = PuzzleImageSolver('bottom_right')
         self.assertEqual(puzzle_solver.get_pattern(0, 0), BlockPattern.BlackBottomRightCornerSquare)
 
     def test_bottom_left(self):
-        print('Instantiates bottom left image')
+        print('\nTests bottom left image instantiation')
         puzzle_solver = PuzzleImageSolver('bottom_left')
         self.assertEqual(puzzle_solver.get_pattern(0, 0), BlockPattern.BlackBottomLeftCornerSquare)
 
     def test_top_left(self):
-        print('Instantiates top left image')
+        print('\nTests top left image instantiation')
         puzzle_solver = PuzzleImageSolver('top_left')
         self.assertEqual(puzzle_solver.get_pattern(0, 0), BlockPattern.BlackTopLeftCornerSquare)
 
     def test_white(self):
-        print('Instantiates white image')
+        print('\nTests white image instantiation')
         puzzle_solver = PuzzleImageSolver('white')
         self.assertEqual(puzzle_solver.get_pattern(0, 0), BlockPattern.WhiteSquare)
 
     def test_shaded(self):
-        print('Instantiates shaded image')
+        print('\nTests shaded image instantiation')
         puzzle_solver = PuzzleImageSolver('shaded')
         self.assertEqual(puzzle_solver.get_pattern(0, 0), BlockPattern.BlackSquare)
 
     def test_puzzle_a(self):
-        print('Instantiates puzzle a image')
+        print('\nTests puzzle a image instantiation')
         puzzle_solver = PuzzleImageSolver('puzzle_a')
         actual_patterns = puzzle_solver.get_puzzle()
         expected_patterns = [
@@ -71,7 +74,7 @@ class TestPuzzleImageSolver(unittest.TestCase):
         self.assertEqual(actual_patterns, expected_patterns)
 
     def test_puzzle_b(self):
-        print('Instantiates puzzle b image')
+        print('\nTests puzzle b image instantiation')
         puzzle_solver = PuzzleImageSolver('puzzle_b')
         actual_patterns = puzzle_solver.get_puzzle()
         expected_patterns = [
@@ -95,7 +98,7 @@ class TestPuzzleImageSolver(unittest.TestCase):
         self.assertEqual(actual_patterns, expected_patterns)
 
     def test_puzzle_c(self):
-        print('Instantiates puzzle c image')
+        print('\nTests puzzle c image instantiation')
         puzzle_solver = PuzzleImageSolver('puzzle_c')
         actual_patterns = puzzle_solver.get_puzzle()
         expected_patterns = [
@@ -112,12 +115,12 @@ class TestPuzzleImageSolver(unittest.TestCase):
         self.assertEqual(actual_patterns, expected_patterns)
 
     def test_block_bank(self):
-        print('Instantiates block bank with correct length')
+        print('\nTests block bank instantiation')
         puzzle_solver = PuzzleImageSolver('puzzle_c')
         self.assertEqual(len(puzzle_solver.block_bank), 9)
 
     def test_random_search(self):
-        print('Apply random search for a single block')
+        print('\nTests random search for a single block')
         block = BlockImage(1, 1)
         self.assertEqual(block.get_face(), 1)
         self.assertEqual(block.get_pattern(),
@@ -126,7 +129,7 @@ class TestPuzzleImageSolver(unittest.TestCase):
         self.assertEqual(block.get_pattern(), BlockPattern.WhiteSquare)
 
     def test_random_search_puzzle(self):
-        print('Random search for puzzle c')
+        print('\nTests random search for puzzle c')
         expected_patterns = [
             BlockPattern.WhiteSquare,
             BlockPattern.BlackSquare,
@@ -155,7 +158,7 @@ class TestPuzzleImageSolver(unittest.TestCase):
         self.assertEqual(actual_patterns, expected_patterns)
 
     def test_memory_loss_puzzle(self):
-        print('Beeline search with memory loss on puzzle c')
+        print('\nTests beeline search with memory loss on puzzle c')
         expected_patterns = [
             BlockPattern.WhiteSquare,
             BlockPattern.BlackSquare,

@@ -3,9 +3,12 @@ import unittest
 from block_image import BlockImage, BlockPattern, BlockAction
 
 class TestBlockImageMethods(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        print('\n\nBLOCK IMAGE TESTS')
 
     def test_simple_sequence_one(self):
-        print('Test simple block sequence one')
+        print('\nTests simple block sequence one')
         block = BlockImage()
         self.assertEqual(block.get_face(), 1)
         self.assertEqual(block.get_pattern(), BlockPattern.BlackTopRightCornerSquare)
@@ -23,7 +26,7 @@ class TestBlockImageMethods(unittest.TestCase):
         self.assertEqual(block.get_pattern(), BlockPattern.BlackTopRightCornerSquare)
 
     def test_simple_sequence_two(self):
-        print('Test simple sequence two')
+        print('\nTests simple sequence two')
         block = BlockImage()
         self.assertEqual(block.get_face(), 1)
         self.assertEqual(block.get_pattern(), BlockPattern.BlackTopRightCornerSquare)
@@ -41,7 +44,7 @@ class TestBlockImageMethods(unittest.TestCase):
         self.assertEqual(block.get_pattern(), BlockPattern.BlackBottomLeftCornerSquare)
 
     def test_complex_sequence(self):
-        print('Test block complex sequence')
+        print('\nTests block complex sequence')
         block = BlockImage()
         self.assertEqual(block.get_face(), 1)
         self.assertEqual(block.get_pattern(), BlockPattern.BlackTopRightCornerSquare)
@@ -87,7 +90,7 @@ class TestBlockImageMethods(unittest.TestCase):
         self.assertEqual(block.get_pattern(), BlockPattern.BlackBottomRightCornerSquare)
 
     def test_invalid_sequence(self):
-        print('Invalid block sequence should throw error')
+        print('\nTests invalid block sequence')
         block = BlockImage()
         self.assertEqual(block.get_face(), 1)
         self.assertEqual(block.get_pattern(), BlockPattern.BlackTopRightCornerSquare)
@@ -97,7 +100,7 @@ class TestBlockImageMethods(unittest.TestCase):
         self.assertEqual(str(context.exception), "Can't go from 1 to 6")
 
     def test_peek(self):
-        print('Test peek')
+        print('\nTests peek')
         block = BlockImage(6)
         self.assertEqual(block.get_pattern(), BlockPattern.BlackBottomRightCornerSquare)
         self.assertEqual(block.peek_action(BlockAction.RotateRight),
