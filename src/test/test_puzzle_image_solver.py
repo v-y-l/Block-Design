@@ -41,8 +41,8 @@ class TestPuzzleImageSolver(unittest.TestCase):
 
     def test_puzzle_a(self):
         puzzle_solver = PuzzleImageSolver('puzzle_a')
-        actual = puzzle_solver.get_puzzle()
-        expected = [
+        actual_patterns = puzzle_solver.get_puzzle()
+        expected_patterns = [
             BlockPattern.BlackTopRightCornerSquare,
             BlockPattern.BlackTopLeftCornerSquare,
             BlockPattern.BlackTopRightCornerSquare,
@@ -60,12 +60,12 @@ class TestPuzzleImageSolver(unittest.TestCase):
             BlockPattern.BlackBottomRightCornerSquare,
             BlockPattern.BlackBottomLeftCornerSquare
         ]
-        self.assertEqual(actual, expected)
+        self.assertEqual(actual_patterns, expected_patterns)
 
     def test_puzzle_b(self):
         puzzle_solver = PuzzleImageSolver('puzzle_b')
-        actual = puzzle_solver.get_puzzle()
-        expected = [
+        actual_patterns = puzzle_solver.get_puzzle()
+        expected_patterns = [
             BlockPattern.BlackTopLeftCornerSquare,
             BlockPattern.BlackTopRightCornerSquare,
             BlockPattern.BlackBottomLeftCornerSquare,
@@ -83,12 +83,12 @@ class TestPuzzleImageSolver(unittest.TestCase):
             BlockPattern.BlackBottomLeftCornerSquare,
             BlockPattern.BlackBottomRightCornerSquare,
         ]
-        self.assertEqual(actual, expected)
+        self.assertEqual(actual_patterns, expected_patterns)
 
     def test_puzzle_c(self):
         puzzle_solver = PuzzleImageSolver('puzzle_c')
-        actual = puzzle_solver.get_puzzle()
-        expected = [
+        actual_patterns = puzzle_solver.get_puzzle()
+        expected_patterns = [
             BlockPattern.WhiteSquare,
             BlockPattern.BlackSquare,
             BlockPattern.BlackTopRightCornerSquare,
@@ -99,7 +99,7 @@ class TestPuzzleImageSolver(unittest.TestCase):
             BlockPattern.BlackSquare,
             BlockPattern.BlackBottomRightCornerSquare,
         ]
-        self.assertEqual(actual, expected)
+        self.assertEqual(actual_patterns, expected_patterns)
 
     def test_block_bank(self):
         print('\n Instantiates a block bank with correct length')
@@ -143,6 +143,35 @@ class TestPuzzleImageSolver(unittest.TestCase):
             block = puzzle_solver.solved_pieces[pieces]
             actual_patterns.append(block.get_pattern())
         self.assertEqual(actual_patterns, expected_patterns)
+
+    def test_memory_loss_puzzle(self):
+        expected_patterns = [
+            BlockPattern.WhiteSquare,
+            BlockPattern.BlackSquare,
+            BlockPattern.BlackTopRightCornerSquare,
+            BlockPattern.BlackSquare,
+            BlockPattern.WhiteSquare,
+            BlockPattern.WhiteSquare,
+            BlockPattern.WhiteSquare,
+            BlockPattern.BlackSquare,
+            BlockPattern.BlackBottomRightCornerSquare,
+        ]
+        puzzle_solver = PuzzleImageSolver(
+            'puzzle_c', {
+            'solvers': {
+                SearchType.Face: random_search,
+                SearchType.PuzzlePiece: sequential_search
+            },
+            'puzzle_memory_loss_factor': .5,
+            'puzzle_memory_loss_counter_limit': 5
+        })
+        puzzle_solver.solve()
+        actual_patterns = []
+        for pieces in sorted(puzzle_solver.solved_pieces):
+            block = puzzle_solver.solved_pieces[pieces]
+            actual_patterns.append(block.get_pattern())
+        self.assertEqual(actual_patterns, expected_patterns)
+        self.assertTrue(len(puzzle_solver.action_history) >= 48)
 
 if __name__ == '__main__':
     unittest.main()
