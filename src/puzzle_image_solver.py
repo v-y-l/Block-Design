@@ -34,17 +34,20 @@ class PuzzleImageSolver:
 
     def _setup_puzzle(self):
         self.image_path = PUZZLE_OPTIONS[self.name]
-        self.image = imread(self.image_path)
+        self.action_history = []
+        self.look_at_puzzle()
+
         self.height, self.width, _ = self.image.shape
         self.unsolved_pieces = [] # Represents as top left coordinate
         for r in range(0, self.height - EDGE_OFFSET, BLOCK_LENGTH):
             for c in range(0, self.width - EDGE_OFFSET, BLOCK_LENGTH):
                 self.unsolved_pieces.append((r, c))
+
         self.block_bank = [
             BlockImage(1, i+1, self) for i in
             range(len(self.unsolved_pieces))]
+
         self.solved_pieces = {piece:None for piece in self.unsolved_pieces}
-        self.action_history = []
         self.puzzle_memory_loss_counter = 0
     
     def add_to_history(self, row):

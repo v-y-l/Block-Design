@@ -134,7 +134,8 @@ class TestPuzzleImageSolver(unittest.TestCase):
                 SearchType.Face: random_search,
                 SearchType.PuzzlePiece: sequential_search
             },
-            'puzzle_memory_loss_factor': 0
+            'puzzle_memory_loss_factor': 0,
+            'puzzle_memory_loss_counter_limit': 0
         })
         puzzle_solver.solve()
         actual_patterns = []
