@@ -5,7 +5,7 @@ from block_image import BlockImage, BlockPattern, BlockAction
 class TestBlockImageMethods(unittest.TestCase):
 
     def test_simple_sequence_one(self):
-        print('\n Simple sequence one')
+        print('Test simple block sequence one')
         block = BlockImage()
         self.assertEqual(block.get_face(), 1)
         self.assertEqual(block.get_pattern(), BlockPattern.BlackTopRightCornerSquare)
@@ -23,7 +23,7 @@ class TestBlockImageMethods(unittest.TestCase):
         self.assertEqual(block.get_pattern(), BlockPattern.BlackTopRightCornerSquare)
 
     def test_simple_sequence_two(self):
-        print('\n Simple sequence two')
+        print('Test simple sequence two')
         block = BlockImage()
         self.assertEqual(block.get_face(), 1)
         self.assertEqual(block.get_pattern(), BlockPattern.BlackTopRightCornerSquare)
@@ -41,7 +41,7 @@ class TestBlockImageMethods(unittest.TestCase):
         self.assertEqual(block.get_pattern(), BlockPattern.BlackBottomLeftCornerSquare)
 
     def test_complex_sequence(self):
-        print('\n Complex sequence')
+        print('Test block complex sequence')
         block = BlockImage()
         self.assertEqual(block.get_face(), 1)
         self.assertEqual(block.get_pattern(), BlockPattern.BlackTopRightCornerSquare)
@@ -87,7 +87,7 @@ class TestBlockImageMethods(unittest.TestCase):
         self.assertEqual(block.get_pattern(), BlockPattern.BlackBottomRightCornerSquare)
 
     def test_invalid_sequence(self):
-        print('\n Invalid sequence should not be possible')
+        print('Invalid block sequence should throw error')
         block = BlockImage()
         self.assertEqual(block.get_face(), 1)
         self.assertEqual(block.get_pattern(), BlockPattern.BlackTopRightCornerSquare)
@@ -97,7 +97,7 @@ class TestBlockImageMethods(unittest.TestCase):
         self.assertEqual(str(context.exception), "Can't go from 1 to 6")
 
     def test_peek(self):
-        print('\n Test peek')
+        print('Test peek')
         block = BlockImage(6)
         self.assertEqual(block.get_pattern(), BlockPattern.BlackBottomRightCornerSquare)
         self.assertEqual(block.peek_action(BlockAction.RotateRight),
