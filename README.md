@@ -66,4 +66,8 @@ Forgetfulness is modeled as blotted out pixels
 
 ## Testing
 
-> python -m unittest test/test_something.py
+Test all modules
+> python -m unittest test
+
+Test an individual module
+> python -m unittest test/test_search.py
