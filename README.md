@@ -46,7 +46,9 @@ Represents block in sprawled-out 2D form using the underlying image:
 
 ### Block actions
 
-[enums.py](https://github.com/v-y-l/Block-Design/blob/main/src/utils/enums.py#L25)
+See [enums.py](https://github.com/v-y-l/Block-Design/blob/main/src/utils/enums.py#L25)
+
+### Forgetfulness
 
 Forgetfulness is modeled as blotted out pixels
 
