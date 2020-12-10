@@ -22,7 +22,9 @@ class PuzzleImageSolver:
                      'puzzle_memory_loss_factor': 0,
                      # Number of puzzle pieces solved before memory loss
                      # e.g. if = 4, then memory loss happens on 4th piece
-                     'puzzle_memory_loss_counter_limit': 0
+                     'puzzle_memory_loss_counter_limit': 0,
+
+                     'glance_factor': 0,
                  }
     ):
         self.name = name

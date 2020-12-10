@@ -64,17 +64,6 @@ class BlockImage:
             BlockAction.GoToFaceSix: 6
         }
 
-        self.action_counter = {
-            BlockAction.GoToFaceOne: 0,
-            BlockAction.GoToFaceTwo: 0,
-            BlockAction.GoToFaceThree: 0,
-            BlockAction.GoToFaceFour: 0,
-            BlockAction.GoToFaceFive: 0,
-            BlockAction.GoToFaceSix: 0,
-            BlockAction.RotateLeft: 0,
-            BlockAction.RotateRight: 0
-        }
-
     ''' Setup data structures that enable movement to a neighboring face. '''
     def _setup_go_to_data_structures(self):
         face_one = FaceNode(1)
@@ -99,7 +88,6 @@ class BlockImage:
             5: face_five,
             6: face_six,
         }
-
         
     ''' Sets up data structures for enabling rotation logic. '''
     def _setup_rotation_data_structures(self):
@@ -168,11 +156,7 @@ class BlockImage:
             return get_pattern(peek_r, peek_c, self.image)
 
     def execute_action(self, action):
-        self.action_counter[action] += 1
         self.actions[action]()
-
-    def get_action_counter(self):
-        return self.action_counter
 
     def get_face(self):
         return self.face
