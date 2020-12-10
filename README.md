@@ -6,21 +6,32 @@ Run python [main.py](https://github.com/v-y-l/Block-Design/blob/main/src/main.py
 
 Example:
 
-> python main.py --puzzle puzzle_b --face_search beeline_search --piece_search sequential_search \
+> python main.py --puzzle puzzle_b --face_search beeline_search --piece_search sequential_search
 > --puzzle_memory_loss .5 --puzzle_memory_loss_counter_limit 5 --csv stats.csv
+
+...solves puzzle_b.png using the beeline face search and sequential puzzle piece search, with a memory loss of 50% of the puzzle every 5 puzzle pieces solved.
+
+![Demo gif](https://github.com/v-y-l/Block-Design/blob/main/assets/cli_demo.gif)
 
 ### Parameters
 
-> --puzzle # The name of the puzzle image to solve
-> --face_search # The search algorithm to find the destination pattern on a block
-> --piece_search # The search algorithm that returns the next pattern of the puzzle to solve
-> --puzzle_memory_loss # The rate of memory loss, 0-100% of entire puzzle
-> --puzzle_memory_loss_counter_limit # Memory loss kicks every time this limit of puzzle pieces is solved
-> --csv # Dumps the full list of actions to the specified file
+#### --puzzle
+The name of the puzzle image to solve
 
-...will solve puzzle_b.png using the beeline face search and sequential puzzle piece search.
+#### --face_search
+The search algorithm to find the destination pattern on a block
 
-![Demo gif](https://github.com/v-y-l/Block-Design/blob/main/assets/cli_demo.gif)
+#### --piece_search
+The search algorithm that returns the next pattern of the puzzle to solve
+
+#### --puzzle_memory_loss
+The rate of memory loss, 0-100% of entire puzzle
+
+#### --puzzle_memory_loss_counter_limit
+Memory loss kicks every time this limit of puzzle pieces is solved
+
+#### --csv
+Dumps the full list of actions to the specified file
 
 ## Block image model
 
