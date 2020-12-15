@@ -129,7 +129,7 @@ class TestPuzzleImageSolver(unittest.TestCase):
         random_search(block, BlockPattern.WhiteSquare, [])
         self.assertEqual(block.get_pattern(), BlockPattern.WhiteSquare)
 
-    def test_random_search_puzzle(self):
+    def test_random_search_puzzle_c(self):
         print('\nTests random search for puzzle c')
         expected_patterns = [
             BlockPattern.WhiteSquare,
@@ -158,6 +158,41 @@ class TestPuzzleImageSolver(unittest.TestCase):
             block = puzzle_solver.solved_pieces[pieces]
             actual_patterns.append(block.get_pattern())
         self.assertEqual(actual_patterns, expected_patterns)
+
+    def test_beeline_search_puzzle_b(self):
+        print('\nTests beeline search on puzzle b')
+        expected_patterns = [
+            BlockPattern.BlackTopLeftCornerSquare,
+            BlockPattern.BlackTopRightCornerSquare,
+            BlockPattern.BlackBottomLeftCornerSquare,
+            BlockPattern.BlackBottomRightCornerSquare,
+            BlockPattern.BlackBottomLeftCornerSquare,
+            BlockPattern.BlackBottomRightCornerSquare,
+            BlockPattern.BlackSquare,
+            BlockPattern.BlackTopLeftCornerSquare,
+            BlockPattern.BlackBottomRightCornerSquare,
+            BlockPattern.BlackSquare,
+            BlockPattern.BlackTopLeftCornerSquare,
+            BlockPattern.BlackTopRightCornerSquare,
+            BlockPattern.BlackTopLeftCornerSquare,
+            BlockPattern.BlackTopRightCornerSquare,
+            BlockPattern.BlackBottomLeftCornerSquare,
+            BlockPattern.BlackBottomRightCornerSquare,
+        ]
+        puzzle_solver = PuzzleImageSolver(
+            'puzzle_b', {
+                'solvers': {
+                    SearchType.Face: beeline_search,
+                    SearchType.PuzzlePiece: sequential_search
+                },
+                'puzzle_memory_loss_factor': 0.0,
+                'puzzle_memory_loss_counter_limit': 0,
+                'glance_factor': 1.0
+            })
+        puzzle_solver.solve()
+        actual_patterns = puzzle_solver.get_solved_pieces_patterns()
+        self.assertEqual(actual_patterns, expected_patterns)
+        self.assertEqual(len(puzzle_solver.action_history), 33)
 
     def test_memory_loss_puzzle_b(self):
         print('\nTests beeline search with memory loss on puzzle b')
