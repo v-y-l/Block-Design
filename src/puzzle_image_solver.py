@@ -19,13 +19,13 @@ class PuzzleImageSolver:
                      },
                      # Value from 0 to 1, represents % of memory
                      # loss on the puzzle each turn
-                     'puzzle_memory_loss_factor': 0,
+                     'puzzle_memory_loss_factor': 0.0,
                      # Number of puzzle pieces solved before memory loss
                      # e.g. if = 4, then memory loss happens on 4th piece
                      'puzzle_memory_loss_counter_limit': 0,
                      # Value from 0 to 1, represents % of memory recovered
                      # from the puzzle
-                     'glance_factor': 1,
+                     'glance_factor': 1.0,
                  }
     ):
         self.name = name or 'puzzle_a'
@@ -33,10 +33,10 @@ class PuzzleImageSolver:
             SearchType.Face: random_search,
             SearchType.PuzzlePiece: sequential_search
         })
-        self.puzzle_memory_loss_factor = config.get("puzzle_memory_loss_factor", 0)
+        self.puzzle_memory_loss_factor = config.get("puzzle_memory_loss_factor", 0.0)
         self.puzzle_memory_loss_counter_limit = config.get(
             "puzzle_memory_loss_counter_limit", 0)
-        self.glance_factor = config.get("glance_factor", 1)
+        self.glance_factor = config.get("glance_factor", 1.0)
         self._setup_puzzle()
 
     def _setup_puzzle(self):

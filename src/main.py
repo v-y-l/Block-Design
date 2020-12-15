@@ -12,6 +12,7 @@ if __name__=="__main__":
     csv_input = ''
     puzzle_memory_loss_factor_input = 0.0
     puzzle_memory_loss_counter_limit_input = 0
+    glance_factor_input = 1
     try:
         opts, args = getopt(argv[1:], "h",
             ["puzzle=",
@@ -19,6 +20,7 @@ if __name__=="__main__":
              "piece_search=",
              "puzzle_memory_loss=",
              "puzzle_memory_loss_counter_limit=",
+             "glance_factor="
              "csv="])
         for opt, arg in opts:
             if opt == '-h':
@@ -27,6 +29,7 @@ if __name__=="__main__":
                       '--piece_search <sequential_search> ' +
                       '-puzzle_memory_loss <[0-1]> ' +
                       '-puzzle_memory_loss_counter_limit <[>0]> ' +
+                      '-glance_factor <[0-1]> ' +
                       '--csv <example.csv>')
                 exit()
             elif opt in ("--puzzle"):
@@ -39,6 +42,8 @@ if __name__=="__main__":
                 puzzle_memory_loss_factor_input = float(arg)
             elif opt in ("--puzzle_memory_loss_counter_limit"):
                 puzzle_memory_loss_counter_limit_input = int(arg)
+            elif opt in ("--glance_factor"):
+                glance_factor_input = float(arg)
             elif opt in ("--csv"):
                 csv_input = arg
     except GetoptError as err:
@@ -65,6 +70,7 @@ if __name__=="__main__":
     puzzle_solver_config = {
         'puzzle_memory_loss_factor': puzzle_memory_loss_factor_input,
         'puzzle_memory_loss_counter_limit': puzzle_memory_loss_counter_limit_input,
+        'glance_factor': glance_factor_input,
         'solvers': {
             SearchType.Face: face_search,
             SearchType.PuzzlePiece: puzzle_piece_search
