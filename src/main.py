@@ -64,6 +64,9 @@ if __name__=="__main__":
     if not 0 <= puzzle_memory_loss_factor_input <= 1:
         raise Exception("Specify puzzle memory loss factor: 0-1")
 
+    if not 0 <= glance_factor_input <= 1:
+        raise Exception("Specify glance factor: 0-1")
+
     face_search = face_search_options[face_search_input]
     puzzle_piece_search = puzzle_piece_search_options[puzzle_piece_search_input]
 

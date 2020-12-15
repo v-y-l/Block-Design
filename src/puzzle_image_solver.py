@@ -46,6 +46,13 @@ class PuzzleImageSolver:
         self.num_rows, self.num_cols, self.bgr_len = (
             imread(self.image_path).shape)
 
+        # Glance factor presumes that the puzzle is a square
+        min_glance_factor = float(BLOCK_LENGTH - 5) / self.num_cols
+        if not self.glance_factor >= min_glance_factor:
+            raise Exception(
+                "Specified glance factor {} must be at least {} to cover one square".format(
+                    self.glance_factor, min_glance_factor))
+
         # Start with a blank slate
         self.image = np.zeros((self.num_rows,
                                self.num_cols,
@@ -64,10 +71,12 @@ class PuzzleImageSolver:
 
         self.solved_pieces = {piece:None for piece in self.unsolved_pieces}
         self.puzzle_memory_loss_counter = 0
-    
+
+    ''' Adds to the history of executed actions on each block. '''
     def add_to_history(self, row):
         self.action_history.append(row)
 
+    ''' Simulates picking up a block '''
     def pick_up_next_block(self):
         if not self.block_bank:
             raise Exception("No more blocks in block bank")
@@ -164,9 +173,11 @@ class PuzzleImageSolver:
             self.solved_pieces[unsolved_piece] = self.block
         return actions_per_block
 
+    ''' Prints a puzzle action in csv readable form. '''
     def to_csv_row(self, action, point):
         return str(self) + ",action," + action.name + ",point," + str(point)
 
+    ''' Prints out all executed actions. '''
     def print_history(self, csv_path=''):
         csv_writer = None
         if csv_path != '':
