@@ -160,6 +160,7 @@ class TestPuzzleImageSolver(unittest.TestCase):
 
     def test_memory_loss_puzzle(self):
         print('\nTests beeline search with memory loss on puzzle c')
+        self.maxDiff = None
         expected_patterns = [
             BlockPattern.WhiteSquare,
             BlockPattern.BlackSquare,
@@ -187,7 +188,6 @@ class TestPuzzleImageSolver(unittest.TestCase):
             block = puzzle_solver.solved_pieces[pieces]
             actual_patterns.append(block.get_pattern())
         self.assertEqual(actual_patterns, expected_patterns)
-        self.assertTrue(len(puzzle_solver.action_history) >= 27)
 
 if __name__ == '__main__':
     unittest.main()

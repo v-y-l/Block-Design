@@ -37,6 +37,7 @@ class PuzzleImageSolver:
         self._setup_puzzle()
 
     def _setup_puzzle(self):
+        self.block = None
         self.image_path = PUZZLE_OPTIONS[self.name]
         self.action_history = []
         self.num_rows, self.num_cols, self.bgr_len = (
@@ -47,7 +48,7 @@ class PuzzleImageSolver:
                                self.num_cols,
                                self.bgr_len),
                               np.uint8)
-        self.look_at_puzzle((0,0), 1)
+        self.look_at_puzzle((0,0), self.glance_factor)
 
         self.unsolved_pieces = [] # Represents as top left coordinate
         for r in range(0, self.num_rows - EDGE_OFFSET, BLOCK_LENGTH):
@@ -64,6 +65,13 @@ class PuzzleImageSolver:
     def add_to_history(self, row):
         self.action_history.append(row)
 
+    def pick_up_next_block(self):
+        if not self.block_bank:
+            raise Exception("No more blocks in block bank")
+        if not self.block or self.block.is_solved:
+            self.block = self.block_bank.pop()
+            self.add_to_history(self.block.to_csv_row(BlockAction.PickUpFromBank))
+
     ''' Returns the puzzle piece in symbolic form given some r, c. '''
     def get_pattern(self, r, c):
         return get_pattern(r, c, self.image)
@@ -77,8 +85,9 @@ class PuzzleImageSolver:
         return [self.get_pattern(r, c) for (r, c) in self.unsolved_pieces]
 
     ''' Opens the puzzle as an image. '''
-    def show_image(self):
-        Image.fromarray(cvtColor(self.image, COLOR_BGR2RGB), 'RGB').show()
+    def show_image(self, image=[]):
+        if len(image) == 0: image = self.image
+        Image.fromarray(cvtColor(image, COLOR_BGR2RGB), 'RGB').show()
 
     ''' Sets a memory_loss_factor % of image to black to simulate forgetfulness. '''
     def forget_puzzle(self):
@@ -104,10 +113,14 @@ class PuzzleImageSolver:
 
     ''' Take a look at the puzzle to refresh our memory of it. '''
     def look_at_puzzle(self, point, factor):
-        r, c = point
+        row, col = point
         self.add_to_history(self.to_csv_row(PuzzleAction.LookAtPuzzle))
-        self.image[r:r + self.num_rows][c:c + self.num_cols] = (
-            imread(self.image_path)[r:r + self.num_rows][c:c + self.num_cols])
+        remembered_puzzle_pieces = (
+            imread(self.image_path)[row:row + int(self.num_rows * factor),
+                                    col:col + int(self.num_cols * factor)])
+        self.image[row:row + int(self.num_rows * factor)
+                   ,col:col + int(self.num_cols * factor)] = (
+            remembered_puzzle_pieces)
 
     ''' If the solver is forgetting some of the puzzle on this turn '''
     def should_forget(self):
@@ -123,21 +136,21 @@ class PuzzleImageSolver:
         actions_per_block = []
 
         while self.unsolved_pieces:
-            block = self.block_bank.pop()
-            self.add_to_history(block.to_csv_row(BlockAction.PickUpFromBank))
-
+            self.pick_up_next_block()
             if self.should_forget():
                 self.forget_puzzle()
             self.increment_memory_loss_counter()
 
             unsolved_piece_pattern, unsolved_piece = sequential_search(self)
+            if unsolved_piece_pattern == BlockPattern.Unknown:
+                continue
             search_face_actions = face_searcher(
-                block,
+                self.block,
                 unsolved_piece_pattern,
                 actions_per_block)
-
-            self.solved_pieces[unsolved_piece] = block
-            self.add_to_history(block.to_csv_row(BlockAction.PlaceInPuzzle))
+            self.block.is_solved = True
+            self.unsolved_pieces.remove(unsolved_piece)
+            self.solved_pieces[unsolved_piece] = self.block
         return actions_per_block
 
     def to_csv_row(self, action):

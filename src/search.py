@@ -65,10 +65,10 @@ def memory_search(block, dest_pattern, actions):
 
 ''' Search the puzzle in sequential order. '''
 def sequential_search(problem):
-    r, c = problem.unsolved_pieces.pop(0)
+    r, c = problem.unsolved_pieces[0]
     unsolved_piece_pattern = problem.get_pattern(r, c)
     if unsolved_piece_pattern == BlockPattern.Unknown:
-        problem.look_at_puzzle((0,0), 1)
+        problem.look_at_puzzle((r,c), problem.glance_factor)
         unsolved_piece_pattern = problem.get_pattern(r, c)
     return unsolved_piece_pattern, (r, c)
 

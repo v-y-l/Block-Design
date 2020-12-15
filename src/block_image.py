@@ -25,6 +25,7 @@ class BlockImage:
         self.image = imread('./block_images/block_up.png')
         self.r, self.c = FACE_TO_COORDINATE[self.orientation][face]
         self.puzzle = puzzle
+        self.is_solved = False
         
         self._setup_block_data_structures()
         self._setup_go_to_data_structures()
@@ -184,6 +185,10 @@ class BlockImage:
 
     def show_image(self):
         Image.fromarray(cvtColor(self.image, COLOR_BGR2RGB), 'RGB').show()
+
+    def solved(self):
+        self.is_solved = True
+        if self.puzzle: self.puzzle.add_to_history(self.to_csv_row(BlockAction.PlaceInPuzzle))
 
     def to_csv_row(self, action):
         return str(self) + ",action," + action.name
