@@ -23,8 +23,9 @@ class PuzzleImageSolver:
                      # Number of puzzle pieces solved before memory loss
                      # e.g. if = 4, then memory loss happens on 4th piece
                      'puzzle_memory_loss_counter_limit': 0,
-
-                     'glance_factor': 0,
+                     # Value from 0 to 1, represents % of memory recovered
+                     # from the puzzle
+                     'glance_factor': 1,
                  }
     ):
         self.name = name
@@ -32,17 +33,25 @@ class PuzzleImageSolver:
         self.puzzle_memory_loss_factor = config["puzzle_memory_loss_factor"]
         self.puzzle_memory_loss_counter_limit = config[
             "puzzle_memory_loss_counter_limit"]
+        self.glance_factor = config["glance_factor"]
         self._setup_puzzle()
 
     def _setup_puzzle(self):
         self.image_path = PUZZLE_OPTIONS[self.name]
         self.action_history = []
-        self.look_at_puzzle()
+        self.num_rows, self.num_cols, self.bgr_len = (
+            imread(self.image_path).shape)
 
-        self.height, self.width, _ = self.image.shape
+        # Start with a blank slate
+        self.image = np.zeros((self.num_rows,
+                               self.num_cols,
+                               self.bgr_len),
+                              np.uint8)
+        self.look_at_puzzle((0,0), 1)
+
         self.unsolved_pieces = [] # Represents as top left coordinate
-        for r in range(0, self.height - EDGE_OFFSET, BLOCK_LENGTH):
-            for c in range(0, self.width - EDGE_OFFSET, BLOCK_LENGTH):
+        for r in range(0, self.num_rows - EDGE_OFFSET, BLOCK_LENGTH):
+            for c in range(0, self.num_cols - EDGE_OFFSET, BLOCK_LENGTH):
                 self.unsolved_pieces.append((r, c))
 
         self.block_bank = [
@@ -59,7 +68,7 @@ class PuzzleImageSolver:
     def get_pattern(self, r, c):
         return get_pattern(r, c, self.image)
 
-    ''' Returns a numpy array with shape of height x width x bgr pixels. '''
+    ''' Returns a numpy array with shape of num_rows x num_cols x bgr pixels. '''
     def get_image(self):
         return self.image
 
@@ -74,16 +83,16 @@ class PuzzleImageSolver:
     ''' Sets a memory_loss_factor % of image to black to simulate forgetfulness. '''
     def forget_puzzle(self):
         if (self.puzzle_memory_loss_factor) == 0: return
-        height, width, bgr_len = self.image.shape
-        total_pixels = height * width
-        total_pixels_to_forget =int(
+        num_rows, num_cols, bgr_len = self.image.shape
+        total_pixels = num_rows * num_cols
+        total_pixels_to_forget = int(
             total_pixels * self.puzzle_memory_loss_factor)
         tmp_image = self.image.reshape(total_pixels, bgr_len)
         mask = np.ones((total_pixels, bgr_len), np.uint8)
         mask[:total_pixels_to_forget] = [0, 0, 0]
         np.random.shuffle(mask) # Expensive
         tmp_image *= mask
-        self.image = tmp_image.reshape(height, width, bgr_len)
+        self.image = tmp_image.reshape(num_rows, num_cols, bgr_len)
 
     ''' Increment the turn counter in turns of forgetfulness. '''
     def increment_memory_loss_counter(self):
@@ -94,9 +103,11 @@ class PuzzleImageSolver:
             )
 
     ''' Take a look at the puzzle to refresh our memory of it. '''
-    def look_at_puzzle(self):
+    def look_at_puzzle(self, point, factor):
+        r, c = point
         self.add_to_history(self.to_csv_row(PuzzleAction.LookAtPuzzle))
-        self.image = imread(self.image_path)
+        self.image[r:r + self.num_rows][c:c + self.num_cols] = (
+            imread(self.image_path)[r:r + self.num_rows][c:c + self.num_cols])
 
     ''' If the solver is forgetting some of the puzzle on this turn '''
     def should_forget(self):

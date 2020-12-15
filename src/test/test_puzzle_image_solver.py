@@ -148,7 +148,8 @@ class TestPuzzleImageSolver(unittest.TestCase):
                 SearchType.PuzzlePiece: sequential_search
             },
             'puzzle_memory_loss_factor': 0,
-            'puzzle_memory_loss_counter_limit': 0
+            'puzzle_memory_loss_counter_limit': 0,
+            'glance_factor': 1    
         })
         puzzle_solver.solve()
         actual_patterns = []
@@ -177,7 +178,8 @@ class TestPuzzleImageSolver(unittest.TestCase):
                 SearchType.PuzzlePiece: sequential_search
             },
             'puzzle_memory_loss_factor': .5,
-            'puzzle_memory_loss_counter_limit': 3
+            'puzzle_memory_loss_counter_limit': 3,
+            'glance_factor': 1    
         })
         puzzle_solver.solve()
         actual_patterns = []
