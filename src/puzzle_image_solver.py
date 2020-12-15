@@ -117,7 +117,7 @@ class PuzzleImageSolver:
     ''' Take a look at the puzzle to refresh our memory of it. '''
     def look_at_puzzle(self, point, factor):
         row, col = point
-        self.add_to_history(self.to_csv_row(PuzzleAction.LookAtPuzzle))
+        self.add_to_history(self.to_csv_row(PuzzleAction.LookAtPuzzle, (row, col)))
         remembered_puzzle_pieces = (
             imread(self.image_path)[row:row + int(self.num_rows * factor),
                                     col:col + int(self.num_cols * factor)])
@@ -156,8 +156,8 @@ class PuzzleImageSolver:
             self.solved_pieces[unsolved_piece] = self.block
         return actions_per_block
 
-    def to_csv_row(self, action):
-        return str(self) + ",action," + action.name
+    def to_csv_row(self, action, point):
+        return str(self) + ",action," + action.name + ",point," + str(point)
 
     def print_history(self, csv_path=''):
         csv_writer = None
