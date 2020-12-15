@@ -255,5 +255,40 @@ class TestPuzzleImageSolver(unittest.TestCase):
         actual_patterns = puzzle_solver.get_solved_pieces_patterns()
         self.assertEqual(actual_patterns, expected_patterns)
 
+    def test_glance_factor_puzzle_c(self):
+        print('\nTests glance factor on puzzle b')
+        expected_patterns = [
+            BlockPattern.BlackTopLeftCornerSquare,
+            BlockPattern.BlackTopRightCornerSquare,
+            BlockPattern.BlackBottomLeftCornerSquare,
+            BlockPattern.BlackBottomRightCornerSquare,
+            BlockPattern.BlackBottomLeftCornerSquare,
+            BlockPattern.BlackBottomRightCornerSquare,
+            BlockPattern.BlackSquare,
+            BlockPattern.BlackTopLeftCornerSquare,
+            BlockPattern.BlackBottomRightCornerSquare,
+            BlockPattern.BlackSquare,
+            BlockPattern.BlackTopLeftCornerSquare,
+            BlockPattern.BlackTopRightCornerSquare,
+            BlockPattern.BlackTopLeftCornerSquare,
+            BlockPattern.BlackTopRightCornerSquare,
+            BlockPattern.BlackBottomLeftCornerSquare,
+            BlockPattern.BlackBottomRightCornerSquare,
+        ]
+        puzzle_solver = PuzzleImageSolver(
+            'puzzle_b', {
+                'solvers': {
+                    SearchType.Face: beeline_search,
+                    SearchType.PuzzlePiece: sequential_search
+                },
+                'puzzle_memory_loss_factor': 1.0,
+                'puzzle_memory_loss_counter_limit': 1,
+                'glance_factor': .0625
+            })
+        puzzle_solver.solve()
+        actual_patterns = puzzle_solver.get_solved_pieces_patterns()
+        self.assertEqual(actual_patterns, expected_patterns)
+        self.assertEqual(len(puzzle_solver.action_history), 33)
+
 if __name__ == '__main__':
     unittest.main()

@@ -20,7 +20,7 @@ if __name__=="__main__":
              "piece_search=",
              "puzzle_memory_loss=",
              "puzzle_memory_loss_counter_limit=",
-             "glance_factor="
+             "glance_factor=",
              "csv="])
         for opt, arg in opts:
             if opt == '-h':
