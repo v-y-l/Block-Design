@@ -28,12 +28,15 @@ class PuzzleImageSolver:
                      'glance_factor': 1,
                  }
     ):
-        self.name = name
-        self.solvers = config["solvers"]
-        self.puzzle_memory_loss_factor = config["puzzle_memory_loss_factor"]
-        self.puzzle_memory_loss_counter_limit = config[
-            "puzzle_memory_loss_counter_limit"]
-        self.glance_factor = config["glance_factor"]
+        self.name = name or 'puzzle_a'
+        self.solvers = config.get("solvers", {
+            SearchType.Face: random_search,
+            SearchType.PuzzlePiece: sequential_search
+        })
+        self.puzzle_memory_loss_factor = config.get("puzzle_memory_loss_factor", 0)
+        self.puzzle_memory_loss_counter_limit = config.get(
+            "puzzle_memory_loss_counter_limit", 0)
+        self.glance_factor = config.get("glance_factor", 1)
         self._setup_puzzle()
 
     def _setup_puzzle(self):
