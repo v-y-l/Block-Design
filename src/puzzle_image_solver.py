@@ -87,6 +87,14 @@ class PuzzleImageSolver:
     def get_puzzle(self):
         return [self.get_pattern(r, c) for (r, c) in self.unsolved_pieces]
 
+    ''' Get the patterns of pieces solved so far. '''
+    def get_solved_pieces_patterns(self):
+        solved_pieces_patterns = []
+        for pieces in sorted(self.solved_pieces):
+            block = self.solved_pieces[pieces]
+            solved_pieces_patterns.append(block.get_pattern())
+        return solved_pieces_patterns
+
     ''' Opens the puzzle as an image. '''
     def show_image(self, image=[]):
         if len(image) == 0: image = self.image
