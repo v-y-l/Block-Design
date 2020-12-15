@@ -7,9 +7,9 @@ Run python [main.py](https://github.com/v-y-l/Block-Design/blob/main/src/main.py
 Example:
 
 > python main.py --puzzle puzzle_b --face_search beeline_search --piece_search sequential_search
-> --puzzle_memory_loss .5 --puzzle_memory_loss_counter_limit 5 --csv stats.csv
+> --puzzle_memory_loss .5 --puzzle_memory_loss_counter_limit 5 --glance_factor 1 --csv stats.csv
 
-...solves puzzle_b.png using the beeline face search and sequential puzzle piece search, with a memory loss of 50% of the puzzle every 5 puzzle pieces solved, and dump the solution list to stats.csv.
+...solves puzzle_b.png using the beeline face search and sequential puzzle piece search, with a memory loss of 50% of the puzzle every 5 puzzle piece attempts, recall of 100% of the puzzle image's width and height from some top left corner of the puzzle, and dump the solution list to stats.csv.
 
 ![Demo gif](https://github.com/v-y-l/Block-Design/blob/main/assets/cli_demo.gif)
 
@@ -28,7 +28,10 @@ The search algorithm that returns the next piece of the puzzle to solve
 The rate of memory loss (0-100% of entire puzzle)
 
 #### --puzzle_memory_loss_counter_limit
-Memory loss kicks every time this limit of puzzle pieces is solved (resets every time the limit is achieved)
+Memory loss kicks every time this limit of puzzle piece attempts (resets every time the limit is achieved; sometimes, we get a puzzle piece of "UNKNOWN" and this constitutes an attempt)
+
+#### --glance_factor
+Memory recall is will be refreshed from some top left point (row, col), extending to the bottom right point (puzzle_height * glance_factor, puzzle_width * glance_factor)
 
 #### --csv
 Dumps the full list of solution actions to the specified file
