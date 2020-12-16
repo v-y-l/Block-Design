@@ -74,7 +74,15 @@ def sequential_search(problem):
 
 ''' Search the puzzle in sequential order, but skip unknown (forgotten) blocks. '''
 def skip_unknown_search(problem):
-    pass
+    for r, c in problem.unsolved_pieces:
+        unsolved_piece_pattern = problem.get_pattern(r, c)
+        if unsolved_piece_pattern != BlockPattern.Unknown:
+           return unsolved_piece_pattern, (r, c)
+
+    r, c = problem.unsolved_pieces[0]
+    problem.look_at_puzzle((r,c), problem.glance_factor)
+    unsolved_piece_pattern = problem.get_pattern(r, c)
+    return unsolved_piece_pattern, (r, c)
 
 face_search_options = {
     'random_search': random_search,
@@ -82,5 +90,6 @@ face_search_options = {
 }
 
 puzzle_piece_search_options = {
-    'sequential_search': sequential_search
+    'sequential_search': sequential_search,
+    'skip_unknown_search': skip_unknown_search,
 }

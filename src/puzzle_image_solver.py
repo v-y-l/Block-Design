@@ -37,6 +37,7 @@ class PuzzleImageSolver:
         self.puzzle_memory_loss_counter_limit = config.get(
             "puzzle_memory_loss_counter_limit", 0)
         self.glance_factor = config.get("glance_factor", 1.0)
+        self.action_counter = {}
         self._setup_puzzle()
 
     def _setup_puzzle(self):
@@ -73,7 +74,8 @@ class PuzzleImageSolver:
         self.puzzle_memory_loss_counter = 0
 
     ''' Adds to the history of executed actions on each block. '''
-    def add_to_history(self, row):
+    def add_to_history(self, row, action):
+        self.increment_action(action)
         self.action_history.append(row)
 
     ''' Simulates picking up a block '''
@@ -82,7 +84,8 @@ class PuzzleImageSolver:
             raise Exception("No more blocks in block bank")
         if not self.block or self.block.is_solved:
             self.block = self.block_bank.pop()
-            self.add_to_history(self.block.to_csv_row(BlockAction.PickUpFromBank))
+            self.add_to_history(self.block.to_csv_row(BlockAction.PickUpFromBank),
+                                BlockAction.PickUpFromBank)
 
     ''' Returns the puzzle piece in symbolic form given some r, c. '''
     def get_pattern(self, r, c):
@@ -123,6 +126,10 @@ class PuzzleImageSolver:
         tmp_image *= mask
         self.image = tmp_image.reshape(num_rows, num_cols, bgr_len)
 
+    ''' Increment the action counter by an action. '''
+    def increment_action(self, action):
+        self.action_counter[action] = self.action_counter.get(action, 0) + 1
+
     ''' Increment the turn counter in turns of forgetfulness. '''
     def increment_memory_loss_counter(self):
         if self.puzzle_memory_loss_counter_limit > 0:
@@ -134,7 +141,9 @@ class PuzzleImageSolver:
     ''' Take a look at the puzzle to refresh our memory of it. '''
     def look_at_puzzle(self, point, factor):
         row, col = point
-        self.add_to_history(self.to_csv_row(PuzzleAction.LookAtPuzzle, (row, col)))
+        self.add_to_history(
+            self.to_csv_row(PuzzleAction.LookAtPuzzle, (row, col)),
+            PuzzleAction.LookAtPuzzle)
         remembered_puzzle_pieces = (
             imread(self.image_path)[row:row + int(self.num_rows * factor),
                                     col:col + int(self.num_cols * factor)])

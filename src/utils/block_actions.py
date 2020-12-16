@@ -9,7 +9,11 @@ def go_to_face(block, next_face):
         block.face = next_face
         block.r, block.c = FACE_TO_COORDINATE[block.orientation][block.face]
         if block.puzzle:
-            block.puzzle.add_to_history(block.to_csv_row(NUMBER_TO_GO_TO_FACE_ACTION[next_face]))
+            go_to_action = NUMBER_TO_GO_TO_FACE_ACTION[next_face]
+            block.puzzle.add_to_history(
+                block.to_csv_row(go_to_action),
+                go_to_action
+            )
     else:
         raise Exception("Can't go from {} to {}".format(
             block.face, next_face))
@@ -19,11 +23,19 @@ def rotate_right(block):
     block.image = rot90(block.image, 3)
     block.orientation = block.block_orientations[block.orientation].next.val
     block.r, block.c = FACE_TO_COORDINATE[block.orientation][block.face]
-    if block.puzzle: block.puzzle.add_to_history(block.to_csv_row(BlockAction.RotateRight))
-        
+    if block.puzzle:
+        block.puzzle.add_to_history(
+            block.to_csv_row(BlockAction.RotateRight),
+            BlockAction.RotateRight
+        )
+
 ''' Change orientation, but stay on the same face. '''
 def rotate_left(block):
     block.image = rot90(block.image)
     block.orientation = block.block_orientations[block.orientation].prev.val
     block.r, block.c = FACE_TO_COORDINATE[block.orientation][block.face]
-    if block.puzzle: block.puzzle.add_to_history(block.to_csv_row(BlockAction.RotateLeft))
+    if block.puzzle:
+        block.puzzle.add_to_history(
+            block.to_csv_row(BlockAction.RotateLeft),
+            BlockAction.RotateLeft
+        )

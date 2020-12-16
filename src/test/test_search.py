@@ -1,7 +1,8 @@
 import unittest
 
 from block_image import BlockPattern, BlockImage
-from search import random_search, beeline_search
+from search import random_search, beeline_search, sequential_search, skip_unknown_search
+from puzzle_image_solver import PuzzleImageSolver, SearchType, PuzzleAction
 
 class TestSearchMethods(unittest.TestCase):
 
@@ -44,6 +45,42 @@ class TestSearchMethods(unittest.TestCase):
         for action in actions:
              block.execute_action(action)
         self.assertEqual(block.get_pattern(), BlockPattern.BlackTopLeftCornerSquare)
+
+    def test_sequential_search(self):
+        print('\nTests sequential search')
+        expected_patterns = [
+            BlockPattern.BlackTopLeftCornerSquare,
+            BlockPattern.BlackTopRightCornerSquare,
+            BlockPattern.BlackBottomLeftCornerSquare,
+            BlockPattern.BlackBottomRightCornerSquare,
+            BlockPattern.BlackBottomLeftCornerSquare,
+            BlockPattern.BlackBottomRightCornerSquare,
+            BlockPattern.BlackSquare,
+            BlockPattern.BlackTopLeftCornerSquare,
+            BlockPattern.BlackBottomRightCornerSquare,
+            BlockPattern.BlackSquare,
+            BlockPattern.BlackTopLeftCornerSquare,
+            BlockPattern.BlackTopRightCornerSquare,
+            BlockPattern.BlackTopLeftCornerSquare,
+            BlockPattern.BlackTopRightCornerSquare,
+            BlockPattern.BlackBottomLeftCornerSquare,
+            BlockPattern.BlackBottomRightCornerSquare,
+        ]
+        puzzle_solver = PuzzleImageSolver(
+            'puzzle_b', {
+                'solvers': {
+                    SearchType.Face: beeline_search,
+                    SearchType.PuzzlePiece: sequential_search
+                },
+                'puzzle_memory_loss_factor': .3,
+                'puzzle_memory_loss_counter_limit': 5,
+                'glance_factor': 1.0
+            })
+        puzzle_solver.solve()
+        actual_patterns = puzzle_solver.get_solved_pieces_patterns()
+        self.assertEqual(actual_patterns, expected_patterns)
+        self.assertTrue(
+            puzzle_solver.action_counter[PuzzleAction.LookAtPuzzle] >= 5)
 
 if __name__ == '__main__':
     unittest.main()
