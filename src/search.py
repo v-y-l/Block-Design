@@ -78,7 +78,6 @@ def skip_unknown_search(problem):
         unsolved_piece_pattern = problem.get_pattern(r, c)
         if unsolved_piece_pattern != BlockPattern.Unknown:
            return unsolved_piece_pattern, (r, c)
-
     r, c = problem.unsolved_pieces[0]
     problem.look_at_puzzle((r,c), problem.glance_factor)
     unsolved_piece_pattern = problem.get_pattern(r, c)

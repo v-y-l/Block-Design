@@ -170,7 +170,7 @@ class PuzzleImageSolver:
                 self.forget_puzzle()
             self.increment_memory_loss_counter()
 
-            unsolved_piece_pattern, unsolved_piece = sequential_search(self)
+            unsolved_piece_pattern, unsolved_piece = puzzle_piece_searcher(self)
             if unsolved_piece_pattern == BlockPattern.Unknown:
                 continue
             search_face_actions = face_searcher(

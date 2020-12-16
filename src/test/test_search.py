@@ -72,15 +72,52 @@ class TestSearchMethods(unittest.TestCase):
                     SearchType.Face: beeline_search,
                     SearchType.PuzzlePiece: sequential_search
                 },
-                'puzzle_memory_loss_factor': .3,
-                'puzzle_memory_loss_counter_limit': 5,
-                'glance_factor': 1.0
+                'puzzle_memory_loss_factor': 0.0,
+                'puzzle_memory_loss_counter_limit': 0,
+                'glance_factor': .25
             })
         puzzle_solver.solve()
         actual_patterns = puzzle_solver.get_solved_pieces_patterns()
         self.assertEqual(actual_patterns, expected_patterns)
-        self.assertTrue(
-            puzzle_solver.action_counter[PuzzleAction.LookAtPuzzle] >= 5)
+        self.assertEqual(
+            puzzle_solver.action_counter[PuzzleAction.LookAtPuzzle],
+            16
+        )
+
+    def test_skip_unknown_search(self):
+        print('\nTests skip unknown search')
+        expected_patterns = [
+            BlockPattern.BlackTopLeftCornerSquare,
+            BlockPattern.BlackTopRightCornerSquare,
+            BlockPattern.BlackBottomLeftCornerSquare,
+            BlockPattern.BlackBottomRightCornerSquare,
+            BlockPattern.BlackBottomLeftCornerSquare,
+            BlockPattern.BlackBottomRightCornerSquare,
+            BlockPattern.BlackSquare,
+            BlockPattern.BlackTopLeftCornerSquare,
+            BlockPattern.BlackBottomRightCornerSquare,
+            BlockPattern.BlackSquare,
+            BlockPattern.BlackTopLeftCornerSquare,
+            BlockPattern.BlackTopRightCornerSquare,
+            BlockPattern.BlackTopLeftCornerSquare,
+            BlockPattern.BlackTopRightCornerSquare,
+            BlockPattern.BlackBottomLeftCornerSquare,
+            BlockPattern.BlackBottomRightCornerSquare,
+        ]
+        puzzle_solver = PuzzleImageSolver(
+            'puzzle_b', {
+                'solvers': {
+                    SearchType.Face: beeline_search,
+                    SearchType.PuzzlePiece: skip_unknown_search
+                },
+                'puzzle_memory_loss_factor': 0.0,
+                'puzzle_memory_loss_counter_limit': 0,
+                'glance_factor': .5
+            })
+        puzzle_solver.solve()
+        actual_patterns = puzzle_solver.get_solved_pieces_patterns()
+        self.assertEqual(actual_patterns, expected_patterns)
+        self.assertEqual(puzzle_solver.action_counter[PuzzleAction.LookAtPuzzle], 4)
 
 if __name__ == '__main__':
     unittest.main()
