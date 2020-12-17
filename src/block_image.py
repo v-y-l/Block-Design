@@ -26,6 +26,7 @@ class BlockImage:
         self.r, self.c = FACE_TO_COORDINATE[self.orientation][face]
         self.puzzle = puzzle
         self.is_solved = False
+        self.visited = {}
         
         self._setup_block_data_structures()
         self._setup_go_to_data_structures()
@@ -148,13 +149,13 @@ class BlockImage:
         if action not in self.get_valid_actions():
             raise Exception("Invalid action {} for {}".format(action, str(self)))
         if action == BlockAction.RotateLeft:
-            return self.face_orientations[self.get_pattern()].prev.val
+            return self.get_face(), self.face_orientations[self.get_pattern()].prev.val
         elif action == BlockAction.RotateRight:
-            return self.face_orientations[self.get_pattern()].next.val
+            return self.get_face(), self.face_orientations[self.get_pattern()].next.val
         else:
             peek_face = self.action_to_face[action]
             peek_r, peek_c = FACE_TO_COORDINATE[self.orientation][peek_face]
-            return get_pattern(peek_r, peek_c, self.image)
+            return peek_face, get_pattern(peek_r, peek_c, self.image)
 
     def execute_action(self, action):
         self.actions[action]()

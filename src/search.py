@@ -31,9 +31,9 @@ def beeline_search(block, dest_pattern, actions):
         # Since the destination face is only two rotations away,
         # taking any default move ensures the ideal move in the next move.
         next_action = valid_actions[0]
-        if block.peek_action(valid_actions[0]) == dest_pattern:
+        if block.peek_action(valid_actions[0])[1] == dest_pattern:
             next_action = valid_actions[0]
-        elif block.peek_action(valid_actions[1]) == dest_pattern:
+        elif block.peek_action(valid_actions[1])[1] == dest_pattern:
             next_action = valid_actions[1]
         actions.append(next_action)
         block.execute_action(next_action)
@@ -46,9 +46,9 @@ def beeline_search(block, dest_pattern, actions):
         next_action = sample(valid_actions, 1)[0]
         for action in valid_actions:
             if (
-                    block.peek_action(action) == dest_pattern
+                    block.peek_action(action)[1] == dest_pattern
                     or is_triangle_pattern(dest_pattern)
-                    and is_triangle_pattern(block.peek_action(action))
+                    and is_triangle_pattern(block.peek_action(action)[1])
             ):
                 next_action = action
                 break
@@ -58,7 +58,22 @@ def beeline_search(block, dest_pattern, actions):
 
 ''' Never go to the same face with this search. '''
 def memory_search(block, dest_pattern, actions):
-    pass
+    # Do random search
+    if dest_pattern == BlockPattern.Unknown:
+        return []
+
+    if block.get_pattern() == dest_pattern:
+        return actions
+    valid_actions = block.get_valid_actions()
+    next_action = valid_actions.pop()
+    next_face, next_pattern = block.peek_action(next_action)
+    while (next_face, next_pattern) in block.visited:
+        next_action = valid_actions.pop()
+        next_face, next_pattern = block.peek_action(next_action)
+    actions.append(next_action)
+    block.execute_action(next_action)
+    block.visited.add((block.get_face(), block.get_pattern()))
+    return random_search(block, dest_pattern, actions)
 
 # Puzzle piece search functions, given some puzzle,
 # return the next puzzle piece to solve for.
@@ -84,6 +99,7 @@ def skip_unknown_search(problem):
     return unsolved_piece_pattern, (r, c)
 
 face_search_options = {
+    'memory_search': memory_search,
     'random_search': random_search,
     'beeline_search': beeline_search,
 }

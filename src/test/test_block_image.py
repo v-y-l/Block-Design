@@ -104,11 +104,11 @@ class TestBlockImageMethods(unittest.TestCase):
         block = BlockImage(6)
         self.assertEqual(block.get_pattern(), BlockPattern.BlackBottomRightCornerSquare)
         self.assertEqual(block.peek_action(BlockAction.RotateRight),
-            BlockPattern.BlackBottomLeftCornerSquare)
+            (6, BlockPattern.BlackBottomLeftCornerSquare))
         self.assertEqual(block.peek_action(BlockAction.RotateLeft),
-            BlockPattern.BlackTopRightCornerSquare)
+            (6, BlockPattern.BlackTopRightCornerSquare))
         self.assertEqual(block.peek_action(BlockAction.GoToFaceThree),
-            BlockPattern.WhiteSquare)
+            (3, BlockPattern.WhiteSquare))
         with self.assertRaises(Exception) as context:
             block.peek_action(BlockAction.GoToFaceOne)
         self.assertEqual(str(context.exception),

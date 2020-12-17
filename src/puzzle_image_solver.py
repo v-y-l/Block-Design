@@ -48,7 +48,7 @@ class PuzzleImageSolver:
             imread(self.image_path).shape)
 
         # Glance factor presumes that the puzzle is a square
-        min_glance_factor = float(BLOCK_LENGTH - 5) / self.num_cols
+        min_glance_factor = float(BLOCK_LENGTH - 10) / self.num_cols
         if not self.glance_factor >= min_glance_factor:
             raise Exception(
                 "Specified glance factor {} must be at least {} to cover one square".format(
