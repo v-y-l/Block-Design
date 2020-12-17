@@ -196,7 +196,7 @@ class PuzzleImageSolver:
                                     quoting=csv.QUOTE_NONE)
 
         for i, action in enumerate(self.action_history):
-            row = "{},{}".format(i+1, action)
+            row = "{},{}".format(i, action)
             if csv_writer:
                 csv_writer.writerow([row])
             else:

@@ -80,6 +80,9 @@ if __name__=="__main__":
         }
     }
     puzzle_solver = PuzzleImageSolver(puzzle_input, puzzle_solver_config)
+    puzzle_solver.action_history = [
+        "puzzle_name,{},face_search,{},puzzle_piece_search,{},memory_loss_factor,{},memory_loss_counter_limit,{},glance_factor,{}"
+        .format(puzzle_input, face_search_input, puzzle_piece_search_input, puzzle_memory_loss_factor_input, puzzle_memory_loss_counter_limit_input, glance_factor_input)] + puzzle_solver.action_history
 
     puzzle_solver.solve()
     puzzle_solver.print_history(csv_input)
