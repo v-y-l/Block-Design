@@ -61,10 +61,13 @@ def memory_search(block, dest_pattern, actions):
     # Do random search
     if dest_pattern == BlockPattern.Unknown:
         return []
-
     if block.get_pattern() == dest_pattern:
         return actions
-    valid_actions = block.get_valid_actions()
+
+    if (block.has_triangle_pattern() and is_triangle_pattern(dest_pattern)):
+        valid_actions = block.get_rotate_actions()
+    else:
+        valid_actions = block.get_go_to_actions()
     next_action = valid_actions.pop()
     next_face, next_pattern = block.peek_action(next_action)
     while (next_face, next_pattern) in block.visited:
@@ -73,7 +76,7 @@ def memory_search(block, dest_pattern, actions):
     actions.append(next_action)
     block.execute_action(next_action)
     block.visited.add((block.get_face(), block.get_pattern()))
-    return random_search(block, dest_pattern, actions)
+    return memory_search(block, dest_pattern, actions)
 
 # Puzzle piece search functions, given some puzzle,
 # return the next puzzle piece to solve for.

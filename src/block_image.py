@@ -26,7 +26,8 @@ class BlockImage:
         self.r, self.c = FACE_TO_COORDINATE[self.orientation][face]
         self.puzzle = puzzle
         self.is_solved = False
-        self.visited = {}
+        # Used by memory search
+        self.visited = {(self.get_face(), self.get_pattern())}
         
         self._setup_block_data_structures()
         self._setup_go_to_data_structures()

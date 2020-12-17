@@ -1,7 +1,7 @@
 import unittest
 
 from block_image import BlockPattern, BlockImage
-from search import random_search, beeline_search, sequential_search, skip_unknown_search
+from search import memory_search, random_search, beeline_search, sequential_search, skip_unknown_search
 from puzzle_image_solver import PuzzleImageSolver, SearchType, PuzzleAction
 
 class TestSearchMethods(unittest.TestCase):
@@ -9,6 +9,17 @@ class TestSearchMethods(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         print('\n\nSEARCH TESTS')
+
+    def test_memory_search(self):
+        print('\nTests memory search')
+        actions = memory_search(BlockImage(), BlockPattern.BlackTopLeftCornerSquare, [])
+        block = BlockImage()
+        visited = [(block.get_face(), block.get_pattern())]
+        for action in actions:
+            block.execute_action(action)
+            visited.append((block.get_face(), block.get_pattern()))
+        self.assertEqual(block.get_pattern(), BlockPattern.BlackTopLeftCornerSquare)
+        self.assertEqual(len(visited), len(set(visited)))
 
     def test_random_search(self):
         print('\nTests random search')
