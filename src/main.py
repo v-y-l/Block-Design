@@ -5,6 +5,7 @@ from utils.constants  import PUZZLE_OPTIONS
 from getopt import getopt, GetoptError
 from sys import argv, exit
 from threading import Thread
+from results_analyzer import ResultsAnalyzer
 
 if __name__=="__main__":
     puzzle_input = ''
@@ -24,17 +25,22 @@ if __name__=="__main__":
              "puzzle_memory_loss_counter_limit=",
              "glance_factor=",
              "iterations=",
-             "csv="])
+             "csv=",
+             "analyze="
+            ])
         for opt, arg in opts:
             if opt == '-h':
-                print('main.py --puzzle <[puzzle_a].png, [puzzle_b].png, or [puzzle_c].png> ' +
+                print('main.py --puzzle <[puzzle_a].png, ' +
+                      '[puzzle_b].png, or [puzzle_c].png> ' +
                       '--face_search <[random_search] or [beeline_search]> ' +
                       '--piece_search <sequential_search> ' +
                       '-puzzle_memory_loss <[0-1]> ' +
                       '-puzzle_memory_loss_counter_limit <[>0]> ' +
                       '-glance_factor <[0-1]> ' +
-                      '--iterations <[>0]> '
-                      '--csv <example.csv>')
+                      '--iterations <[>0]> ' +
+                      '--csv <example.csv>' +
+                      ' OR --analyze <example.csv>'
+                )
                 exit()
             elif opt in ("--puzzle"):
                 puzzle_input = arg
@@ -52,9 +58,16 @@ if __name__=="__main__":
                 iterations_input = int(arg)
             elif opt in ("--csv"):
                 csv_input = arg
+            elif opt in ("--analyze"):
+                analyze_csv_input = arg
     except GetoptError as err:
         print(err)
         exit(2)
+
+    if analyze_csv_input:
+        analyzer = ResultsAnalyzer(analyze_csv_input)
+        analyzer.analyze()
+        exit(0)
 
     if puzzle_input not in PUZZLE_OPTIONS:
         raise Exception("Specify puzzle: " +
