@@ -20,10 +20,10 @@ def random_search(block, dest_pattern, actions):
     block.execute_action(next_action)
     return random_search(block, dest_pattern, actions)
 
+''' Take the shortest path to find the destination pattern. '''
 def beeline_search(block, dest_pattern, actions):
     if dest_pattern == BlockPattern.Unknown:
         return []
-    ''' Take the shortest path to find the destination pattern. '''
     if block.get_pattern() == dest_pattern:
         return actions
     elif (block.has_triangle_pattern() and is_triangle_pattern(dest_pattern)):
@@ -63,7 +63,6 @@ def memory_search(block, dest_pattern, actions):
         return []
     if block.get_pattern() == dest_pattern:
         return actions
-
     if (block.has_triangle_pattern() and is_triangle_pattern(dest_pattern)):
         valid_actions = block.get_rotate_actions()
     else:
@@ -75,7 +74,6 @@ def memory_search(block, dest_pattern, actions):
         next_face, next_pattern = block.peek_action(next_action)
     actions.append(next_action)
     block.execute_action(next_action)
-    block.visited.add((block.get_face(), block.get_pattern()))
     return memory_search(block, dest_pattern, actions)
 
 # Puzzle piece search functions, given some puzzle,

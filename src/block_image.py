@@ -160,6 +160,7 @@ class BlockImage:
 
     def execute_action(self, action):
         self.actions[action]()
+        self.visited.add((self.get_face(), self.get_pattern()))
 
     def get_face(self):
         return self.face
