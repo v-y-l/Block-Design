@@ -1,0 +1,331 @@
+0,puzzle_name,puzzle_c,face_search,random_search,puzzle_piece_search,sequential_search,memory_loss_factor,0.5,memory_loss_counter_limit,3,glance_factor,0.32
+1,Puzzle,puzzle_c,action,LookAtPuzzle,point,(0, 0)
+2,Block,9,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+3,Block,9,Face,3,Pattern,WhiteSquare,action,GoToFaceThree
+4,Block,8,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+5,Puzzle,puzzle_c,action,LookAtPuzzle,point,(0, 170)
+6,Block,8,Face,3,Pattern,WhiteSquare,action,GoToFaceThree
+7,Block,8,Face,3,Pattern,WhiteSquare,action,RotateLeft
+8,Block,8,Face,4,Pattern,BlackSquare,action,GoToFaceFour
+9,Block,7,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+10,Puzzle,puzzle_c,action,LookAtPuzzle,point,(0, 340)
+11,Block,6,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+12,Puzzle,puzzle_c,action,LookAtPuzzle,point,(170, 0)
+13,Block,6,Face,3,Pattern,WhiteSquare,action,GoToFaceThree
+14,Block,6,Face,6,Pattern,BlackBottomRightCornerSquare,action,GoToFaceSix
+15,Block,6,Face,5,Pattern,BlackSquare,action,GoToFaceFive
+16,Block,5,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+17,Puzzle,puzzle_c,action,LookAtPuzzle,point,(170, 170)
+18,Block,5,Face,3,Pattern,WhiteSquare,action,GoToFaceThree
+19,Block,4,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+20,Puzzle,puzzle_c,action,LookAtPuzzle,point,(170, 340)
+21,Block,4,Face,3,Pattern,WhiteSquare,action,GoToFaceThree
+22,Block,3,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+23,Puzzle,puzzle_c,action,LookAtPuzzle,point,(340, 0)
+24,Block,3,Face,5,Pattern,BlackSquare,action,GoToFaceFive
+25,Block,3,Face,5,Pattern,BlackSquare,action,RotateLeft
+26,Block,3,Face,5,Pattern,BlackSquare,action,RotateRight
+27,Block,3,Face,5,Pattern,BlackSquare,action,RotateLeft
+28,Block,3,Face,2,Pattern,WhiteSquare,action,GoToFaceTwo
+29,Block,2,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+30,Puzzle,puzzle_c,action,LookAtPuzzle,point,(340, 170)
+31,Block,2,Face,1,Pattern,BlackBottomRightCornerSquare,action,RotateRight
+32,Block,2,Face,1,Pattern,BlackBottomLeftCornerSquare,action,RotateRight
+33,Block,2,Face,2,Pattern,WhiteSquare,action,GoToFaceTwo
+34,Block,2,Face,2,Pattern,WhiteSquare,action,RotateLeft
+35,Block,2,Face,2,Pattern,WhiteSquare,action,RotateRight
+36,Block,2,Face,2,Pattern,WhiteSquare,action,RotateRight
+37,Block,2,Face,2,Pattern,WhiteSquare,action,RotateRight
+38,Block,2,Face,3,Pattern,WhiteSquare,action,GoToFaceThree
+39,Block,2,Face,3,Pattern,WhiteSquare,action,RotateRight
+40,Block,2,Face,6,Pattern,BlackBottomLeftCornerSquare,action,GoToFaceSix
+41,Block,2,Face,4,Pattern,BlackSquare,action,GoToFaceFour
+42,Block,1,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+43,Puzzle,puzzle_c,action,LookAtPuzzle,point,(340, 340)
+44,Block,1,Face,2,Pattern,WhiteSquare,action,GoToFaceTwo
+45,Block,1,Face,5,Pattern,BlackSquare,action,GoToFaceFive
+46,Block,1,Face,1,Pattern,BlackTopRightCornerSquare,action,GoToFaceOne
+47,Block,1,Face,5,Pattern,BlackSquare,action,GoToFaceFive
+48,Block,1,Face,1,Pattern,BlackTopRightCornerSquare,action,GoToFaceOne
+49,Block,1,Face,2,Pattern,WhiteSquare,action,GoToFaceTwo
+50,Block,1,Face,6,Pattern,BlackBottomRightCornerSquare,action,GoToFaceSix
+0,puzzle_name,puzzle_c,face_search,random_search,puzzle_piece_search,sequential_search,memory_loss_factor,0.5,memory_loss_counter_limit,3,glance_factor,0.32
+1,Puzzle,puzzle_c,action,LookAtPuzzle,point,(0, 0)
+2,Block,9,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+3,Block,9,Face,1,Pattern,BlackBottomRightCornerSquare,action,RotateRight
+4,Block,9,Face,2,Pattern,WhiteSquare,action,GoToFaceTwo
+5,Block,8,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+6,Puzzle,puzzle_c,action,LookAtPuzzle,point,(0, 170)
+7,Block,8,Face,1,Pattern,BlackBottomRightCornerSquare,action,RotateRight
+8,Block,8,Face,2,Pattern,WhiteSquare,action,GoToFaceTwo
+9,Block,8,Face,3,Pattern,WhiteSquare,action,GoToFaceThree
+10,Block,8,Face,4,Pattern,BlackSquare,action,GoToFaceFour
+11,Block,7,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+12,Puzzle,puzzle_c,action,LookAtPuzzle,point,(0, 340)
+13,Block,6,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+14,Puzzle,puzzle_c,action,LookAtPuzzle,point,(170, 0)
+15,Block,6,Face,2,Pattern,WhiteSquare,action,GoToFaceTwo
+16,Block,6,Face,2,Pattern,WhiteSquare,action,RotateRight
+17,Block,6,Face,1,Pattern,BlackBottomRightCornerSquare,action,GoToFaceOne
+18,Block,6,Face,5,Pattern,BlackSquare,action,GoToFaceFive
+19,Block,5,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+20,Puzzle,puzzle_c,action,LookAtPuzzle,point,(170, 170)
+21,Block,5,Face,2,Pattern,WhiteSquare,action,GoToFaceTwo
+22,Block,4,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+23,Puzzle,puzzle_c,action,LookAtPuzzle,point,(170, 340)
+24,Block,4,Face,1,Pattern,BlackTopLeftCornerSquare,action,RotateLeft
+25,Block,4,Face,1,Pattern,BlackTopRightCornerSquare,action,RotateRight
+26,Block,4,Face,2,Pattern,WhiteSquare,action,GoToFaceTwo
+27,Block,3,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+28,Puzzle,puzzle_c,action,LookAtPuzzle,point,(340, 0)
+29,Block,3,Face,2,Pattern,WhiteSquare,action,GoToFaceTwo
+30,Block,2,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+31,Puzzle,puzzle_c,action,LookAtPuzzle,point,(340, 170)
+32,Block,2,Face,4,Pattern,BlackSquare,action,GoToFaceFour
+33,Block,1,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+34,Puzzle,puzzle_c,action,LookAtPuzzle,point,(340, 340)
+35,Block,1,Face,1,Pattern,BlackBottomRightCornerSquare,action,RotateRight
+0,puzzle_name,puzzle_c,face_search,random_search,puzzle_piece_search,sequential_search,memory_loss_factor,0.5,memory_loss_counter_limit,3,glance_factor,0.32
+1,Puzzle,puzzle_c,action,LookAtPuzzle,point,(0, 0)
+2,Block,9,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+3,Block,9,Face,3,Pattern,WhiteSquare,action,GoToFaceThree
+4,Block,8,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+5,Puzzle,puzzle_c,action,LookAtPuzzle,point,(0, 170)
+6,Block,8,Face,5,Pattern,BlackSquare,action,GoToFaceFive
+7,Block,7,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+8,Puzzle,puzzle_c,action,LookAtPuzzle,point,(0, 340)
+9,Block,6,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+10,Puzzle,puzzle_c,action,LookAtPuzzle,point,(170, 0)
+11,Block,6,Face,2,Pattern,WhiteSquare,action,GoToFaceTwo
+12,Block,6,Face,2,Pattern,WhiteSquare,action,RotateRight
+13,Block,6,Face,1,Pattern,BlackBottomRightCornerSquare,action,GoToFaceOne
+14,Block,6,Face,1,Pattern,BlackTopRightCornerSquare,action,RotateLeft
+15,Block,6,Face,4,Pattern,BlackSquare,action,GoToFaceFour
+16,Block,5,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+17,Puzzle,puzzle_c,action,LookAtPuzzle,point,(170, 170)
+18,Block,5,Face,1,Pattern,BlackTopLeftCornerSquare,action,RotateLeft
+19,Block,5,Face,4,Pattern,BlackSquare,action,GoToFaceFour
+20,Block,5,Face,1,Pattern,BlackTopLeftCornerSquare,action,GoToFaceOne
+21,Block,5,Face,4,Pattern,BlackSquare,action,GoToFaceFour
+22,Block,5,Face,3,Pattern,WhiteSquare,action,GoToFaceThree
+23,Block,4,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+24,Puzzle,puzzle_c,action,LookAtPuzzle,point,(170, 340)
+25,Block,4,Face,2,Pattern,WhiteSquare,action,GoToFaceTwo
+26,Block,3,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+27,Puzzle,puzzle_c,action,LookAtPuzzle,point,(340, 0)
+28,Block,3,Face,2,Pattern,WhiteSquare,action,GoToFaceTwo
+29,Block,2,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+30,Puzzle,puzzle_c,action,LookAtPuzzle,point,(340, 170)
+31,Block,2,Face,1,Pattern,BlackBottomRightCornerSquare,action,RotateRight
+32,Block,2,Face,2,Pattern,WhiteSquare,action,GoToFaceTwo
+33,Block,2,Face,1,Pattern,BlackBottomRightCornerSquare,action,GoToFaceOne
+34,Block,2,Face,3,Pattern,WhiteSquare,action,GoToFaceThree
+35,Block,2,Face,2,Pattern,WhiteSquare,action,GoToFaceTwo
+36,Block,2,Face,3,Pattern,WhiteSquare,action,GoToFaceThree
+37,Block,2,Face,4,Pattern,BlackSquare,action,GoToFaceFour
+38,Block,1,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+39,Puzzle,puzzle_c,action,LookAtPuzzle,point,(340, 340)
+40,Block,1,Face,4,Pattern,BlackSquare,action,GoToFaceFour
+41,Block,1,Face,5,Pattern,BlackSquare,action,GoToFaceFive
+42,Block,1,Face,6,Pattern,BlackBottomRightCornerSquare,action,GoToFaceSix
+0,puzzle_name,puzzle_c,face_search,random_search,puzzle_piece_search,sequential_search,memory_loss_factor,0.5,memory_loss_counter_limit,3,glance_factor,0.32
+1,Puzzle,puzzle_c,action,LookAtPuzzle,point,(0, 0)
+2,Block,9,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+3,Block,9,Face,5,Pattern,BlackSquare,action,GoToFaceFive
+4,Block,9,Face,5,Pattern,BlackSquare,action,RotateRight
+5,Block,9,Face,5,Pattern,BlackSquare,action,RotateLeft
+6,Block,9,Face,5,Pattern,BlackSquare,action,RotateRight
+7,Block,9,Face,6,Pattern,BlackBottomLeftCornerSquare,action,GoToFaceSix
+8,Block,9,Face,3,Pattern,WhiteSquare,action,GoToFaceThree
+9,Block,8,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+10,Puzzle,puzzle_c,action,LookAtPuzzle,point,(0, 170)
+11,Block,8,Face,1,Pattern,BlackBottomRightCornerSquare,action,RotateRight
+12,Block,8,Face,5,Pattern,BlackSquare,action,GoToFaceFive
+13,Block,7,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+14,Puzzle,puzzle_c,action,LookAtPuzzle,point,(0, 340)
+15,Block,6,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+16,Puzzle,puzzle_c,action,LookAtPuzzle,point,(170, 0)
+17,Block,6,Face,4,Pattern,BlackSquare,action,GoToFaceFour
+18,Block,5,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+19,Puzzle,puzzle_c,action,LookAtPuzzle,point,(170, 170)
+20,Block,5,Face,3,Pattern,WhiteSquare,action,GoToFaceThree
+21,Block,4,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+22,Puzzle,puzzle_c,action,LookAtPuzzle,point,(170, 340)
+23,Block,4,Face,2,Pattern,WhiteSquare,action,GoToFaceTwo
+24,Block,3,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+25,Puzzle,puzzle_c,action,LookAtPuzzle,point,(340, 0)
+26,Block,3,Face,3,Pattern,WhiteSquare,action,GoToFaceThree
+27,Block,2,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+28,Puzzle,puzzle_c,action,LookAtPuzzle,point,(340, 170)
+29,Block,2,Face,3,Pattern,WhiteSquare,action,GoToFaceThree
+30,Block,2,Face,3,Pattern,WhiteSquare,action,RotateRight
+31,Block,2,Face,1,Pattern,BlackBottomRightCornerSquare,action,GoToFaceOne
+32,Block,2,Face,1,Pattern,BlackBottomLeftCornerSquare,action,RotateRight
+33,Block,2,Face,1,Pattern,BlackTopLeftCornerSquare,action,RotateRight
+34,Block,2,Face,3,Pattern,WhiteSquare,action,GoToFaceThree
+35,Block,2,Face,6,Pattern,BlackTopRightCornerSquare,action,GoToFaceSix
+36,Block,2,Face,6,Pattern,BlackBottomRightCornerSquare,action,RotateRight
+37,Block,2,Face,6,Pattern,BlackTopRightCornerSquare,action,RotateLeft
+38,Block,2,Face,5,Pattern,BlackSquare,action,GoToFaceFive
+39,Block,1,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+40,Puzzle,puzzle_c,action,LookAtPuzzle,point,(340, 340)
+41,Block,1,Face,3,Pattern,WhiteSquare,action,GoToFaceThree
+42,Block,1,Face,6,Pattern,BlackBottomRightCornerSquare,action,GoToFaceSix
+0,puzzle_name,puzzle_c,face_search,random_search,puzzle_piece_search,sequential_search,memory_loss_factor,0.5,memory_loss_counter_limit,3,glance_factor,0.32
+1,Puzzle,puzzle_c,action,LookAtPuzzle,point,(0, 0)
+2,Block,9,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+3,Block,9,Face,4,Pattern,BlackSquare,action,GoToFaceFour
+4,Block,9,Face,5,Pattern,BlackSquare,action,GoToFaceFive
+5,Block,9,Face,4,Pattern,BlackSquare,action,GoToFaceFour
+6,Block,9,Face,4,Pattern,BlackSquare,action,RotateRight
+7,Block,9,Face,1,Pattern,BlackBottomRightCornerSquare,action,GoToFaceOne
+8,Block,9,Face,2,Pattern,WhiteSquare,action,GoToFaceTwo
+9,Block,8,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+10,Puzzle,puzzle_c,action,LookAtPuzzle,point,(0, 170)
+11,Block,8,Face,1,Pattern,BlackTopLeftCornerSquare,action,RotateLeft
+12,Block,8,Face,2,Pattern,WhiteSquare,action,GoToFaceTwo
+13,Block,8,Face,3,Pattern,WhiteSquare,action,GoToFaceThree
+14,Block,8,Face,6,Pattern,BlackTopRightCornerSquare,action,GoToFaceSix
+15,Block,8,Face,5,Pattern,BlackSquare,action,GoToFaceFive
+16,Block,7,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+17,Puzzle,puzzle_c,action,LookAtPuzzle,point,(0, 340)
+18,Block,6,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+19,Puzzle,puzzle_c,action,LookAtPuzzle,point,(170, 0)
+20,Block,6,Face,1,Pattern,BlackTopLeftCornerSquare,action,RotateLeft
+21,Block,6,Face,4,Pattern,BlackSquare,action,GoToFaceFour
+22,Block,5,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+23,Puzzle,puzzle_c,action,LookAtPuzzle,point,(170, 170)
+24,Block,5,Face,1,Pattern,BlackBottomRightCornerSquare,action,RotateRight
+25,Block,5,Face,1,Pattern,BlackTopRightCornerSquare,action,RotateLeft
+26,Block,5,Face,1,Pattern,BlackBottomRightCornerSquare,action,RotateRight
+27,Block,5,Face,2,Pattern,WhiteSquare,action,GoToFaceTwo
+28,Block,4,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+29,Puzzle,puzzle_c,action,LookAtPuzzle,point,(170, 340)
+30,Block,4,Face,2,Pattern,WhiteSquare,action,GoToFaceTwo
+31,Block,3,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+32,Puzzle,puzzle_c,action,LookAtPuzzle,point,(340, 0)
+33,Block,3,Face,1,Pattern,BlackTopLeftCornerSquare,action,RotateLeft
+34,Block,3,Face,1,Pattern,BlackBottomLeftCornerSquare,action,RotateLeft
+35,Block,3,Face,2,Pattern,WhiteSquare,action,GoToFaceTwo
+36,Block,2,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+37,Puzzle,puzzle_c,action,LookAtPuzzle,point,(340, 170)
+38,Block,2,Face,3,Pattern,WhiteSquare,action,GoToFaceThree
+39,Block,2,Face,2,Pattern,WhiteSquare,action,GoToFaceTwo
+40,Block,2,Face,6,Pattern,BlackBottomRightCornerSquare,action,GoToFaceSix
+41,Block,2,Face,2,Pattern,WhiteSquare,action,GoToFaceTwo
+42,Block,2,Face,1,Pattern,BlackTopRightCornerSquare,action,GoToFaceOne
+43,Block,2,Face,5,Pattern,BlackSquare,action,GoToFaceFive
+44,Block,1,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+45,Puzzle,puzzle_c,action,LookAtPuzzle,point,(340, 340)
+46,Block,1,Face,1,Pattern,BlackTopLeftCornerSquare,action,RotateLeft
+47,Block,1,Face,1,Pattern,BlackBottomLeftCornerSquare,action,RotateLeft
+48,Block,1,Face,4,Pattern,BlackSquare,action,GoToFaceFour
+49,Block,1,Face,3,Pattern,WhiteSquare,action,GoToFaceThree
+50,Block,1,Face,2,Pattern,WhiteSquare,action,GoToFaceTwo
+51,Block,1,Face,6,Pattern,BlackTopLeftCornerSquare,action,GoToFaceSix
+52,Block,1,Face,5,Pattern,BlackSquare,action,GoToFaceFive
+53,Block,1,Face,2,Pattern,WhiteSquare,action,GoToFaceTwo
+54,Block,1,Face,5,Pattern,BlackSquare,action,GoToFaceFive
+55,Block,1,Face,5,Pattern,BlackSquare,action,RotateLeft
+56,Block,1,Face,5,Pattern,BlackSquare,action,RotateRight
+57,Block,1,Face,4,Pattern,BlackSquare,action,GoToFaceFour
+58,Block,1,Face,3,Pattern,WhiteSquare,action,GoToFaceThree
+59,Block,1,Face,6,Pattern,BlackTopLeftCornerSquare,action,GoToFaceSix
+60,Block,1,Face,6,Pattern,BlackTopRightCornerSquare,action,RotateRight
+61,Block,1,Face,2,Pattern,WhiteSquare,action,GoToFaceTwo
+62,Block,1,Face,6,Pattern,BlackTopRightCornerSquare,action,GoToFaceSix
+63,Block,1,Face,3,Pattern,WhiteSquare,action,GoToFaceThree
+64,Block,1,Face,6,Pattern,BlackTopRightCornerSquare,action,GoToFaceSix
+65,Block,1,Face,6,Pattern,BlackBottomRightCornerSquare,action,RotateRight
+0,puzzle_name,puzzle_c,face_search,random_search,puzzle_piece_search,sequential_search,memory_loss_factor,0.5,memory_loss_counter_limit,3,glance_factor,0.32
+1,Puzzle,puzzle_c,action,LookAtPuzzle,point,(0, 0)
+2,Block,9,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+3,Block,9,Face,1,Pattern,BlackBottomRightCornerSquare,action,RotateRight
+4,Block,9,Face,1,Pattern,BlackTopRightCornerSquare,action,RotateLeft
+5,Block,9,Face,2,Pattern,WhiteSquare,action,GoToFaceTwo
+6,Block,8,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+7,Puzzle,puzzle_c,action,LookAtPuzzle,point,(0, 170)
+8,Block,8,Face,2,Pattern,WhiteSquare,action,GoToFaceTwo
+9,Block,8,Face,5,Pattern,BlackSquare,action,GoToFaceFive
+10,Block,7,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+11,Puzzle,puzzle_c,action,LookAtPuzzle,point,(0, 340)
+12,Block,6,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+13,Puzzle,puzzle_c,action,LookAtPuzzle,point,(170, 0)
+14,Block,6,Face,4,Pattern,BlackSquare,action,GoToFaceFour
+15,Block,5,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+16,Puzzle,puzzle_c,action,LookAtPuzzle,point,(170, 170)
+17,Block,5,Face,1,Pattern,BlackBottomRightCornerSquare,action,RotateRight
+18,Block,5,Face,1,Pattern,BlackBottomLeftCornerSquare,action,RotateRight
+19,Block,5,Face,3,Pattern,WhiteSquare,action,GoToFaceThree
+20,Block,4,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+21,Puzzle,puzzle_c,action,LookAtPuzzle,point,(170, 340)
+22,Block,4,Face,3,Pattern,WhiteSquare,action,GoToFaceThree
+23,Block,3,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+24,Puzzle,puzzle_c,action,LookAtPuzzle,point,(340, 0)
+25,Block,3,Face,5,Pattern,BlackSquare,action,GoToFaceFive
+26,Block,3,Face,2,Pattern,WhiteSquare,action,GoToFaceTwo
+27,Block,2,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+28,Puzzle,puzzle_c,action,LookAtPuzzle,point,(340, 170)
+29,Block,2,Face,1,Pattern,BlackBottomRightCornerSquare,action,RotateRight
+30,Block,2,Face,4,Pattern,BlackSquare,action,GoToFaceFour
+31,Block,1,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+32,Puzzle,puzzle_c,action,LookAtPuzzle,point,(340, 340)
+33,Block,1,Face,3,Pattern,WhiteSquare,action,GoToFaceThree
+34,Block,1,Face,4,Pattern,BlackSquare,action,GoToFaceFour
+35,Block,1,Face,4,Pattern,BlackSquare,action,RotateRight
+36,Block,1,Face,1,Pattern,BlackBottomRightCornerSquare,action,GoToFaceOne
+0,puzzle_name,puzzle_c,face_search,random_search,puzzle_piece_search,sequential_search,memory_loss_factor,0.5,memory_loss_counter_limit,3,glance_factor,0.32
+1,Puzzle,puzzle_c,action,LookAtPuzzle,point,(0, 0)
+2,Block,9,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+3,Block,9,Face,5,Pattern,BlackSquare,action,GoToFaceFive
+4,Block,9,Face,4,Pattern,BlackSquare,action,GoToFaceFour
+5,Block,9,Face,4,Pattern,BlackSquare,action,RotateRight
+6,Block,9,Face,4,Pattern,BlackSquare,action,RotateLeft
+7,Block,9,Face,3,Pattern,WhiteSquare,action,GoToFaceThree
+8,Block,8,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+9,Puzzle,puzzle_c,action,LookAtPuzzle,point,(0, 170)
+10,Block,8,Face,1,Pattern,BlackTopLeftCornerSquare,action,RotateLeft
+11,Block,8,Face,1,Pattern,BlackBottomLeftCornerSquare,action,RotateLeft
+12,Block,8,Face,2,Pattern,WhiteSquare,action,GoToFaceTwo
+13,Block,8,Face,6,Pattern,BlackTopLeftCornerSquare,action,GoToFaceSix
+14,Block,8,Face,3,Pattern,WhiteSquare,action,GoToFaceThree
+15,Block,8,Face,3,Pattern,WhiteSquare,action,RotateRight
+16,Block,8,Face,1,Pattern,BlackTopLeftCornerSquare,action,GoToFaceOne
+17,Block,8,Face,1,Pattern,BlackTopRightCornerSquare,action,RotateRight
+18,Block,8,Face,3,Pattern,WhiteSquare,action,GoToFaceThree
+19,Block,8,Face,3,Pattern,WhiteSquare,action,RotateLeft
+20,Block,8,Face,6,Pattern,BlackTopRightCornerSquare,action,GoToFaceSix
+21,Block,8,Face,4,Pattern,BlackSquare,action,GoToFaceFour
+22,Block,7,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+23,Puzzle,puzzle_c,action,LookAtPuzzle,point,(0, 340)
+24,Block,6,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+25,Puzzle,puzzle_c,action,LookAtPuzzle,point,(170, 0)
+26,Block,6,Face,3,Pattern,WhiteSquare,action,GoToFaceThree
+27,Block,6,Face,2,Pattern,WhiteSquare,action,GoToFaceTwo
+28,Block,6,Face,3,Pattern,WhiteSquare,action,GoToFaceThree
+29,Block,6,Face,2,Pattern,WhiteSquare,action,GoToFaceTwo
+30,Block,6,Face,5,Pattern,BlackSquare,action,GoToFaceFive
+31,Block,5,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+32,Puzzle,puzzle_c,action,LookAtPuzzle,point,(170, 170)
+33,Block,5,Face,1,Pattern,BlackBottomRightCornerSquare,action,RotateRight
+34,Block,5,Face,1,Pattern,BlackTopRightCornerSquare,action,RotateLeft
+35,Block,5,Face,2,Pattern,WhiteSquare,action,GoToFaceTwo
+36,Block,4,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+37,Puzzle,puzzle_c,action,LookAtPuzzle,point,(170, 340)
+38,Block,4,Face,5,Pattern,BlackSquare,action,GoToFaceFive
+39,Block,4,Face,4,Pattern,BlackSquare,action,GoToFaceFour
+40,Block,4,Face,4,Pattern,BlackSquare,action,RotateLeft
+41,Block,4,Face,5,Pattern,BlackSquare,action,GoToFaceFive
+42,Block,4,Face,6,Pattern,BlackTopRightCornerSquare,action,GoToFaceSix
+43,Block,4,Face,3,Pattern,WhiteSquare,action,GoToFaceThree
+44,Block,3,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+45,Puzzle,puzzle_c,action,LookAtPuzzle,point,(340, 0)
+46,Block,3,Face,5,Pattern,BlackSquare,action,GoToFaceFive
+47,Block,3,Face,2,Pattern,WhiteSquare,action,GoToFaceTwo
+48,Block,2,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+49,Puzzle,puzzle_c,action,LookAtPuzzle,point,(340, 170)
+50,Block,2,Face,1,Pattern,BlackBottomRightCornerSquare,action,RotateRight
+51,Block,2,Face,4,Pattern,BlackSquare,action,GoToFaceFour
+52,Block,1,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+53,Puzzle,puzzle_c,action,LookAtPuzzle,point,(340, 340)
+54,Block,1,Face,1,Pattern,BlackBottomRightCornerSquare,action,RotateRight
