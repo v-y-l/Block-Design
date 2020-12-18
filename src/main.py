@@ -13,6 +13,7 @@ if __name__=="__main__":
     puzzle_memory_loss_factor_input = 0.0
     puzzle_memory_loss_counter_limit_input = 0
     glance_factor_input = 1
+    iterations_input = 1
     try:
         opts, args = getopt(argv[1:], "h",
             ["puzzle=",
@@ -21,6 +22,7 @@ if __name__=="__main__":
              "puzzle_memory_loss=",
              "puzzle_memory_loss_counter_limit=",
              "glance_factor=",
+             "iterations=",
              "csv="])
         for opt, arg in opts:
             if opt == '-h':
@@ -30,6 +32,7 @@ if __name__=="__main__":
                       '-puzzle_memory_loss <[0-1]> ' +
                       '-puzzle_memory_loss_counter_limit <[>0]> ' +
                       '-glance_factor <[0-1]> ' +
+                      '--iterations <[>0]> '
                       '--csv <example.csv>')
                 exit()
             elif opt in ("--puzzle"):
@@ -44,6 +47,8 @@ if __name__=="__main__":
                 puzzle_memory_loss_counter_limit_input = int(arg)
             elif opt in ("--glance_factor"):
                 glance_factor_input = float(arg)
+            elif opt in ("--iterations"):
+                iterations_input = int(arg)
             elif opt in ("--csv"):
                 csv_input = arg
     except GetoptError as err:
@@ -79,10 +84,20 @@ if __name__=="__main__":
             SearchType.PuzzlePiece: puzzle_piece_search
         }
     }
-    puzzle_solver = PuzzleImageSolver(puzzle_input, puzzle_solver_config)
-    puzzle_solver.action_history = [
-        "puzzle_name,{},face_search,{},puzzle_piece_search,{},memory_loss_factor,{},memory_loss_counter_limit,{},glance_factor,{}"
-        .format(puzzle_input, face_search_input, puzzle_piece_search_input, puzzle_memory_loss_factor_input, puzzle_memory_loss_counter_limit_input, glance_factor_input)] + puzzle_solver.action_history
 
-    puzzle_solver.solve()
-    puzzle_solver.print_history(csv_input)
+    for _ in range(iterations_input):
+        puzzle_solver = PuzzleImageSolver(puzzle_input, puzzle_solver_config)
+        puzzle_solver.action_history = [
+            "puzzle_name,{},face_search,{},puzzle_piece_search,{},memory_loss_factor,{},memory_loss_counter_limit,{},glance_factor,{}"
+            .format(puzzle_input,
+                    face_search_input,
+                    puzzle_piece_search_input,
+                    puzzle_memory_loss_factor_input,
+                    puzzle_memory_loss_counter_limit_input,
+                    glance_factor_input)] + puzzle_solver.action_history
+
+        puzzle_solver.solve()
+        puzzle_solver.print_history(csv_input)
+
+    if csv_input:
+        print("Solution written to {}".format(csv_input))

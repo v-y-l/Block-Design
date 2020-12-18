@@ -190,7 +190,7 @@ class PuzzleImageSolver:
     def print_history(self, csv_path=''):
         csv_writer = None
         if csv_path != '':
-            file = open(csv_path, 'w')
+            file = open(csv_path, 'a')
             csv_writer = csv.writer(file,
                                     delimiter='|', # A hack, since our true delimiter is ","
                                     quoting=csv.QUOTE_NONE)
@@ -203,7 +203,6 @@ class PuzzleImageSolver:
                 print(row)
 
         if csv_writer:
-            print("Solution written to {}".format(csv_path))
             file.close()
 
     def __str__(self):
