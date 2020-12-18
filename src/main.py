@@ -62,10 +62,11 @@ if __name__=="__main__":
 
     if face_search_input not in face_search_options:
         raise Exception("Specify face search: " +
-                        "random_search or beeline_search")
+                        "random_search, memory_search, or beeline_search")
 
     if puzzle_piece_search_input not in puzzle_piece_search_options:
-        raise Exception("Specify puzzle piece search: [s]equential_search")
+        raise Exception("Specify puzzle piece search: " +
+                        "sequential_search or skip_unknown_search]")
 
     if not 0 <= puzzle_memory_loss_factor_input <= 1:
         raise Exception("Specify puzzle memory loss factor: 0-1")
