@@ -86,6 +86,14 @@ if __name__=="__main__":
         }
     }
 
+    if csv_input == "default":
+        csv_input = "{}_{}_{}_{}_{}_{}.csv".format(puzzle_input,
+                face_search_input,
+                puzzle_piece_search_input,
+                puzzle_memory_loss_factor_input,
+                puzzle_memory_loss_counter_limit_input,
+                glance_factor_input)
+
     for _ in range(iterations_input):
         def puzzle_solver_thread():
             puzzle_solver = PuzzleImageSolver(puzzle_input, puzzle_solver_config)
