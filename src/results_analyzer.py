@@ -26,5 +26,6 @@ class ResultsAnalyzer:
             else:
                 self.stats["mean_actions"] += 1
         self.stats["mean_actions"] /= self.stats["num_runs"]
+
+    def printStats(self):
         print(self.stats)
-                

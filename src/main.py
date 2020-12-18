@@ -68,6 +68,7 @@ if __name__=="__main__":
     if analyze_csv_input:
         analyzer = ResultsAnalyzer(analyze_csv_input)
         analyzer.analyze()
+        analyzer.printStats()
         exit(0)
 
     if puzzle_input not in PUZZLE_OPTIONS:
