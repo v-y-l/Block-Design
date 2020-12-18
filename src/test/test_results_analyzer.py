@@ -3,6 +3,10 @@ from results_analyzer import ResultsAnalyzer
 
 class TestResultsAnalyzerMethods(unittest.TestCase):
 
+    @classmethod
+    def setUpClass(cls):
+        print('\n\nANALYZER TESTS')
+
     def test_simple_analysis(self):
         print('\nTests small run')
         analyzer = ResultsAnalyzer("past_runs/test_run.csv")
