@@ -142,7 +142,7 @@ class PuzzleImageSolver:
     def look_at_puzzle(self, point, factor):
         row, col = point
         self.add_to_history(
-            self.to_csv_row(PuzzleAction.LookAtPuzzle, (row, col)),
+            self.to_csv_row(PuzzleAction.LookAtPuzzle, "{}|{}".format(row, col)),
             PuzzleAction.LookAtPuzzle)
         remembered_puzzle_pieces = (
             imread(self.image_path)[row:row + int(self.num_rows * factor),
@@ -184,7 +184,7 @@ class PuzzleImageSolver:
 
     ''' Prints a puzzle action in csv readable form. '''
     def to_csv_row(self, action, point):
-        return str(self) + ",action," + action.name + ",point," + str(point)
+        return str(self) + ",action," + action.name + ",point," + point
 
     ''' Prints out all executed actions. '''
     def print_history(self, csv_path=''):
@@ -192,7 +192,7 @@ class PuzzleImageSolver:
         if csv_path != '':
             file = open(csv_path, 'a')
             csv_writer = csv.writer(file,
-                                    delimiter='|', # A hack, since our true delimiter is ","
+                                    delimiter='&', # A hack, since our true delimiter is ","
                                     quoting=csv.QUOTE_NONE)
 
         for i, action in enumerate(self.action_history):
