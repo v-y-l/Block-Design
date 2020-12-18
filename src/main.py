@@ -4,6 +4,7 @@ from block_image import BlockPattern
 from utils.constants  import PUZZLE_OPTIONS
 from getopt import getopt, GetoptError
 from sys import argv, exit
+from threading import Thread
 
 if __name__=="__main__":
     puzzle_input = ''
@@ -86,18 +87,21 @@ if __name__=="__main__":
     }
 
     for _ in range(iterations_input):
-        puzzle_solver = PuzzleImageSolver(puzzle_input, puzzle_solver_config)
-        puzzle_solver.action_history = [
+        def puzzle_solver_thread():
+            puzzle_solver = PuzzleImageSolver(puzzle_input, puzzle_solver_config)
+            puzzle_solver.action_history = [
             "puzzle_name,{},face_search,{},puzzle_piece_search,{},memory_loss_factor,{},memory_loss_counter_limit,{},glance_factor,{}"
-            .format(puzzle_input,
-                    face_search_input,
-                    puzzle_piece_search_input,
-                    puzzle_memory_loss_factor_input,
-                    puzzle_memory_loss_counter_limit_input,
-                    glance_factor_input)] + puzzle_solver.action_history
-
-        puzzle_solver.solve()
-        puzzle_solver.print_history(csv_input)
+                .format(puzzle_input,
+                        face_search_input,
+                        puzzle_piece_search_input,
+                        puzzle_memory_loss_factor_input,
+                        puzzle_memory_loss_counter_limit_input,
+                        glance_factor_input)] + puzzle_solver.action_history
+            puzzle_solver.solve()
+            puzzle_solver.print_history(csv_input)
+        thread = Thread(target = puzzle_solver_thread)
+        thread.start()
+        thread.join()
 
     if csv_input:
         print("Solution written to {}".format(csv_input))
