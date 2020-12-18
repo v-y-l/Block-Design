@@ -16,6 +16,7 @@ if __name__=="__main__":
     puzzle_memory_loss_counter_limit_input = 0
     glance_factor_input = 1
     iterations_input = 1
+    analyze_csv_input = None
     try:
         opts, args = getopt(argv[1:], "h",
             ["puzzle=",
