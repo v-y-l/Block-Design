@@ -192,7 +192,8 @@ class PuzzleImageSolver:
         if csv_path != '':
             file = open(csv_path, 'a')
             csv_writer = csv.writer(file,
-                                    delimiter='&', # A hack, since our true delimiter is ","
+                                    # A hack, since our true delimiter is ","
+                                    delimiter='&',
                                     quoting=csv.QUOTE_NONE)
 
         for i, action in enumerate(self.action_history):
