@@ -125,7 +125,7 @@ class PuzzleImageSolver:
                 bottom_r = base_r + BLOCK_LENGTH *.75
                 bottom_c = base_c + BLOCK_LENGTH *.75
                 draw = ImageDraw.Draw(image)
-                draw.ellipse((top_r, top_c, bottom_r, bottom_c),
+                draw.ellipse((top_c, top_r, bottom_c, bottom_r),
                              fill = 'blue', outline ='blue')
         image.save(name, "PNG")
 
