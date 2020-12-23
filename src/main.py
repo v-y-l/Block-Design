@@ -16,6 +16,7 @@ if __name__=="__main__":
     puzzle_memory_loss_counter_limit_input = 0
     glance_factor_input = 1
     iterations_input = 1
+    state_image_path_input = ''
     analyze_csv_input = None
     try:
         opts, args = getopt(argv[1:], "h",
@@ -27,7 +28,8 @@ if __name__=="__main__":
              "glance_factor=",
              "iterations=",
              "csv=",
-             "analyze="
+             "analyze=",
+             "state_image_path=",
             ])
         for opt, arg in opts:
             if opt == '-h':
@@ -39,7 +41,8 @@ if __name__=="__main__":
                       '-puzzle_memory_loss_counter_limit <[>0]> ' +
                       '-glance_factor <[0-1]> ' +
                       '--iterations <[>0]> ' +
-                      '--csv <example.csv>' +
+                      '--csv <example.csv> ' +
+                      '--state_image_path <directory>' +
                       ' OR --analyze <example.csv>'
                 )
                 exit()
@@ -59,6 +62,8 @@ if __name__=="__main__":
                 iterations_input = int(arg)
             elif opt in ("--csv"):
                 csv_input = arg
+            elif opt in ("--state_image_path"):
+                state_image_path_input = arg
             elif opt in ("--analyze"):
                 analyze_csv_input = arg
     except GetoptError as err:
@@ -99,7 +104,8 @@ if __name__=="__main__":
         'solvers': {
             SearchType.Face: face_search,
             SearchType.PuzzlePiece: puzzle_piece_search
-        }
+        },
+        'state_image_path': state_image_path_input
     }
 
     if csv_input == "default":
@@ -115,6 +121,7 @@ if __name__=="__main__":
     for _ in range(iterations_input):
         def puzzle_solver_thread():
             puzzle_solver = PuzzleImageSolver(puzzle_input, puzzle_solver_config)
+            puzzle_solver.solve()
             puzzle_solver.action_history = [
             "puzzle_name,{},face_search,{},puzzle_piece_search,{},memory_loss_factor,{},memory_loss_counter_limit,{},glance_factor,{}"
                 .format(puzzle_input,
@@ -123,7 +130,6 @@ if __name__=="__main__":
                         puzzle_memory_loss_factor_input,
                         puzzle_memory_loss_counter_limit_input,
                         glance_factor_input)] + puzzle_solver.action_history
-            puzzle_solver.solve()
             puzzle_solver.print_history(csv_input)
         thread = Thread(target = puzzle_solver_thread)
         thread.start()

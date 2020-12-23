@@ -26,6 +26,8 @@ class PuzzleImageSolver:
                      # Value from 0 to 1, represents % of memory recovered
                      # from the puzzle
                      'glance_factor': 1.0,
+                     # If provided, saves snapshot of each state to the path
+                     'state_image_path': '',
                  }
     ):
         self.name = name or 'puzzle_a'
@@ -38,6 +40,7 @@ class PuzzleImageSolver:
             "puzzle_memory_loss_counter_limit", 0)
         self.glance_factor = config.get("glance_factor", 1.0)
         self.action_counter = {}
+        self.state_image_path = config.get("state_image_path", "")
         self._setup_puzzle()
 
     def _setup_puzzle(self):
@@ -77,6 +80,10 @@ class PuzzleImageSolver:
     def add_to_history(self, row, action):
         self.increment_action(action)
         self.action_history.append(row)
+        action_index = len(self.action_history)
+        if self.state_image_path:
+            self.save_puzzle_image("{}/puzzle_image_{}.png".format(
+                self.state_image_path, action_index))
 
     ''' Simulates picking up a block '''
     def pick_up_next_block(self):
@@ -106,6 +113,10 @@ class PuzzleImageSolver:
             block = self.solved_pieces[pieces]
             solved_pieces_patterns.append(block.get_pattern())
         return solved_pieces_patterns
+
+    ''' Save the puzzle as an image. '''
+    def save_puzzle_image(self, name):
+        Image.fromarray(cvtColor(self.image, COLOR_BGR2RGB), 'RGB').save(name, "PNG")
 
     ''' Opens the puzzle as an image. '''
     def show_image(self, image=[]):
