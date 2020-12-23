@@ -202,6 +202,11 @@ class PuzzleImageSolver:
             self.block.is_solved = True
             self.unsolved_pieces.remove(unsolved_piece)
             self.solved_pieces[unsolved_piece] = self.block
+
+        if self.state_image_path:
+            self.save_puzzle_image("{}/puzzle_image_{}.png".format(
+                self.state_image_path, final)
+
         return actions_per_block
 
     ''' Prints a puzzle action in csv readable form. '''
