@@ -1,5 +1,5 @@
 from cv2 import imread, cvtColor, COLOR_BGR2RGB
-from PIL import Image
+from PIL import Image, ImageDraw
 from utils.constants import BLOCK_LENGTH, EDGE_OFFSET, PUZZLE_OPTIONS
 from utils.enums import BlockPattern, SearchType, BlockAction, PuzzleAction
 from utils.helper import get_pattern
@@ -42,6 +42,7 @@ class PuzzleImageSolver:
         self.action_counter = {}
         self.state_image_path = config.get("state_image_path", "")
         self._setup_puzzle()
+        self.look_at_puzzle((0,0), self.glance_factor)
 
     def _setup_puzzle(self):
         self.block = None
@@ -62,7 +63,6 @@ class PuzzleImageSolver:
                                self.num_cols,
                                self.bgr_len),
                               np.uint8)
-        self.look_at_puzzle((0,0), self.glance_factor)
 
         self.unsolved_pieces = [] # Represents as top left coordinate
         for r in range(0, self.num_rows - EDGE_OFFSET, BLOCK_LENGTH):
@@ -116,7 +116,18 @@ class PuzzleImageSolver:
 
     ''' Save the puzzle as an image. '''
     def save_puzzle_image(self, name):
-        Image.fromarray(cvtColor(self.image, COLOR_BGR2RGB), 'RGB').save(name, "PNG")
+        image = Image.fromarray(cvtColor(self.image, COLOR_BGR2RGB), 'RGB')
+        for piece in self.solved_pieces:
+            if self.solved_pieces[piece]:
+                base_r, base_c = piece
+                top_r = base_r + BLOCK_LENGTH *.25
+                top_c = base_c + BLOCK_LENGTH *.25 
+                bottom_r = base_r + BLOCK_LENGTH *.75
+                bottom_c = base_c + BLOCK_LENGTH *.75
+                draw = ImageDraw.Draw(image)
+                draw.ellipse((top_r, top_c, bottom_r, bottom_c),
+                             fill = 'blue', outline ='blue')
+        image.save(name, "PNG")
 
     ''' Opens the puzzle as an image. '''
     def show_image(self, image=[]):
@@ -195,7 +206,7 @@ class PuzzleImageSolver:
 
     ''' Prints a puzzle action in csv readable form. '''
     def to_csv_row(self, action, point):
-        return str(self) + ",action," + action.name + ",point," + point
+        return str(self) + ",action," + action.name + ",point," + point        
 
     ''' Prints out all executed actions. '''
     def print_history(self, csv_path=''):
