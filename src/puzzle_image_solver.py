@@ -204,8 +204,8 @@ class PuzzleImageSolver:
             self.solved_pieces[unsolved_piece] = self.block
 
         if self.state_image_path:
-            self.save_puzzle_image("{}/puzzle_image_{}.png".format(
-                self.state_image_path, final)
+            self.save_puzzle_image("{}/puzzle_image_final.png".format(
+                self.state_image_path))
 
         return actions_per_block
 
