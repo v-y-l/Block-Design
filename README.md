@@ -36,6 +36,12 @@ Memory recall is will be refreshed from some top left point (row, col), extendin
 #### --csv
 Dumps the full list of solution actions to the specified file
 
+#### --image_state_path
+Saves each state of a run into number coded .pngs
+
+#### --analyze
+Analyzes some csv file produced through main.py with the --csv flag and returns statistics about those runs
+
 ## Block image model
 
 [block_image.py](https://github.com/v-y-l/Block-Design/blob/main/src/block_image.py)
