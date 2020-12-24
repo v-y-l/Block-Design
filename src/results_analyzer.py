@@ -14,7 +14,8 @@ class ResultsAnalyzer:
         self.stats = {
             "num_runs": 0,
             "mean_actions": 0.0,
-            "look_at_puzzle_actions": 0.0,
+            "mean_actions_per_block": 0.0,
+            "mean_look_at_puzzle_actions": 0.0,
         }
         self.metadata = {
             "num_pieces": 0
@@ -50,15 +51,18 @@ class ResultsAnalyzer:
             self.stats["mean_actions"] += 1
 
             if row[1] == "Puzzle" and row[4] == "LookAtPuzzle":
-                self.stats["look_at_puzzle_actions"] += 1
+                self.stats["mean_look_at_puzzle_actions"] += 1
                 continue
 
             if row[1] == "Block":
                 self.metadata["num_pieces"] = max(int(row[2]),
                                                   self.metadata["num_pieces"])
-        
+                self.stats["mean_actions_per_block"] += 1
+
         self.stats["mean_actions"] /= self.stats["num_runs"]
-        self.stats["look_at_puzzle_actions"] /= self.stats["num_runs"]
+        self.stats["mean_look_at_puzzle_actions"] /= self.stats["num_runs"]
+        self.stats["mean_actions_per_block"] /= self.metadata["num_pieces"]
+        self.stats["mean_actions_per_block"] /= self.stats["num_runs"]
 
         self.print("PUZZLE CONFIGURATION")
         for key, value in self.metadata.items():
