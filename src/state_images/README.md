@@ -7,9 +7,13 @@ These images are generated with the command below.
 They map to the following actions.
 
 > 1,Puzzle,puzzle_b,action,LookAtPuzzle,point,0|0
+
 > 2,Block,16,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+
 > 3,Block,16,Face,1,Pattern,BlackTopLeftCornerSquare,action,RotateLeft
+
 > 4,Block,15,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
+
 > 5,Block,14,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
 > 6,Puzzle,puzzle_b,action,LookAtPuzzle,point,0|340
 > 7,Block,14,Face,1,Pattern,BlackTopLeftCornerSquare,action,RotateLeft
