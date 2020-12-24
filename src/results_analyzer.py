@@ -3,8 +3,11 @@ import csv
 class ResultsAnalyzer:
 
     def __init__(self,
-                 csv_path="past_runs/puzzle_c_beeline_search_skip_unknown_search_0.1_3_1.0_1000.csv"):
+                 csv_path="past_runs/puzzle_c_beeline_search_skip_unknown_search_0.1_3_1.0_1000.csv",
+                 output_file=None
+    ):
         self.csv_path = csv_path
+        self.output_file = output_file
         self.raw_results = []
         self.stats = {
             "num_runs": 0,
@@ -19,13 +22,35 @@ class ResultsAnalyzer:
                 self.raw_results.append(row)
 
     def analyze(self):
+        if self.output_file:
+            self.file = open(self.output_file, 'a')
+            self.csv_writer = csv.writer(self.file,
+                                         # A hack, since our true delimiter is ","
+                                         delimiter='&',
+                                         quoting=csv.QUOTE_NONE)
+
         for row in self.raw_results:
             index = int(row[0])
             if index == 0:
                 self.stats["num_runs"] += 1
+                if self.stats["num_runs"] == 1:
+                    (_, _, puzzle_name, _,
+                     face_search, _, puzzle_piece_search, _,
+                     memory_loss_factor, _, memory_loss_counter_limit, _,
+                     glance_factor) = row
+                    self.print("Puzzle name: {}".format(puzzle_name))
+                    self.print("Face search: {}".format(face_search))
             else:
                 self.stats["mean_actions"] += 1
         self.stats["mean_actions"] /= self.stats["num_runs"]
 
-    def printStats(self):
-        print(self.stats)
+        for key, value in self.stats.items():
+            self.print("{}: {}".format(key, value))
+
+        self.file.close()
+
+    def print(self, row):
+        if self.csv_writer:
+            self.csv_writer.writerow([row])
+        else:
+            print(row)

@@ -18,6 +18,7 @@ if __name__=="__main__":
     iterations_input = 1
     state_image_path_input = ''
     analyze_csv_input = None
+    output_file = None
     try:
         opts, args = getopt(argv[1:], "h",
             ["puzzle=",
@@ -29,6 +30,7 @@ if __name__=="__main__":
              "iterations=",
              "csv=",
              "analyze=",
+             "output_file=",
              "state_image_path=",
             ])
         for opt, arg in opts:
@@ -43,7 +45,8 @@ if __name__=="__main__":
                       '--iterations <[>0]> ' +
                       '--csv <example.csv> ' +
                       '--state_image_path <directory>' +
-                      ' OR --analyze <example.csv>'
+                      ' OR --analyze <example.csv> ' +
+                      '--output_file <file.txt>'
                 )
                 exit()
             elif opt in ("--puzzle"):
@@ -66,14 +69,16 @@ if __name__=="__main__":
                 state_image_path_input = arg
             elif opt in ("--analyze"):
                 analyze_csv_input = arg
+            elif opt in ("--output_file"):
+                output_file = arg
+
     except GetoptError as err:
         print(err)
         exit(2)
 
     if analyze_csv_input:
-        analyzer = ResultsAnalyzer(analyze_csv_input)
+        analyzer = ResultsAnalyzer(analyze_csv_input, output_file)
         analyzer.analyze()
-        analyzer.printStats()
         exit(0)
 
     if puzzle_input not in PUZZLE_OPTIONS:
