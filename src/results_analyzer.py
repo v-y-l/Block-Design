@@ -13,8 +13,10 @@ class ResultsAnalyzer:
         self.raw_results = []
         self.stats = {
             "num_runs": 0,
-            "mean_actions": 0.0
+            "mean_actions": 0.0,
+            "look_at_puzzle_actions": 0.0,
         }
+        self.metadata = {}
         self._parse_csv()
 
     def _parse_csv(self):
@@ -38,21 +40,22 @@ class ResultsAnalyzer:
             if index == 0:
                 self.stats["num_runs"] += 1
                 if self.stats["num_runs"] == 1:
-                    self.print("CONFIGURATION")
-                    (_, _, puzzle_name, _,
-                     face_search, _, puzzle_piece_search, _,
-                     memory_loss_factor, _, memory_loss_counter_limit, _,
-                     glance_factor) = row
-                    self.print("puzzle_name: {}".format(puzzle_name))
-                    self.print("face_search: {}".format(face_search))
-                    self.print("puzzle_piece_search: {}".format(puzzle_piece_search))
-                    self.print("memory_loss_factor: {}".format(memory_loss_factor))
-                    self.print("memory_loss_counter_limit: {}".format(
-                        memory_loss_counter_limit))
-                    self.print("glance_factor: {}".format(glance_factor))
-            else:
-                self.stats["mean_actions"] += 1
+                    for i in range(1, len(row), 2):
+                        key, value = row[i], row[i+1]
+                        self.metadata[key] = value
+                continue
+
+            self.stats["mean_actions"] += 1
+
+            if row[1] == "Puzzle" and row[4] == "LookAtPuzzle":
+                self.stats["look_at_puzzle_actions"] += 1
+        
         self.stats["mean_actions"] /= self.stats["num_runs"]
+        self.stats["look_at_puzzle_actions"] /= self.stats["num_runs"]
+
+        self.print("CONFIGURATION")
+        for key, value in self.metadata.items():
+            self.print("{}: {}".format(key, value))
 
         self.print("\nSTATISTICS")
         for key, value in self.stats.items():
