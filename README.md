@@ -100,3 +100,20 @@ Test all modules
 
 Test an individual module
 > python -m unittest test/test_search.py
+
+## Miscellany
+
+[Past runs](https://github.com/v-y-l/Block-Design/tree/main/src/past_runs)
+* Provides raw information about a few solutions to problems
+
+[State imagery](https://github.com/v-y-l/Block-Design/tree/main/src/state_images)
+* Visualizes the puzzle state of a sample solution run
+
+[Puzzle images](https://github.com/v-y-l/Block-Design/tree/main/src/puzzle_images)
+* The puzzles available to be solved
+
+[Face images](https://github.com/v-y-l/Block-Design/tree/main/src/face_images)
+* The image representation of the various faces of the block
+
+[Block images](https://github.com/v-y-l/Block-Design/tree/main/src/block_images)
+* The image representation of the entire block
