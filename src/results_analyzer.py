@@ -16,7 +16,9 @@ class ResultsAnalyzer:
             "mean_actions": 0.0,
             "look_at_puzzle_actions": 0.0,
         }
-        self.metadata = {}
+        self.metadata = {
+            "num_pieces": 0
+        }
         self._parse_csv()
 
     def _parse_csv(self):
@@ -49,15 +51,20 @@ class ResultsAnalyzer:
 
             if row[1] == "Puzzle" and row[4] == "LookAtPuzzle":
                 self.stats["look_at_puzzle_actions"] += 1
+                continue
+
+            if row[1] == "Block":
+                self.metadata["num_pieces"] = max(int(row[2]),
+                                                  self.metadata["num_pieces"])
         
         self.stats["mean_actions"] /= self.stats["num_runs"]
         self.stats["look_at_puzzle_actions"] /= self.stats["num_runs"]
 
-        self.print("CONFIGURATION")
+        self.print("PUZZLE CONFIGURATION")
         for key, value in self.metadata.items():
             self.print("{}: {}".format(key, value))
 
-        self.print("\nSTATISTICS")
+        self.print("\nSOLUTION STATISTICS")
         for key, value in self.stats.items():
             self.print("{}: {}".format(key, value))
 
