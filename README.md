@@ -19,32 +19,42 @@ Example:
 
 ### Parameters
 
-#### --puzzle
+#### Solving the puzzle
+
+##### --puzzle
 The name of the puzzle image to solve
 
-#### --face_search
+##### --face_search
 The search algorithm to find the destination pattern on a block
 
-#### --piece_search
+##### --piece_search
 The search algorithm that returns the next piece of the puzzle to solve
 
-#### --puzzle_memory_loss
+##### --puzzle_memory_loss
 The rate of memory loss (0-100% of entire puzzle)
 
-#### --puzzle_memory_loss_counter_limit
+##### --puzzle_memory_loss_counter_limit
 Memory loss kicks every time this limit of puzzle piece attempts (resets every time the limit is achieved; sometimes, we get a puzzle piece of "UNKNOWN" and this constitutes an attempt)
 
-#### --glance_factor
+##### --glance_factor
 Memory recall is will be refreshed from some top left point (row, col), extending to the bottom right point (puzzle_height * glance_factor, puzzle_width * glance_factor)
 
-#### --csv
-Dumps the full list of solution actions to the specified file
-
-#### --image_state_path
+##### --image_state_path
 If provided, saves each state of a run into number coded .pngs to this designated path
 
-#### --analyze
+##### --iterations
+Number of times to solve the puzzle using this configuration. Use in conjuction with the --csv flag.
+
+##### --csv
+Dumps the full list of solution actions to the specified file. If "default" is passed, use a name delineated by the configuration, e.g. {puzzle_input}_{face_search_input}_{puzzle_piece_search_input}_{puzzle_memory_loss_factor_input}_{puzzle_memory_loss_counter_limit_input}_{glance_factor_input}_{iterations_input}
+
+#### Analyzing results
+
+##### --analyze
 If provided, analyzes the given csv file (must be produced through main.py with the --csv flag), returning statistics about those runs
+
+##### --output_file
+If provided, prints output into this file instead of the terminal.
 
 ## Block image model
 
