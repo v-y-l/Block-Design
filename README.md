@@ -11,6 +11,10 @@ Example:
 
 ...solves puzzle_b.png using the beeline face search and sequential puzzle piece search, with a memory loss of 50% of the puzzle every 5 puzzle piece attempts, recall of 100% of the puzzle image's width and height from some top left corner of the puzzle, and dump the solution list to stats.csv.
 
+> python main.py --analyze past_runs/puzzle_c_beeline_search_skip_unknown_search_0.1_3_1.0_1000.csv --output_file output.csv
+
+... analyzes the designated file and outputs results to output.csv
+
 ![Demo gif](https://github.com/v-y-l/Block-Design/blob/main/assets/cli_demo.gif)
 
 ### Parameters
