@@ -18,6 +18,7 @@
 17,Block,2,Face,2,Pattern,WhiteSquare,action,GoToFaceTwo
 18,Block,1,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank
 19,Block,1,Face,4,Pattern,BlackSquare,action,GoToFaceFour
+19,Block,1,Face,4,Pattern,BlackSquare,action,GoToFaceFour
 0,puzzle_name,puzzle_c,face_search,beeline_search,puzzle_piece_search,skip_unknown_search,memory_loss_factor,0.1,memory_loss_counter_limit,3,glance_factor,1.0
 1,Puzzle,puzzle_c,action,LookAtPuzzle,point,0|0
 2,Block,9,Face,1,Pattern,BlackTopRightCornerSquare,action,PickUpFromBank

@@ -17,7 +17,6 @@ class ResultsAnalyzer:
             "mean_actions_per_block": 0.0,
             "mean_look_at_puzzle_actions": 0.0,
             "std_dev_actions": 0.0,
-            "std_dev_actions_per_block": 0.0,
             "std_dev_look_at_puzzle_actions": 0.0,
         }
         self.metadata = {
@@ -25,7 +24,6 @@ class ResultsAnalyzer:
         }
         self.hidden_metadata = {
             "actions_by_run": [],
-            "actions_per_block_by_run": [],
             "look_at_puzzle_actions_by_run": [],
         }
         self._parse_csv()
@@ -59,7 +57,6 @@ class ResultsAnalyzer:
                         key, value = row[i], row[i+1]
                         self.metadata[key] = value
                 self.hidden_metadata["actions_by_run"].append(0)
-                self.hidden_metadata["actions_per_block_by_run"].append(0)
                 self.hidden_metadata["look_at_puzzle_actions_by_run"].append(0)
                 continue
 
@@ -76,18 +73,15 @@ class ResultsAnalyzer:
                     int(row[2]),
                     self.metadata["num_pieces"])
                 self.stats["mean_actions_per_block"] += 1
-                self.hidden_metadata["actions_per_block_by_run"][-1] += 1             
 
         self.stats["mean_actions"] /= self.stats["num_runs"]
         self.stats["mean_look_at_puzzle_actions"] /= self.stats["num_runs"]
         self.stats["mean_actions_per_block"] /= self.metadata["num_pieces"]
         self.stats["mean_actions_per_block"] /= self.stats["num_runs"]
+
         self.set_std_dev("actions_by_run",
                          "std_dev_actions",
                          "mean_actions")
-        self.set_std_dev("actions_per_block_by_run",
-                         "std_dev_actions_per_block",
-                         "mean_actions_per_block")
         self.set_std_dev("look_at_puzzle_actions_by_run",
                          "std_dev_look_at_puzzle_actions",
                          "mean_look_at_puzzle_actions")
