@@ -75,9 +75,16 @@ class ResultsAnalyzer:
                 self.stats["mean_actions_per_block"] += 1
 
         self.stats["mean_actions"] /= self.stats["num_runs"]
+        self.stats["mean_actions"] = round(self.stats["mean_actions"], 2)
+
         self.stats["mean_look_at_puzzle_actions"] /= self.stats["num_runs"]
+        self.stats["mean_look_at_puzzle_actions"] = round(
+            self.stats["mean_look_at_puzzle_actions"], 2)
+
         self.stats["mean_actions_per_block"] /= self.metadata["num_pieces"]
         self.stats["mean_actions_per_block"] /= self.stats["num_runs"]
+        self.stats["mean_actions_per_block"] = round(
+            self.stats["mean_actions_per_block"], 2)
 
         self.set_std_dev("actions_by_run",
                          "std_dev_actions",
