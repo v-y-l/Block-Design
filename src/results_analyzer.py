@@ -133,3 +133,5 @@ class ResultsAnalyzer:
                 num_actions - self.stats[stats_mean_key]) ** 2
         self.stats[stats_std_dev_key] /= self.stats["num_runs"]
         self.stats[stats_std_dev_key] **= .5
+        self.stats[stats_std_dev_key] = round(
+            self.stats[stats_std_dev_key], 2)
