@@ -16,9 +16,13 @@ class ResultsAnalyzer:
             "mean_actions": 0.0,
             "mean_actions_per_block": 0.0,
             "mean_look_at_puzzle_actions": 0.0,
+            "std_dev_actions": 0.0,
         }
         self.metadata = {
-            "num_pieces": 0
+            "num_pieces": 0,
+        }
+        self.hidden_metadata = {
+            "actions_by_run": []
         }
         self._parse_csv()
 
@@ -38,6 +42,7 @@ class ResultsAnalyzer:
 
         if not self.file: self.print("")
 
+        run_index = 0
         for row in self.raw_results:
             index = int(row[0])
             if index == 0:
@@ -46,8 +51,10 @@ class ResultsAnalyzer:
                     for i in range(1, len(row), 2):
                         key, value = row[i], row[i+1]
                         self.metadata[key] = value
+                self.hidden_metadata["actions_by_run"].append(0)
                 continue
 
+            self.hidden_metadata["actions_by_run"][-1] += 1
             self.stats["mean_actions"] += 1
 
             if row[1] == "Puzzle" and row[4] == "LookAtPuzzle":
@@ -63,6 +70,12 @@ class ResultsAnalyzer:
         self.stats["mean_look_at_puzzle_actions"] /= self.stats["num_runs"]
         self.stats["mean_actions_per_block"] /= self.metadata["num_pieces"]
         self.stats["mean_actions_per_block"] /= self.stats["num_runs"]
+
+        for num_actions in self.hidden_metadata["actions_by_run"]:
+            self.stats["std_dev_actions"] += (
+                num_actions - self.stats["mean_actions"]) ** 2
+        self.stats["std_dev_actions"] /= self.stats["num_runs"]
+        self.stats["std_dev_actions"] **= .5
 
         self.print("PUZZLE CONFIGURATION")
         for key, value in self.metadata.items():
