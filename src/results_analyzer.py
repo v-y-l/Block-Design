@@ -4,10 +4,12 @@ class ResultsAnalyzer:
 
     def __init__(self,
                  csv_path="past_runs/puzzle_c_beeline_search_skip_unknown_search_0.1_3_1.0_1000.csv",
-                 output_file=None
+                 output_file=None,
+                 test_only=False
     ):
         self.csv_path = csv_path
         self.output_file = output_file
+        self.test_only = test_only
         self.csv_writer = None
         self.file = None
         self.raw_results = []
@@ -93,13 +95,14 @@ class ResultsAnalyzer:
                          "std_dev_look_at_puzzle_actions",
                          "mean_look_at_puzzle_actions")
 
-        self.print("PUZZLE CONFIGURATION")
-        for key, value in self.metadata.items():
-            self.print("{}: {}".format(key, value))
+        if not self.test_only:
+            self.print("PUZZLE CONFIGURATION")
+            for key, value in self.metadata.items():
+                self.print("{}: {}".format(key, value))
 
-        self.print("\nSOLUTION STATISTICS")
-        for key, value in self.stats.items():
-            self.print("{}: {}".format(key, value))
+            self.print("\nSOLUTION STATISTICS")
+            for key, value in self.stats.items():
+                self.print("{}: {}".format(key, value))
 
         self.print("")
 
