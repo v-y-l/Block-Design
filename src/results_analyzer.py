@@ -15,9 +15,13 @@ class ResultsAnalyzer:
         self.raw_results = []
         self.stats = {
             "num_runs": 0,
+            "min_actions": 0.0,
             "mean_actions": 0.0,
+            "max_actions": 0.0,
             "mean_actions_per_block": 0.0,
+            "min_look_at_puzzle_actions": 0.0,
             "mean_look_at_puzzle_actions": 0.0,
+            "max_look_at_puzzle_actions": 0.0,
             "std_dev_actions": 0.0,
             "std_dev_look_at_puzzle_actions": 0.0,
         }
@@ -87,6 +91,15 @@ class ResultsAnalyzer:
         self.stats["mean_actions_per_block"] /= self.stats["num_runs"]
         self.stats["mean_actions_per_block"] = round(
             self.stats["mean_actions_per_block"], 2)
+        self.stats["min_actions"] = min(
+            self.hidden_metadata["actions_by_run"])
+        self.stats["max_actions"] = max(
+            self.hidden_metadata["actions_by_run"])
+        self.stats["min_look_at_puzzle_actions"] = min(
+            self.hidden_metadata["look_at_puzzle_actions_by_run"])
+        self.stats["max_look_at_puzzle_actions"] = max(
+            self.hidden_metadata["look_at_puzzle_actions_by_run"])
+
 
         self.set_std_dev("actions_by_run",
                          "std_dev_actions",
