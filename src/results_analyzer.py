@@ -17,18 +17,24 @@ class ResultsAnalyzer:
             "mean_actions_per_block": 0.0,
             "mean_look_at_puzzle_actions": 0.0,
             "std_dev_actions": 0.0,
+            "std_dev_actions_per_block": 0.0,
+            "std_dev_look_at_puzzle_actions": 0.0,
         }
         self.metadata = {
             "num_pieces": 0,
         }
         self.hidden_metadata = {
-            "actions_by_run": []
+            "actions_by_run": [],
+            "actions_per_block_by_run": [],
+            "look_at_puzzle_actions_by_run": [],
         }
         self._parse_csv()
 
     def _parse_csv(self):
         with open(self.csv_path, newline='') as csvfile:
-            results_reader = csv.reader(csvfile, delimiter=',', quotechar='|')
+            results_reader = csv.reader(csvfile,
+                                        delimiter=',',
+                                        quotechar='|')
             for row in results_reader:
                 self.raw_results.append(row)
 
@@ -36,7 +42,8 @@ class ResultsAnalyzer:
         if self.output_file:
             self.file = open(self.output_file, 'a')
             self.csv_writer = csv.writer(self.file,
-                                         # A hack, since our true delimiter is ","
+                                         # A hack, since our
+                                         # true delimiter is ","
                                          delimiter='&',
                                          quoting=csv.QUOTE_NONE)
 
@@ -52,6 +59,8 @@ class ResultsAnalyzer:
                         key, value = row[i], row[i+1]
                         self.metadata[key] = value
                 self.hidden_metadata["actions_by_run"].append(0)
+                self.hidden_metadata["actions_per_block_by_run"].append(0)
+                self.hidden_metadata["look_at_puzzle_actions_by_run"].append(0)
                 continue
 
             self.hidden_metadata["actions_by_run"][-1] += 1
@@ -59,23 +68,29 @@ class ResultsAnalyzer:
 
             if row[1] == "Puzzle" and row[4] == "LookAtPuzzle":
                 self.stats["mean_look_at_puzzle_actions"] += 1
+                self.hidden_metadata["look_at_puzzle_actions_by_run"][-1] += 1
                 continue
 
             if row[1] == "Block":
-                self.metadata["num_pieces"] = max(int(row[2]),
-                                                  self.metadata["num_pieces"])
+                self.metadata["num_pieces"] = max(
+                    int(row[2]),
+                    self.metadata["num_pieces"])
                 self.stats["mean_actions_per_block"] += 1
+                self.hidden_metadata["actions_per_block_by_run"][-1] += 1             
 
         self.stats["mean_actions"] /= self.stats["num_runs"]
         self.stats["mean_look_at_puzzle_actions"] /= self.stats["num_runs"]
         self.stats["mean_actions_per_block"] /= self.metadata["num_pieces"]
         self.stats["mean_actions_per_block"] /= self.stats["num_runs"]
-
-        for num_actions in self.hidden_metadata["actions_by_run"]:
-            self.stats["std_dev_actions"] += (
-                num_actions - self.stats["mean_actions"]) ** 2
-        self.stats["std_dev_actions"] /= self.stats["num_runs"]
-        self.stats["std_dev_actions"] **= .5
+        self.set_std_dev("actions_by_run",
+                         "std_dev_actions",
+                         "mean_actions")
+        self.set_std_dev("actions_per_block_by_run",
+                         "std_dev_actions_per_block",
+                         "mean_actions_per_block")
+        self.set_std_dev("look_at_puzzle_actions_by_run",
+                         "std_dev_look_at_puzzle_actions",
+                         "mean_look_at_puzzle_actions")
 
         self.print("PUZZLE CONFIGURATION")
         for key, value in self.metadata.items():
@@ -94,3 +109,10 @@ class ResultsAnalyzer:
             self.csv_writer.writerow([row])
         else:
             print(row)
+
+    def set_std_dev(self, hidden_key, stats_std_dev_key, stats_mean_key):
+        for num_actions in self.hidden_metadata[hidden_key]:
+            self.stats[stats_std_dev_key] += (
+                num_actions - self.stats[stats_mean_key]) ** 2
+        self.stats[stats_std_dev_key] /= self.stats["num_runs"]
+        self.stats[stats_std_dev_key] **= .5
