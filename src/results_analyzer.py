@@ -10,8 +10,6 @@ class ResultsAnalyzer:
         self.csv_path = csv_path
         self.output_file = output_file
         self.test_only = test_only
-        self.csv_writer = None
-        self.file = None
         self.raw_results = []
         self.stats = {
             "num_runs": 0,
@@ -43,15 +41,6 @@ class ResultsAnalyzer:
                 self.raw_results.append(row)
 
     def analyze(self):
-        if self.output_file:
-            self.file = open(self.output_file, 'a')
-            self.csv_writer = csv.writer(self.file,
-                                         # A hack, since our
-                                         # true delimiter is ","
-                                         delimiter='&',
-                                         quoting=csv.QUOTE_NONE)
-
-        if not self.file: self.print("")
 
         run_index = 0
         for row in self.raw_results:
@@ -107,25 +96,32 @@ class ResultsAnalyzer:
         self.set_std_dev("look_at_puzzle_actions_by_run",
                          "std_dev_look_at_puzzle_actions",
                          "mean_look_at_puzzle_actions")
+        self.print()
 
-        if not self.test_only:
-            self.print("PUZZLE CONFIGURATION")
+    def print(self):
+
+        if self.test_only:
+            return
+
+        if not self.output_file:
+            print("\nPUZZLE CONFIGURATION")
             for key, value in self.metadata.items():
-                self.print("{}: {}".format(key, value))
+                print("{}: {}".format(key, value))
 
-            self.print("\nSOLUTION STATISTICS")
+            print("\nSOLUTION STATISTICS")
             for key, value in self.stats.items():
-                self.print("{}: {}".format(key, value))
+                print("{}: {}".format(key, value))
+            print("")
+            return
 
-        self.print("")
-
-        self.file: self.file.close()
-
-    def print(self, row):
-        if self.csv_writer:
-            self.csv_writer.writerow([row])
-        else:
-            print(row)
+        with open(self.output_file, 'a') as f:
+            csv_writer = csv.writer(f,
+                                    delimiter=',',
+                                    quoting=csv.QUOTE_NONE)
+            csv_writer.writerow(self.metadata.keys())
+            csv_writer.writerow(self.metadata.values())
+            csv_writer.writerow(self.stats.keys())
+            csv_writer.writerow(self.stats.values())
 
     def set_std_dev(self, hidden_key, stats_std_dev_key, stats_mean_key):
         for num_actions in self.hidden_metadata[hidden_key]:
