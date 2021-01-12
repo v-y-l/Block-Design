@@ -39,7 +39,7 @@ Memory loss kicks every time this limit of puzzle piece attempts (resets every t
 ##### --glance_factor
 Memory recall is will be refreshed from some top left point (row, col), extending to the bottom right point (puzzle_height * glance_factor, puzzle_width * glance_factor)
 
-##### --image_state_path
+##### --state_image_path
 If provided, saves each state of a run into number coded .pngs to this designated path
 
 ##### --iterations
