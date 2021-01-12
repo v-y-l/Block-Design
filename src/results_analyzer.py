@@ -118,10 +118,14 @@ class ResultsAnalyzer:
             csv_writer = csv.writer(f,
                                     delimiter=',',
                                     quoting=csv.QUOTE_NONE)
-            csv_writer.writerow(self.metadata.keys())
-            csv_writer.writerow(self.metadata.values())
-            csv_writer.writerow(self.stats.keys())
-            csv_writer.writerow(self.stats.values())
+            keys = []
+            keys.extend(self.metadata.keys())
+            keys.extend(self.stats.keys())
+            csv_writer.writerow(keys)
+            values = []
+            values.extend(self.metadata.values())
+            values.extend(self.stats.values())
+            csv_writer.writerow(values)
 
     def set_std_dev(self, hidden_key, stats_std_dev_key, stats_mean_key):
         for num_actions in self.hidden_metadata[hidden_key]:
